@@ -1,4 +1,4 @@
-# viking-conversion
+# viking orbiter imaging data conversion
 
 This repository contains documentation for modernized versions of the Viking Orbiter 1 and 2
 (VO-1 and VO-2) imaging data sets. It will soon also contain the software we used to produce
