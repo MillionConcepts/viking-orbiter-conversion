@@ -1,0 +1,434 @@
+This document concatenates the various 'imginfo.txt' files provided in the subdirectories of the 'special' directories on the multispectral volumes of VO1_VO2-M-VIS-5-DIM-V1.0. These texts explain the contents, purpose, and provenance of the 'special' multispectral DIMs. Please note that some elements of this document are deprecated -- for instance, we did not preserve the browse products, so any notes about special GIF formatting are now irrelevant. Because only some of the imginfo.txt files explicitly describe their referents, we have noted which subdirectory each text snippet refers to [in brackets] above the snippet.
+
+
+[this text refers to products in the '323so' directory]
+
+
+             Cerberus Hemisphere - Orthographic Projection
+             ---------------------------------------------
+
+The image files contained in the SPECIAL/323SO sub-directory are global
+mosaics of the Cerberus Hemisphere of Mars. The original images were
+acquired during orbit 1,323 of Viking 1 on February 11, 1980. At
+that time, it was early northern summer on Mars (aerocentric solar
+longitude = 65 degrees). The center of the image is at latitude 0
+degrees,  longitude 184 degrees, and the latitude limits are
+approximately 60 degrees N and S.  
+
+The images are in an orthographic projection with scales of 1/4
+Degree/Pixel (14.8 KM/Pixel, MC* files), 1/8 Degree/Pixel (7.40
+KM/Pixel, MD* files), 1/16 Degree/Pixel (3.70 KM/Pixel, ME* files), 1/32
+Degree/Pixel (1.85 KM/Pixel, MF* files), and 1/64 Degree/Pixel (.925
+KM/Pixel, MG* files). The MG* files contain selected sub-areas of the
+total mosaic.
+
+The color variations have been enhanced in the GIF formatted image
+files. The large-scale brightness variations (mostly due to sun-angle
+variations) have been normalized by large-scale filtering.
+
+A major geologic boundary extends across this mosaic, with the lower
+third of the image showing ancient cratered highlands; north of this
+boundary are the lowland northern plains.  A series of poorly-indurated
+sedimentary deposits occur just north of the highland-lowland boundary;
+some scientists believe that these are explosive volcanic deposits
+(ignimbrites) whereas others have postulated that they are paleo-polar
+deposits.  Other prominent features in this image include the large dark
+area left of the image center (named Cerberus), and the Elysium volcanic
+region (bright yellowish area north of  Cerberus).  The crater "Mie" is
+located near the top left, and has a dark  spot near its center.  The
+Viking 2 Lander is located about 400 km west of the center of this
+crater, or about 1 1/2 crater diameters left of the left edge  of the
+crater.
+
+Thin white clouds are dispersed over the northern hemisphere, and the
+opaque cloud in the upper right overlays the Olympus Mons Aureole. The 
+arcuate markings west of the Aureole are thought to be extended drifts
+of windblown material.  The bright blue area at the bottom of the
+picture shows the extent of the seasonal carbon dioxide polar cap (these
+frosts are actually white).
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at  the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '323sp' directory]
+
+
+                     Cerberus - Point Perspective
+                     ----------------------------
+
+Mosaic of the Cerberus hemisphere of Mars projected into point
+perspective,  a view similar to that which one would see from a
+spacecraft.  The viewer's distance is  2,000 kilometers above the
+surface of the planet. The mosaic is composed of 104 Viking Orbiter
+Images. The images were  acquired on February 11, 1980 during orbit
+1,323 of Viking Orbiter 1.  At  that time, it was early northern summer
+on Mars (aerocentric solar longitude  65 degrees) and the sub-solar
+declination was 22.6 degrees N.  The center of  this image is at
+latitude 12 degrees and longitude 190 degrees. There are  thin white
+clouds dispersed over the northern hemisphere.  
+
+For the GIF formatted files, color variations have been enhanced by a
+factor of two. The global  brightness variation due to sun angle reduced
+by spacial filtering.
+ 
+Other prominent features in this image include the large dark area left 
+of the image center known as Cerberus. The Elysium volcanic construct
+shows as a bright yellow area north of Cerberus, with several well
+defined channels radiating from the flanks of this volcano.  Just to the
+right of the center of the  image is the crater Tettit, with its
+peculiar dark "tail" extending to the  southwest.  The arcuate markings
+on the upper right of the image are in the  south-west Amazonis plains
+and are thought to be extended sand drifts. The three bright spots north
+of Cerberus, upper left of image, are volcanoes partially veiled by thin
+clouds.
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at  the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '334so' directory]
+
+
+       Valles Marineris Hemisphere - Orthographic Projection
+         -----------------------------------------------------
+
+
+The image files contained in the SPECIAL/334SO sub-directory are global
+mosaics of the Valles Marineris Hemisphere of Mars. The original images
+were acquired during orbit 1,334 of Viking 1 on February 22, 1980. 
+
+The mosaics are composed of 102 Viking Orbiter images of Mars, covering
+nearly a full hemisphere of the planet (approx. latitude -55 degrees to
+60 degrees, longitude 30 degrees to 130 degrees). The images are in an
+orthographic projection with scales of 1/4 Degree/Pixel (14.8 KM/Pixel,
+MC* files), 1/8 Degree/Pixel (7.40 KM/Pixel, MD* files), 1/16
+Degree/Pixel (3.70 KM/Pixel, ME* files), 1/32 Degree/Pixel (1.85
+KM/Pixel, MF* files), and 1/64 Degree/Pixel (.925 KM/Pixel, MG* files).
+The MG* files contain selected sub-areas of the mosaic.
+
+The color variations have been enhanced in the GIF formatted image
+files. The large-scale brightness variations (mostly due to sun-angle
+variations) have been normalized by large-scale filtering.
+
+The center of the scene shows the entire Valles Marineris canyon 
+system, over 3,000 km long and up to 8 km deep, extending from Noctis 
+Labyrinthus, the arcuate system of graben to the west, to the chaotic
+terrain to the east. Bright white layers of material in the eastern
+canyons may consist of carbonates deposited in ancient lakes. Huge
+ancient river channels begin from the chaotic terrain and from
+north-central canyons and run north.  Many of the channels flowed into a
+basin called Acidalia Planitia, which is the dark area in the extreme
+north of this picture. The Viking 1 landing site (Mutch Memorial
+Station) is located in Chryse Planitia, south of Acidalia Planitia.  The
+three Tharsis volcanoes (dark red spots), each about 25 kilometers high,
+are visible to the west. The large crater with two prominent  rings
+located at the bottom of this image is named Lowell, after the Flagstaff
+astronomer.
+
+The images were acquired by Viking Orbiter during early northern summer
+on Mars (aerocentric solar longitude = 70 degrees); the atmosphere was
+relatively dust-free. A variety of clouds appear as bright blue streaks
+and hazes, and probably consist of water ice.  Long linear clouds north
+of central Valles Marineris appear to emanate from impact craters.
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '334sp' directory]
+
+
+               Valles Marineris - Point Perspective
+                 ------------------------------------
+
+Mosaic of the Valles Marineris hemisphere of Mars projected into point 
+perspective, a view similar to that which one would see from a
+spacecraft. The viewer's distance is 2,500 kilometers from the surface of
+the planet. The mosaic is composed of 102 Viking Orbiter images of 
+Mars. The center of the scene (lat -7, lon 78) shows the entire Valles 
+Marineris canyon system, over 3,000 kilometers long and up to 8
+kilometers deep, extending from Noctis Labyrinthus, the arcuate system
+of graben to the west, to the chaotic terrain to the east. Many huge
+ancient river channels begin from the chaotic terrain and north-central
+canyons and run north. Many of the channels flowed into a basin called
+Acidalia Planitia, which is the dark area in the extreme north of this
+picture. The three Tharsis volcanoes (dark red spots), each about 25
+kilometers high, are visible to the west. South of Valles Marineris is
+very ancient terrain covered by many impact craters.
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '347so' directory]
+
+           Syrtis Major Hemisphere - Orthographic Projection
+           -------------------------------------------------
+
+The image files contained in the SPECIAL/347SO sub-directory are global
+mosaics of the Syrtis Major Hemisphere of Mars. The original images were
+acquired during orbit 1,347 of Viking 1 on March 6, 1980. 
+
+The images were acquired during early northern summer on Mars
+(aerocentric solar longitude = 75 degrees). The center of this image is
+near latitude 7 degrees, longitude 315 degrees, and the limits of this
+mosaic are approximately latitude -60 degrees to 60 degrees and
+longitude 260 degrees to 350 degrees. 
+
+The images are in an orthographic projection with scales of 1/4
+Degree/Pixel (14.8 KM/Pixel, MC* files), 1/8 Degree/Pixel (7.40
+KM/Pixel, MD* files), 1/16 Degree/Pixel (3.70 KM/Pixel, ME* files), 1/32
+Degree/Pixel (1.85 KM/Pixel, MF* files), and 1/64 Degree/Pixel (.925
+KM/Pixel, MG* files). The MG* files contain selected sub-areas of the 
+mosaic.
+
+The large circular area with a bright yellow color (in this rendition) 
+located in the upper left area of the image is known as Arabia. The
+boundary between the ancient, heavily-cratered southern highlands and
+the younger northern plains occurs far to the north (latitude 40
+degrees) on this side of the planet, just north of Arabia. The dark blue
+area to the right of Arabia, called Syrtis Major Planum, is a low-relief
+volcanic shield of probable basaltic composition. The bright yellow area
+to the right of Syrtis Major is Isidis Planitia, an ancient impact
+basin. Bright white areas to the south, including the Hellas impact
+basin at lower right, are covered by carbon dioxide frost. 
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '347sp' directory]
+
+ 
+                   Syrtis Major - Point Perspective
+                   --------------------------------
+
+Mosaic of the Syrtis Major hemisphere of Mars projected into a point 
+perspective, a view similar to that which one would see from a
+spacecraft. The viewer's distance is 2,000 kilometers above the surface
+of the planet. This mosaic is composed of about 100 red and violet
+filter Viking Orbiter images. The images were acquired in 1980 during 
+early northern summer on Mars. The center of this image is near latitude
+-1.0, longitude 306. 
+
+For GIF formatted image files, the color variations have been enhanced
+by a factor of two, and the large-scale brightness variations (mostly
+due to sun-angle variations) have been normalized by large-scale
+filtering.
+
+The large bright colored area, located in the upper left area of the 
+image is known as Arabia. The dark area to the right of Arabia, called 
+Syrtis Major Planus, is a low-relief volcanic shield of probable
+basaltic composition. Bright white areas to the south, including the
+Hellas impact basin at extreme lower right, are covered by carbon
+dioxide frost. Regions to the west and south of Syrtis Major are heavily
+cratered and relatively old. The dark feature coming around the western
+horizon is known as Sinus Sabaeus.
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '378so' directory]
+
+ 
+           Schiaparelli Hemisphere - Orthographic Projection
+           -------------------------------------------------
+
+The image files contained in the SPECIAL/378SO sub-directory are global
+mosaics of the Schiaparelli Hemisphere of Mars. The original images were
+acquired during orbit 1,378 of Viking 1 on April 6, 1980. At that
+time, it was mid northern summer on Mars (aerocentric solar longitude =
+89 degrees). 
+
+The center of this image is near the impact crater Schiaparelli
+(latitude 0 degrees, longitude 337 degrees). The limits of this mosaic
+are approximately latitude -60 degrees to 60 degrees and longitude 280
+degrees to 30 degrees. 
+
+The images are in an orthographic projection with scales of 1/4
+Degree/Pixel (14.8 KM/Pixel, MC* files), 1/8 Degree/Pixel (7.40
+KM/Pixel, MD* files), 1/16 Degree/Pixel (3.70 KM/Pixel, ME* files), 1/32
+Degree/Pixel (1.85 KM/Pixel, MF* files), and 1/64 Degree/Pixel (.925
+KM/Pixel, MG* files). The MG* files contain selected sub-areas of the
+mosaic.
+
+The color variations have been enhanced in the GIF formatted image
+files. The large-scale brightness variations (mostly due to sun-angle
+variations) have been normalized by large-scale filtering.
+
+The large circular area with a bright yellow color (in this rendition)
+is known as Arabia located center right. The boundary between the ancient,
+heavily- cratered southern highlands and the younger northern plains
+occurs far to the north (latitude 40 degrees) on this side of the
+planet, just north of Arabia. The dark streaks with bright margins
+emanating from craters in the Oxia Palus region (to the left of Arabia)
+are caused by erosion and/or deposition by the wind. The dark blue area
+on the far right, called Syrtis Major Planum, is a low-relief volcanic
+shield of probable basaltic composition. Bright white areas to the
+south, including the Hellas impact basin at lower right, are covered by
+carbon dioxide frost.
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at the U.S. Geological Survey in Flagstaff, Arizona.
+ 
+
+
+[this text refers to products in the '378sp' directory]
+
+
+              Schiaparelli Hemisphere - Point Perspective
+              -------------------------------------------
+                 
+Mosaic of the Schiparelli hemisphere of Mars projected into point
+perspective, a view similar to that which one would see from a
+spacecraft. The viewer's distance is 2,500 kilometers above the surface
+of the planet. This mosaic is composed of about 100 red and violet
+filter Viking Orbiter images. The images were acquired in 1980 during
+mid northern summer on Mars (aerocentric solar longitude = 89 degrees).
+The center of this image is near the impact crater Schiaparelli, 450
+kilometers in diameter. (latitude -5 degrees, longitude -20 degrees). 
+
+For the GIF formatted files, the color variations have been enhanced by
+a factor of two, and the large-scale brightness variations (mostly due
+to sun-angle variations) have been normalized by large-scale filtering. 
+
+The dark streaks with bright margins emanating from craters in the Oxie
+Palus region, upper left of image, are caused by erosion and/or 
+deposition by the wind. Bright white areas to the south, including the
+Hellas impact basin at extreme lower right, are covered by carbon
+dioxide frost. 
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '407bo' directory]
+
+
+        South Polar Residual Ice Cap - Orthographic Projection
+        ------------------------------------------------------
+
+This mosaic is composed of Viking Orbiter images acquired on September
+28, 1977, during revolution 407 of Viking Orbiter 2. The south pole is
+located just off the lower left edge of the polar cap. The 0 degree
+longitude meridian extends toward the top of the mosaic. The large
+crater near the right edge (named "South") is about 100 km in diameter.
+
+The images are in an orthographic projection with scales of 1/8
+Degree/Pixel (7.40 KM/Pixel, MD* files), 1/16 Degree/Pixel (3.70
+KM/Pixel, ME* files), 1/32 Degree/Pixel (1.85 KM/Pixel, MF* files), and
+1/64 Degree/Pixel (.925 KM/Pixel, MG* files)
+
+These images were acquired during southern summer on Mars (aerocentric
+solar longitude = 341 degrees); the sub-solar declination was 8 degrees
+South, and the south polar cap was nearing its final stage of retreat
+just prior to vernal equinox. The south residual cap is approximately
+400 km across, and the exposed surface is thought to consist dominantly
+of carbon-dioxide frost. This is in contrast to the water-ice surface
+of the north polar residual cap. It is likely that water ice is present
+in layers that underlie the south polar cap and that comprise the
+surrounding layered terrains. Near the top of this image, irregular
+pits with sharp-rimmed cliffs appear "etched", presumably by wind. A
+series of rugged mountains (extending toward the upper right corner of
+the image) are of unknown origin.
+
+This digital mosaic was produced by Jody Swann/Tammy Becker/Alfred
+McEwen, using the PICS (Planetary Image Cartography System) image
+processing system developed at the U.S. Geological Survey in Flagstaff,
+Arizona.
+
+
+
+[this text refers to products in the '483so' directory]
+
+
+               Hellas Mosaic - Orthographic Projection
+                ---------------------------------------
+
+The image files contained in the SPECIAL/483SO sub-directory are global
+mosaics of the Hellas Area of Mars. The original images were acquired
+during orbit 1,483 of Viking 1 on July 7, 1980. At that time, it
+was late northern summer on Mars  (aerocentric solar longitude = 140
+degrees).  The mosaic covers the region from latitude -70 degrees to 50
+degrees and longitude 260 degrees to 360 degrees.  
+
+The images are in an orthographic projection with scales of 1/4
+Degree/Pixel (14.8 KM/Pixel, MC* files), 1/8 Degree/Pixel (7.40
+KM/Pixel, MD* files), 1/16 Degree/Pixel (3.70 KM/Pixel, ME* files), 1/32
+Degree/Pixel (1.85 KM/Pixel, MF* files), and 1/64 Degree/Pixel (.925
+KM/Pixel, MG* files). The MG* files contain selected sub-areas of the
+total mosaic.
+
+The color variations have been enhanced in the GIF formatted image
+files. The large-scale brightness variations (mostly due to sun-angle
+variations) have been normalized by large-scale filtering.
+
+The bright  white region near the bottom of the image is due to carbon
+dioxide frost in the Hellas impact basin, which is about 2000 km in
+diameter. The large bright yellow region at top is Arabia.
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at  the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '735sa' directory]
+
+
+                             Olympus Mons
+                             -------------
+
+The image files contained in the SPECIAL/735A sub-directory are a mosaic
+of Olympus Mons. The mosaic was created with the medium-resolution
+Black/White MDIM combined with a low resolution color image mosaic
+acquired on the 735 orbit of Viking 1 on June 22, 1978.
+
+The cental edifice of Olympus Mons has a summit caldera 24km above the
+surrounding plains. Surrounding the volcano is an outward-facing scarp
+550 km in diameter and several kilometers high. Beyond the scarp is a
+moat filled with lava, most likely derived from Olympus Mons. Farther
+out is an aureole of characteristically grooved terrain, just visible at
+the top of the frame. 
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using the
+PICS (Planetary Image Cartography System) image processing system
+developed at  the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+
+[this text refers to products in the '912a' directory]
+
+
+                 Central Candor Chasm - Oblique Views                 
+                             -------------------------------------
+
+Part of the Candor Chasm in Valles Marineris on Mars centered at Latitude -5.0, 
+Longitude 70.0. High resolution black/white images were acquired on orbits 912, 
+914, 913, 915, and 917 of Viking 1. Color images, combined with the high resolution 
+black/white images, wereacquired on orbit 279 from Viking 2.  Oblique views of 
+Candor Chasma are from the East (image names start with 'E'), North (names start 
+with 'N'), South (names start with 'S'),and West (names start with 'W').  The 
+geomorphology is complex, shaped by tectonics, mass wasting, and wind, and 
+perhaps by water and volcanism. 
+
+Image Processing by Jody Swann/Tammy Becker/Alfred McEwen, using thePICS 
+(Planetary Image Cartography System) image processing system developed at  the 
+U.S. Geological Survey in Flagstaff, Arizona.

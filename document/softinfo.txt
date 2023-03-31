@@ -1,0 +1,372 @@
+                        Decompression Software
+
+    The SOFTWARE directory contains software source code files for the
+decompression of compressed image files.  In order to make the software
+available to a wide community of users, different versions of the
+decompression software exist in VAX/VMS FORTRAN, IBM/PC FORTRAN,
+C-language, and VAX/VMS Assembler language.  Some modification of these
+routines may be required in order to adapt the software to a particular
+computer and operating system.  This directory also contains sample
+utility programs to read the image index tables (IMGINDEX.FOR) and the
+lost image table (LOSTIMAG.FOR).
+
+    The decompression routines assume that the user can access the
+compressed image files through normal system input/output (I/O)
+commands.  Otherwise special utilities may be needed to move image files
+from the CD-ROM to the user's fixed-disk prior to executing the
+decompression programs.  As of this writing IBM-PC under the MS-DOS
+operating system can directly access CD-ROMs that conform to the ISO
+volume and directory standard.  However, other systems such as VAX
+systems under the VMS operating system still require special access
+software.  Additional software for accessing CD-ROMs that conform to the
+ISO volume and directory standard can be obtained by contacting the
+following organization:
+
+         Planetary Data System
+         Jet Propulsion Laboratory
+         4800 Oak Grove Drive
+         Pasadena, Ca. 91103
+
+    Information describing the compressed image files can be found in
+the VOLINFO.TXT file located in the DOCUMENT directory.  The document
+describes the organization of the CD-ROM.  It provides information on
+how to access files stored on a CD-ROM, and gives details on the format
+and contents of the image files and their supporting supplemental files.
+
+    The decompression software is supplied as callable subroutine
+modules for use with existing applications; as source code for
+stand-alone programs that can be copied to the users host-computer,
+compiled, linked, and executed; and as executables for IBM PC and VAX
+users.  The practice of distributing software on read-only archival
+media is known to be risky.  The executables are being placed on this
+disk for evaluation and no guarantee is made that they will work in
+specific computer configurations.
+
+
+SUBROUTINES FOR DECOMPRESSION SOFTWARE
+
+    The image decompression software has two subroutines to be called by
+an application program.  Typically, an application program will open an
+image file, read the image data from the file, call the decompression
+routines to restore the image, and then transfer the image to the
+appropriate output media or display device.
+
+    The software has two top-level subroutines, DECMPINIT and
+DECOMPRESS.  They provide a common base from which to call the
+processing routines.  DECMPINIT builds the Huffman tree from the
+encoding histogram and is called only once per image.  DECOMPRESS
+processes one compressed input line per call and returns the line
+completely restored.  These routines are fully documented.  Consult the
+source code files for a full explanation of their use.
+
+
+Programmer's View
+
+    From the programmer's view point, the calling sequence of these
+routines are as follows:
+
+  1) First, extract the encoding histogram from the image file.
+     (Consult VOLINFO.TXT document for details).  The encoding histogram
+     contains 511 32-bit elements.  Note, the encoding histogram is
+     configured in "least significant byte first" order.  This is the
+     order for integer values used by VAX and IBM PC computer systems.
+     Users of other computer architectures (IBM mainframes, Macintosh,
+     SUN, and Apollo) will need to swap the byte pairs 1 and 4, and 2
+     and 3.  (Example, hexadecimal value AA BB CC DD becomes DD CC BB
+     AA.)
+
+  2) Pass the encoding histogram to the DECMPINIT routine to initialize
+     the Huffman coding tree.
+
+  3) After the initialization call, read compressed image lines, one at
+     a time, from the image file and pass the lines to the DECOMPRESS
+     routine for restoration.  After the image line has been restored,
+     transfer the line to an output image file or display screen.
+
+
+FORTRAN Considerations
+
+    The VAX/VMS FORTRAN version of the decompression software resides in
+the DECOMP.FOR file.  This file contains the DECMPINIT and DECOMPRESS
+routines, and the internal subroutines DCMPRS, HUFF_TREE, and SORT_FREQ.
+A version of these routines for Sun workstations is in file DECOMPS.FOR.
+Additionally, for VAX/VMS users there is an assembler language version
+of the DCMPRS routine located in the file DCMPRS.MAR.  Use of this
+routine will improve the performance of the decompression software by a
+factor of two.  The VAX/VMS assembler routine will only work with the
+FORTRAN version of the decompression software.  There is also a source
+file called BTEST.FOR.  This file contains a FORTRAN version of the
+VAX/VMS BTEST intrinsic function.  Use this routine only if you are not
+running under the VAX/VMS environment.  Finally, there is a main
+program, located in the DETEST.FOR file, which tests the performance of
+the decompression software.  If you are adapting the software to your
+particular hardware configuration, then this program will be useful for
+testing the software.  A summary of the FORTRAN related files is
+presented below.
+
+    DECOMP.FOR - VAX/VMS FORTRAN versions of the decompression software.
+       Contains routines DECMPINIT, DECOMPRESS, and working routines
+       SORT_FREQ, HUFF_TREE, and DCMPRS.
+
+    DCMPRS.MAR - VAX/VMS macro assembler routine that can replace the
+       FORTRAN version of the DCMPRS subroutine.
+
+    BTEST.FOR - Contains the FORTRAN code for the VAX/VMS BTEST
+       intrinsic function.
+
+    DETEST.FOR - Main program to test the decompression subroutines.
+
+
+Example FORTRAN Program
+
+    The example FORTRAN program shown below demonstrates how to use the
+decompression programs.
+
+
+  C*******************************************************************
+  C
+  C HIST   - Buffer to contain 511 elements of the encoding histogram.
+  C          The encoding histogram is extracted from the image file.
+  C NSI    - Number of bytes obtained from the read of a compressed
+  C          line.
+  C NSO    - Number of output samples after decompression.  For Viking
+  C          images, this value is 1204.
+  C LINEI  - Buffer containing the input compressed line.
+  C LINEO  - Buffer to contain the restored line after decompression.
+  C NL     - Number of lines in the image array.  For Viking images,
+  C          this value is 1056
+  C IL     - DO loop counter for processing image lines.
+  C********************************************************************
+          INTEGER*4 NSI,NSO,NL,IL
+          INTEGER*4 HIST(511)
+          BYTE      LINEI(4096),LINEO(1204)
+          .
+          .
+  C********************************************************************
+  C Assume the encoding histogram has been extracted from
+  C the image file and has been placed into the HIST array.
+  C Pass it to the DECMPINIT routine for initialization
+  C********************************************************************
+          CALL DECMPINIT(HIST)
+          .
+          .
+  C********************************************************************
+  C The DO loop will read one compressed line at a time from the input
+  C file and call the DECOMPRESS routine to restore the line
+  C********************************************************************
+          NL  = 1056
+          NSO = 1204
+          DO IL = 1,NL
+          .
+          .
+          (read next compressed line (LINEI) and length of line (NSI))
+          CALL DECOMPRESS(LINEI,LINEO,NSI,NSO)
+          (line is restored in the LINEO subroutine)
+          .
+          END DO
+          .
+          .
+          STOP
+          END
+
+
+C-language Considerations
+
+    The C-language versions of the image decompression subroutines are
+more portable than the equivalent FORTRAN versions.  These routines have
+been tested on a VAX 750 running under version 4.6 of VMS, a Micro-VAX
+running under version 2.2 of ULTRIX, a SUN workstation running under
+version 4.2 (release 3.4) of UNIX, and an IBM PC running under MS-DOS
+using versions 4.0 and 3.0 of MICROSOFT C.
+
+    The C-language version of the decompression software resides in the
+DECOMP.C file.  This file contains the decmpinit and decompress
+routines, and the working routines dcmprs, huff_tree, and sort_freq.
+Also, there is a main program, located in the DETEST.C file, which tests
+the performance of the decompression software.  If you are adapting the
+software to your particular hardware and operating system environment,
+then this program will be useful for testing the software.
+
+
+Example C-language Program
+
+    The example program shown below demonstrates the use of the
+decompression subroutines.
+
+  /********************************************************************
+  *
+  * hist   - Buffer to contain 511 elements of the encoding histogram.
+  *          The encoding histogram is extracted from the image area.
+  * nsi    - Number of bytes obtained from the read of a compressed
+  *          line.
+  * nso    - Number of output samples after decompression.  For Viking
+  *          images, this value is 1204.
+  * linei  - Buffer containing the input compressed line.
+  * lineo  - Buffer to contain the restored line after decompression.
+  * nl     - Number of lines in the image array.  For Viking images,
+  *          this value is 1056.
+  * il     - Loop counter for processing image lines.
+  ******************************************************************/
+         main ()
+         {
+          extern void decmpinit(); /* decmpinit is void function*/
+          extern void decompress();/* decompress is void function*/
+          long  nsi,nso,nl,il;
+          long  hist[511];
+          char  linei[4096],lineo[1204];
+          .
+          .
+  /********************************************************************
+  * Assume the encoding histogram has been extracted from
+  * the image file and has been placed into the hist array.
+  * Pass it to the decmpinit routine for initialization
+  ********************************************************************/
+          decmpinit(hist);
+          .
+          .
+  /********************************************************************
+  * The loop will read one compressed line at a time from the input
+  * file and call the decompress routine to restore the line
+  ********************************************************************/
+          nl  = 1056;
+          nso = 1204;
+          for (il=0; i<nl; ++i)
+          {
+           .
+           .
+           (read next compressed line (linei) and length of line (nsi))
+           decompress(linei,lineo,&nsi,&nso);
+           (line is restored in the LINEO variable.)
+           .
+          }
+          .
+          .
+         }
+
+
+STAND-ALONE APPLICATIONS
+
+    Stand-alone applications that will read a compressed image file,
+reformat the labels, and decompress the image to an output file are
+provided in C and FORTRAN language versions.
+
+    The program VDCOMP.C includes all routines necessary to compile and
+link, producing an executable version of the program.  This program has
+been tested on an IBM PC with Microsoft C, version 5.1, on a VAX 11/780
+using VMS C version 2.2-015, on a Sun workstation running BSD UNIX 4.2
+and a Macintosh IIx using Lightspeed C V3.0.  IBM PC users will receive
+several compilation warnings that may be ignored.  VAX/VMS users may
+have to edit the "#include <stdio.h>" statement at the beginning of the
+file depending on their environment setup, and may need to redefine the
+link library as shown below.
+
+    The program VDCOMP.C prompts the user for a input file name, output
+file format choice, and output file name.  The output file formats
+supported by this version of VDCOMP.C include PDS labelled format, FITS
+labelled format, a simple VICAR2 labelled format and an unlabelled
+binary array format.
+
+    The following commands should be used to link subroutines and
+produce an executable file:
+
+    On an IBM PC (using Microsoft C Version 5.x)
+
+         cl /c vdcomp.c
+         link  vdcomp/stack:10000;
+
+    On a VAX:
+
+         cc   vdcomp
+         define lnk$library sys$library:vaxcrtl.olb
+         link vdcomp
+
+    On a Unix host (Sun, Masscomp)
+
+         cc -o vdcomp vdcomp.c
+
+    On a Macintosh (using Lightspeed C)
+
+         link with the following libraries:
+         stdio, storage, strings, unix and MacTraps, with MacTraps
+         in a separate segment.
+
+    Use the following command to run the program:
+
+         VDCOMP [infile] [output format] [outfile]
+
+         infile        - name of compressed image file.
+         output format - selected from the following list:
+
+              1  SFDU/PDS format [DEFAULT].
+              2  FITS format.
+              3  VICAR format.
+              4  Unlabelled binary array.
+
+         outfile       - name of uncompressed output file.
+
+    On the VAX computer you will need to 'install' the program to be
+able to use command line arguments using the following command:
+
+         $ vdcomp :== $DISKNAME:[DIRECTORY]vdcomp.exe
+
+    where DISKNAME is the disk drive and DIRECTORY is the directory
+where VDCOMP.EXE is stored.
+
+    The programs VAXDRIV.FOR and PCDRIV.FOR are VAX/VMS and IBM PC
+versions of a program to decompress image files and write them out to a
+PDS formatted file.  Both programs need to be compiled, then linked with
+DECOMP.FOR to produce an executable file.  The programs are identical
+except for the file open statements and the variable length record I/O
+(read) statements.
+
+    On an IBM PC (using Microsoft FORTRAN Version 4.1)
+
+         fl pcdriv.for decomp.for
+
+    On a VAX/VMS system:
+
+         for   vaxdriv,decomp
+         link  vaxdriv,decomp
+
+    There are also  sample programs, IMGINDEX.FOR and LOSTIMAG.FOR that
+will read and display the contents of the image index or cumulative
+index tables (IMGINDEX.TAB or CUMINDEX.TAB) and the lost image table
+(LOSTIMAG.TAB).  They have been tested on the VAX and IBM PC.
+
+
+EXECUTABLES
+
+    The VDCOMP program has been compiled and linked on IBM PC, VAX/VMS
+and Macintosh systems to produce executable programs for decompressing
+images.  For users of IBM PC computers, the program PCDCOMP.EXE will
+prompt for input and output file names, writing the decompressed file to
+the specified file name.  The program also supports writing the image
+file out in PDS, FITS and VICAR2 format, or writing an unlabelled array
+of sample values.  The FITS and VICAR2 formats provide only minimal
+system labels to allow display of the image on systems that support
+these label formats and have not been carefully tested.  For VAX/VMS
+users, the equivalent program is VAXDCOMP.EXE, which writes out
+fixed-length files (PDS format, VICAR2 or unlabelled formats) or
+2880-bytes (FITS format).  The image histogram and all engineering
+parameters are discarded when writing the FITS, VICAR2 and unlabelled
+formats.  For Macintosh users, the file MACDCOMP.HQX contains a special
+version of the program (MACDCOMP) that incorporates the Macintosh user
+interface for file selection.  The MACDCOMP.HQX file is stored in BINHEX
+format, and the utility STUFFIT or UNSTUFFIT must be used to:  1) decode
+the BINHEX file MACDCOMP.HQX into MACDCOMP.SIT, using the DECODE BINHEX
+FILE... option in the Other menu; and 2) use OPEN ARCHIVE from the File
+menu to extract MACDCOMP from the STUFFIT archive file.  The Lightspeed
+C (V3.0) project file, source code, and resource file are also included
+in MACDCOMP.SIT.  To use MACDCOMP, move the executable file to a folder
+on your hard disk where you want to store the decompressed images.
+Double click on the MACDCOMP icon, then follow the prompts to select a
+file to decompress and to select the output format options.
+
+    No guarantee is made that these programs will work in your computer
+configuration.  The VAX program assumes that you have file-access
+support for ISO format CD-ROM disks on your system, or that you have
+used a CD-ROM utility routine to read the compressed file from CD-ROM to
+a magnetic disk.  The C programs may require some conversion to work
+with C-languages that follow the new ANSI C standard, due to changes in
+the definition of arguments to string handling routines (strncmp, etc.)
+from integers to long integers.

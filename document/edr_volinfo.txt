@@ -1,0 +1,1963 @@
+                       Archive of Digital Images
+
+              from NASA's Viking Orbiter 1 and 2 Missions
+
+
+
+
+
+
+
+
+                    Edward Guinness, Susan Slavney
+              Department of Earth and Planetary Sciences
+                McDonnell Center for the Space Sciences
+                         Washington University
+                          St. Louis, Missouri
+
+
+                             Eric Eliason
+                        Branch of Astrogeology
+                    United States Geological Survey
+                          Flagstaff, Arizona
+
+
+                        Mike Martin, Jason Hyon
+                       Jet Propulsion Laboratory
+                         Pasadena, California
+
+
+
+
+
+
+                           December 26, 1990
+                              Version 1.0
+
+
+
+                               CONTENTS
+
+1   - Introduction ................................................... 1
+
+2   - Viking Mission ................................................. 2
+
+3   - Viking Orbiter Visual Imaging Subsystem ........................ 3
+
+4   - Data Preparation ............................................... 5
+
+5   - Disk Directory Structure ....................................... 6
+
+6   - Compressed Image File Organization ............................. 7
+    6.1 - Image Label Area ........................................... 7
+    6.2 - Image Histogram Object ..................................... 9
+    6.3 - Encoding Histogram Object ................................. 10
+    6.4 - Engineering Table Object .................................. 10
+    6.5 - Line Header Table Object .................................. 10
+    6.6 - Image Object .............................................. 10
+
+7   - Data Compression Method ....................................... 11
+    7.1 - First-Difference Huffman Encoding ......................... 11
+    7.2 - Decompression Software .................................... 12
+
+8   - Browse Image File Organization ................................ 13
+    8.1 - Image Label Area .......................................... 13
+    8.2 - Image Histogram Object .................................... 15
+    8.3 - Image Object .............................................. 15
+
+9   - Image Index Files ............................................. 15
+
+10  - References .................................................... 16
+
+Appendix A - ISO Volume and Directory Standard ...................... 18
+         A.1 - Volume and Directory Structures ...................... 18
+         A.2 - File Structure ....................................... 18
+             A.2.1 - Variable Length Records ........................ 18
+             A.2.2 - Fixed Length Records ........................... 18
+             A.2.3 - Stream Files ................................... 19
+             A.2.4 - Extended Attribute Record ...................... 19
+
+Appendix B - Syntactic Rules of Keyword Assignment Statements ....... 20
+         B.1 - Integer Numbers ...................................... 20
+         B.2 - Real Numbers ......................................... 20
+         B.3 - Dates and Times ...................................... 21
+         B.4 - Literal Values ....................................... 21
+         B.5 - Text Character Strings ............................... 21
+
+Appendix C - Keyword Assignments For Viking Orbiter Images .......... 22
+
+Appendix D - Engineering Table Object ............................... 27
+
+Appendix E - Supplemental Line Engineering Data ..................... 32
+
+Appendix F - Image Index File Format ................................ 33
+
+
+Viking Orbiter Image Archive                                    Page - 1
+
+1 - Introduction
+
+    Digital image data from the Viking Mission to Mars have become
+increasingly valuable to the planetary science community since the last
+images were acquired in 1980.  The desire to support future missions
+such as Mars Observer, along with the availability of software for
+radiometric and geometric image processing, have created a demand for
+convenient, efficient access to the Viking image collection.  To help
+meet this need, NASA's Planetary Data System (PDS), through the
+Geosciences Discipline Node at Washington University and the Image Node
+at the U.S. Geological Survey, Flagstaff, Arizona and the Jet Propulsion
+Laboratory, has created a digital archive of images acquired by the
+Viking Orbiter 1 and 2 spacecraft.  The archive will include Experiment
+Data Record (EDR) versions of all available images acquired by the
+Viking Orbiter Visual Imaging Subsystems (VIS).  The archive is being
+placed on compact read-only optical disk media (CD-ROM) for distribution
+to interested scientific research organizations, universities, and
+libraries.
+
+    The EDR image data are stored on CD-ROM in a compressed format that
+allows exact reconstruction of the original images.  The images were
+compressed in order to reduce the number of CD-ROMs required for the
+archive.  The average Viking Orbiter image is compressed by a factor of
+about 3.5.  Because some processing time is required to decompress an
+image, each CD-ROM also has subsampled versions of the full-resolution
+images that allow users to rapidly view the archive collection.  These
+subsampled images are referred to as browse images.  Each CD-ROM in the
+archive also includes documentation about the organization and contents
+of the disk.  Software is included to provide programmers with tools to
+decompress image files.  The CD-ROM also has index files containing
+information about all the images stored in the archive.  These index
+files can be loaded into a database management system to help the user
+locate images of interest.
+
+    The EDR images in this archive have not been processed in any form
+other than organizing the original telemetry into raster formatted files
+and compressing the image data using a Huffman encoding algorithm.  The
+reason for distributing unprocessed data rather than processed versions
+of the images is that the calibration files and processing procedures
+will continue to evolve.  This is due to improvements not only in the
+procedures but also in the radiometric calibration data and in the
+geometric information concerning spacecraft position and pointing.  By
+providing unprocessed images, new image processing capabilities can be
+applied to the original unprocessed data.  A separate CD-ROM containing
+the ancillary information needed to perform radiometric and geometric
+corrections will be published and updated periodically by the PDS Image
+Node.  The ancillary CD-ROM will contain vidicon shading files, dark
+current drift tables, reseau position tables, and geometry data.
+
+    To make full scientific use of the image collection, it is necessary
+to understand the radiometric and geometric properties of the Viking
+Orbiter imaging systems [1, 2, 3] and to perform corrections to the EDR
+data.  A number of image processing systems are available that provide
+radiometric and geometric corrections, display capabilities, and
+analysis tools for planetary images [4, 5, 6].  Further information on
+processing Viking Orbiter image data and the necessary radiometric and
+
+
+Viking Orbiter Image Archive                                    Page - 2
+
+geometric calibration data is available through the PDS Image Node at
+the U.S. Geological Survey in Flagstaff, Arizona.
+
+    The purpose of the remainder of this document is to provide:  (a)
+brief descriptions of the Viking Mission and the Orbiter imaging
+systems; (b) details on the format and content of the compressed image
+files and browse image files; (c) a description of the data compression
+method used; (d) a description of the image index files; and (e)
+background information on the standards used to generate the data files,
+associated labels, and CD-ROM structure.
+
+
+2 - Viking Mission
+
+    The Viking Mission consisted of four spacecraft:  two identical
+orbiters and two identical landers.  During cruise from Earth to Mars
+the landers were attached to the orbiters.  There were 13 science teams
+with experiments on these spacecraft.  The major scientific objective of
+the mission was to search for life on Mars.  Several experiments on the
+landers were designed to address this objective.  In addition, some of
+the experiments on the orbiters and landers focussed on the study of the
+composition and physical properties of the atmosphere, the distribution
+of water vapor, and global and local meteorology.  Other experiments
+investigated the composition and physical properties of the surface and
+the geologic history of Mars.  Data on the seismicity of Mars and its
+gravity field were also acquired to study the internal structure of Mars
+[7, 8].
+
+    One of the Orbiter experiments was the Visual Imaging Subsystem
+(VIS), which acquired the images that comprise this archive.  The
+imaging system is briefly described in the next section.  The first
+objective of the VIS experiment was to characterize potential landing
+sites in support of site selection.  Additional objectives were to study
+the photometric and colorimetric properties of the surface; to study
+various geological features that were discovered by Mariner 9 in order
+to better understand the geological history of Mars; to study the
+dynamics of the atmosphere; and to monitor the surface for changes.
+
+    The Viking Orbiter spacecraft operated in orbit around Mars from
+1976 until 1980.  The overall Viking mission was divided into a number
+of mission phases with specific objectives.  The time from orbital
+insertion until November 1976 is known as the Primary Mission.  The main
+objective of the Orbiter instruments was to collect data in support of
+landing site selection.  The spacecraft orbital characteristics were
+chosen so that the Orbiters could serve as relay stations for
+communications between the Landers and Earth.  In addition, the Orbiter
+imaging systems imaged all of the terrains on Mars, collected some color
+and stereo images, and made observations of Phobos and Deimos.  The
+Viking Extended Mission took place from November 1976 through May 1978,
+and the Viking Continuation Mission took place from May 1978 through
+February 1979.  During these periods the Orbiters were not always
+required as relay stations with the Landers.  Some of the image
+sequences acquired by the VIS experiment include systematic medium and
+high resolution coverage of large portions of the surface, stereo
+images, observations of Phobos and Deimos, color images of the
+equatorial regions, observations of the polar regions, and monitoring
+
+
+Viking Orbiter Image Archive                                    Page - 3
+
+dust storm activity.  The final phase of the Viking Mission was the
+Survey Mission from July 1979 until July 1980.  During the Survey
+Mission only Viking Orbiter 1 operated since Viking Orbiter 2 had lost
+its attitude control gas through a series of leaks.  The Orbiter 1 image
+coverage during the Survey Mission was designed to obtain contiguous
+high resolution coverage of the Martian cratered terrain.  One reason
+for acquiring these data was to help select landing sites on Mars for
+future missions.
+
+
+3 - Viking Orbiter Visual Imaging Subsystem
+
+    Each Viking Orbiter was equipped with two identical vidicon cameras,
+called the Visual Imaging Subsystem (VIS) [1, 2, 3].  Each VIS camera
+consisted of a telescope, a slow scan vidicon, a filter wheel, and
+associated electronics.  The angular field of view of the camera as
+defined by the reseau pattern was 1.51 by 1.69 degrees.  The ground area
+covered by an image varies as a function of spacecraft altitude and
+emission angle.  A digital image was generated by scanning the vidicon
+face plate.  The signal at each location (pixel) was digitized as a
+7-bit number (i.e., within the range of 0 to 127).  The EDR image data
+were converted to 8-bit numbers by multiplying the original 7-bit
+numbers by 2.  Thus, the least significant bit of each pixel in an EDR
+image is zero, except for interpolated pixels or pixels with corrupted
+values.  A full-resolution, uncompressed Viking Orbiter image consists
+of an array of 1056 lines with 1204 samples per line.  There are only
+1182 valid samples in each line.  The extra 22 samples in each line
+consist of dark bands on the left and right edges of each image,
+produced by an opaque mask located at the front of the vidicon.  Each
+dark band is approximately 11 samples wide, although the exact width
+varies from image to image.
+
+    Each VIS camera contained a filter wheel with five color filters
+(blue, minus blue, violet, green, and red) and a clear position, i.e.,
+no filter.  The filter half power bandwidths are approximately:  blue
+from 0.35 to 0.53 micrometers; minus-blue from 0.48 to 0.70 micrometers;
+violet from 0.35 to 0.47 micrometers; clear from 0.35 to 0.70
+micrometers; green from 0.50 to 0.60 micrometers; and red from 0.55 to
+0.70 micrometers.  Multiple images of the same areas were occasionally
+acquired using violet, green, and red filters to form color images after
+processing on Earth.  Color image reconstruction from Viking imaging
+requires radiometric and geometric corrections, and co-registration of
+the images that make up the color set.  Images were acquired by the
+Viking Orbiters at approximately eight second intervals.  In this time
+period, the viewing geometry changed enough so that the individual
+images that make up the color set can not be properly registered unless
+the images are geometrically rectified.  The brightness of pixels in an
+image could be adjusted by choosing an exposure duration from a set of
+values between 0.003 to 2.66 seconds.  The brightness values could also
+be adjusted by using a combination of three mode parameters:  gain,
+offset, and light flood.  The gain parameter specified the sensitivity
+of a VIS camera to light incident on the vidicon.  There were two gain
+settings:  'low' and 'high'.  The high gain mode had twice the
+sensitivity as the low gain mode.  Thus, the low gain mode expanded the
+dynamic range of the camera by 100%.  The exposure duration and the
+expected light level of a scene were the deciding factors for choosing
+
+
+Viking Orbiter Image Archive                                    Page - 4
+
+high or low gain modes for an imaging sequence.  The offset parameter
+specified whether a constant was subtracted from the vidicon signal in
+order to compensate for the dark current level, i.e., the signal for the
+zero-exposure level.  The offset parameter set to 'on' electronically
+subtracted a constant from the camera signal.  The light flood parameter
+was designed to eliminate a residual image from consecutive images.  The
+light flood parameter was set to 'on' for most images.  With the light
+flood on, the vidicon was exposed to an internal light source in order
+to saturate the vidicon before the camera went into its erase cycle.
+The light flood effectively erased an image so that it would not appear
+in the next image.  A few Viking Orbiter images were acquired with the
+light flood parameter set to 'off', such as star images, Mars limb
+images, and Phobos and Deimos images.
+
+    Many Viking Orbiter images are missing data and contain some amount
+of noise [2].  A common pattern of missing data is a series of vertical
+bars with zero value pixels spaced at an interval of 7 samples.  The 7-
+sample interval results from the raw data being stored on the spacecraft
+and transmitted to Earth in packets that contained every seventh pixel.
+In addition, data for a few horizontal image lines may be missing and
+such lines are filled with zero values.  The types of noise found in
+Viking Orbiter images include single-pixel random noise and several
+sources of coherent noise.  The random noise is usually due to telemetry
+errors.  Techniques exist to remove the random noise and missing data
+[14].  The coherent noise arises from shuttering of the adjacent camera,
+filter wheel stepping, and scan platform movements [2].  The coherent
+noise typically exists in the top and bottom 100 lines of an image and
+appears as a 'herring bone' pattern.  If the amount of missing data and
+noise is large, noise removal procedures may be needed to make the image
+viewable.  Box filtering techniques that fill in zero values or average
+the bright and dark spikes of random noise are often successful at noise
+removal.  For example, the browse images on this CD-ROM were produced
+with a box filter that assigned the median value of a group of pixels to
+each processed pixel.
+
+    A brief summary of the processing procedures needed to convert the
+EDR images on this CD-ROM to radiometrically and geometrically
+calibrated products is now presented:
+
+    (1) Viking Orbiter images can be radiometrically calibrated by
+converting the digitized signal received from the camera (DN value) into
+a quantity that is proportional to the radiance reaching the sensor [2,
+3, 4].  Each Viking Orbiter VIS camera was calibrated before flight.  In
+addition, changes in the calibration over time have been estimated from
+analyses of images of deep space and dust storms.  The radiometric
+calibration procedure applies additive and multiplicative corrections
+that account for the varying sensitivity of the vidicon across the field
+of view and over time.  The calibrated values are proportional to
+radiance factor, which is defined as the ratio of the observed radiance
+to the radiance of a normally illuminated lambertian reflector of unit
+reflectance at the same heliocentric distance.
+
+    (2) Geometric calibration of Viking Orbiter EDR images removes
+electronic distortions and transforms the point perspective geometry of
+the original image into a map projection [3, 4].  The electronic
+distortions are barrel-shaped distortions from the electron beam readout
+
+
+Viking Orbiter Image Archive                                    Page - 5
+
+and complex distortions from interactions between the charge on the
+vidicon face plate and the electron beam.  The electronic distortions
+are modeled by comparing the predicted locations of undistorted reseau
+marks with the actual locations in an image.
+
+    Software and calibration files to perform both radiometric and
+geometric calibrations have been developed and are maintained by the PDS
+Image Node at the U.S. Geological Survey in Flagstaff, Arizona.
+
+
+4 - Data Preparation
+
+    In the process of preparing the EDR images for inclusion on this
+series of CD-ROMs several steps were taken to insure that the best
+available image data and label information were archived.  The
+procedures used to prepare the images are briefly described below.
+
+    Data preparation started with identifying images that were actually
+received on Earth and then locating the digital data on magnetic tape.
+The primary digital data source was the set of magnetic tapes produced
+by the Planetary Image Conversion Task [9], also known as Planetary
+Archive tapes.  The data on the Planetary Archive tapes were derived
+from EDR tapes.  The quality of the image data on the Planetary Archive
+tapes was checked for problems such as missing lines, segments of data
+from other images, and mismatched images and labels.  Some of the images
+received on Earth were not available on these Planetary Archive tapes.
+In addition, some Viking Orbiter images were never transferred to EDR
+tapes.  For images with data problems and for images not available from
+either tape source, attempts were made to retrieve the data from the
+Viking Master Data Record (MDR) tapes.
+
+    The accuracy of the image description keywords (refer to Section
+6.1) in the image label was verified by comparing data from several
+sources.  These sources included the PDS Central Node image catalog,
+label information available within the PICS system, image labels on the
+Planetary Archive tapes, and Mission Test and Imaging System (MTIS)
+photoproducts.  In cases where there were discrepancies among the
+sources, label values were chosen that occurred most frequently among
+the sources, maintained consistency among images within a sequence, and
+agreed with the VIS team planning notes.  For example, a discrepancy in
+exposure duration for an image might be resolved by choosing the value
+of exposure duration for other images in the same sequence.  If a
+discrepancy could not be resolved, that keyword was assigned the value
+"unknown".
+
+    The EDR images included in this archive are stored in a compressed
+format in order to reduce the total number of CD-ROMs in the collection.
+Data compression was applied to an image only after the quality of the
+image data and label information was verified.  In order to check the
+results of the data compression step, each image was decompressed and
+compared to the original image.  The compressed image file was accepted
+only if the results of decompression exactly matched the original image
+data.  Once a compressed image was accepted it was used as the source
+for generating a browse version of the image by sub-sampling each 4 by 4
+array of pixels into a single pixel (see Section 8 for further details).
+
+
+
+Viking Orbiter Image Archive                                    Page - 6
+
+    The transfer of the image data to CD-ROM is checked by comparing the
+compressed images on each CD-ROM with the original uncompressed versions
+of the images.  Any compressed image on CD-ROM that does not match the
+original uncompressed image will be reprocessed and included on a later
+CD-ROM in the series.  The cumulative index table will be updated if an
+image is redone to indicate which CD-ROM volume has the best version of
+the image.
+
+
+5 - Disk Directory Structure
+
+    The volume and directory structure of this CD-ROM conforms to the
+level-1 standard specified by the International Standards Organization
+(ISO).  This standard is also known as the ISO-9660 standard.  The ISO
+standard was used so that the disks can be accessed on a wide variety of
+computer systems.  Information on the ISO-9660 CD-ROM standard is
+provided in Appendix A of this document.
+
+    The compressed Viking Orbiter image files, browse image files,
+supplemental files, documentation, and software are located in separate
+directories.  Four directories are common to all Viking Orbiter image
+CD-ROMs:  the DOCUMENT directory contains documentation files associated
+with the Viking Orbiter image archive; the SOFTWARE directory contains
+software for decompressing an image file and for reading the index
+files; the INDEX directory contains image index files; and the LABEL
+directory contains labels coded in the PDS Object Description Language
+(ODL) [10] that describe the format and content of engineering data
+included with each image.  The LABEL directory also contains a file with
+the PDS catalog information about Viking Orbiter mission, VIS
+instruments, and the image data set.
+
+    The compressed Viking Orbiter image files are subdivided into
+directories based on the orbits during which the images were acquired.
+There is a separate directory for each orbit.  The directory names are
+based on the image_ids of the Viking Orbiter images and have the form
+FnnnnXX, where the 'nnnn' is the portion of the image_id that is common
+to the images of a given orbit.  For example, the directory F122SXX
+would contains images acquired by Viking Orbiter 1 on orbit 1122 (the
+letter S indicates orbit numbers greater than 1000 for Viking Orbiter
+1).  Browse image files are also subdivided into directories in the same
+manner as the compressed image files.  The directories for the browse
+images are all grouped under the top level directory named BROWSE.  Note
+that images retrieved from the MDR tapes may not be on the same CD-ROM
+as the other images from that orbit because of the added processing time
+required to retrieve data from MDR tapes.  These images can be found on
+one of the later disks in the archive.  Check the CUMINDEX.TAB file from
+the most recent Viking Orbiter CD-ROM to locate these images.
+
+    Each compressed Viking Orbiter image file has a unique name
+constructed from the image_id of that image.  The general form of a
+compressed image file name is Fnnnxss.IMQ.  Browse image file names have
+the same format, but with an extension of '.IBG'.  The character 'F' at
+the beginning of the file name designates that 'nnnxss' is an image_id.
+The 'nnn' is the orbit in which the image was acquired.  The 'x'
+indicates the spacecraft that acquired the image.  The values of 'x' are
+usually A or S for Viking Orbiter 1 and B for Viking Orbiter 2.  The
+
+
+Viking Orbiter Image Archive                                    Page - 7
+
+letters C and D indicate images acquired by Viking Orbiter 1 and 2,
+respectively, before orbit insertion.  The letter X indicates a Viking
+Orbiter 1 image acquired in an orbit with more than 100 images.  The
+'ss' is a sequence number for images acquired within one orbit.
+
+
+6 - Compressed Image File Organization
+
+    A compressed image file is composed of variable-length records
+defined according to the ISO-9660 standard.  Each variable length record
+starts with a record length indicator, stored as a 16-bit integer,
+followed by the number of bytes indicated in the record length
+indicator.  If the length indicator is odd, then a pad byte is appended
+to the end of the record so that all records contain an even number of
+bytes.  Refer to the information on variable-length records in Appendix
+A of this document.  Variable-length record files were chosen because of
+the nature of the compressed images; compressed lines, represented as
+individual records, will vary in length from one to another.
+
+    Compressed Viking Orbiter image files begin with a standard format
+data unit (SFDU) record, followed by several records that make up the
+PDS label area [10].  Following the PDS label are the data objects:
+Image Histogram, Encoding Histogram, Engineering Table, Line Header
+Table, and Image.  The remainder of this section provides a description
+of the image labels and the data objects within a compressed Viking
+Orbiter image file.
+
+
+6.1 - Image Label Area
+
+    The label area contains descriptive information about the image file
+and objects within the file.  The label consists of keyword statements
+that conform to version 2 of the Object Description Language (ODL)
+developed by the PDS project [10].  There are three types of ODL
+statements within a label:  structural statements, keyword assignment
+statements, and pointer statements.
+
+    Structural statements provide a shell around keyword assignment
+statements to delineate which data object the assignment statements are
+describing.  The structural statements are:
+
+         1) OBJECT = object_name
+         2) END_OBJECT
+         3) END
+
+    The OBJECT statement begins the description of a particular data
+object and the END_OBJECT statement signals the end of the object's
+description.  All keyword assignment statements between an OBJECT and
+its corresponding END_OBJECT statement describe the particular object
+named in the OBJECT statement.  The END statement terminates a label.
+It must appear as a single record that contains only the word END.
+
+    A keyword assignment statement contains the name of an attribute and
+the value of that attribute.  Keyword assignment statements are
+described in more detail in Appendix B of this document.  These
+statements have the following format:
+
+
+Viking Orbiter Image Archive                                    Page - 8
+
+         name = value
+
+    Values of keyword assignment statements can be numeric values,
+literals, and text strings.
+
+    Pointer statements are a special class of keyword assignment
+statements.  These pointers are expressed in the ODL using the following
+notation:
+
+         ^object_name = location
+
+    If the object is in the same file as the label, the location of the
+object is given as an integer representing the starting record number of
+the object, measured from the beginning of the file.  The first label
+record in a file is record 1.  Pointers are useful for describing the
+location of individual components of a data object.  Pointer statements
+are also used for pointing to data or label information stored in
+separate files.  An example of a detached label (i.e., label information
+stored in a separate file) is shown below:
+
+         ^STRUCTURE = 'logical_file_name'
+
+    The value of 'logical_file_name' is the name of the detached label
+file containing the description.
+
+    In a compressed image file, each keyword assignment in the label
+area is stored as a single variable-length record.  An example of the
+keyword labels for the compressed Viking Orbiter images is shown below.
+All of the compressed Viking Orbiter images in this archive have the
+same format label.  Appendix C of this document provides a detailed
+description of each keyword found in the label.
+
+          Example of a compressed Viking Orbiter image label
+
+CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL
+/*          FILE FORMAT AND LENGTH */
+RECORD_TYPE                      = VARIABLE_LENGTH
+RECORD_BYTES                     = 1204
+FILE_RECORDS                     = 2175
+LABEL_RECORDS                    = 61
+/*          POINTERS TO START RECORDS OF MAJOR OBJECTS IN FILE */
+^IMAGE_HISTOGRAM                 = 62
+^ENCODING_HISTOGRAM              = 63
+^ENGINEERING_TABLE               = 65
+^LINE_HEADER_TABLE               = 66
+^IMAGE                           = 1120
+/*          IMAGE DESCRIPTION */
+DATA_SET_ID                      = 'VO1/VO2-M-VIS-2-EDR-V2.0'
+SPACECRAFT_NAME                  = VIKING_ORBITER_1
+MISSION_PHASE_NAME               = SURVEY_MISSION
+TARGET_NAME                      = MARS
+IMAGE_ID                         = '122S01'
+IMAGE_NUMBER                     = 47637242
+IMAGE_TIME                       = 1979-07-22T01:59:08Z
+EARTH_RECEIVED_TIME              = 1979-07-22T10:40:02Z
+ORBIT_NUMBER                     = 1122
+
+
+Viking Orbiter Image Archive                                    Page - 9
+
+INSTRUMENT_NAME                  = VISUAL_IMAGING_SUBSYSTEM_CAMERA_A
+GAIN_MODE_ID                     = HIGH
+FLOOD_MODE_ID                    = ON
+OFFSET_MODE_ID                   = ON
+FILTER_NAME                      = CLEAR
+EXPOSURE_DURATION                = 0.016970 <SECONDS>
+NOTE                             = "VERY HIGH RESOLUTION GROUND TRACK
+     SEQUENCE WITH IMAGE MOTION COMPENSATION"
+/*          DESCRIPTION OF THE OBJECTS CONTAINED IN FILE */
+OBJECT                           = IMAGE_HISTOGRAM
+ ITEMS                           = 256
+ ITEM_TYPE                       = VAX_INTEGER
+ ITEM_BITS                       = 32
+END_OBJECT
+OBJECT                           = ENCODING_HISTOGRAM
+ ITEMS                           = 511
+ ITEM_TYPE                       = VAX_INTEGER
+ ITEM_BITS                       = 32
+END_OBJECT
+OBJECT                           = ENGINEERING_TABLE
+ ROWS                            = 1
+ ROW_BYTES                       = 152
+ ^STRUCTURE                      = 'ENGSUM.FMT'
+END_OBJECT
+OBJECT                           = LINE_HEADER_TABLE
+ ROWS                            = 1056
+ ROW_BYTES                       = 62
+ ^STRUCTURE                      = 'LINHDR.FMT'
+END_OBJECT
+OBJECT                           = IMAGE
+ ENCODING_TYPE                   = HUFFMAN_FIRST_DIFFERENCE
+ LINES                           = 1056
+ LINE_SAMPLES                    = 1204
+ SAMPLE_TYPE                     = UNSIGNED_INTEGER
+ SAMPLE_BITS                     = 8
+ SAMPLE_BIT_MASK                 = 2#11111110#
+ CHECKSUM                        = 73796562
+END_OBJECT
+END
+
+
+6.2 - Image Histogram Object
+
+    The first object after the label in a compressed Viking Orbiter
+image file is the histogram of the original uncompressed image.  The
+Image Histogram Object begins at the record specified by the
+^IMAGE_HISTOGRAM keyword.  Record 1 is the first record in the file.
+The histogram is made up of one variable-length record.  (The number of
+records contained in an object is determined by subtracting the value of
+the pointer keyword from the value of the next pointer.  For example,
+the value of ^ENCODING_HISTOGRAM minus the value of the ^IMAGE_HISTOGRAM
+equals 1.)  This record contains the 256 items in the image histogram.
+Each item is a 32-bit VAX integer [11].  The first element of the
+histogram contains the number of pixels in the image with the brightness
+value 0.  The last element contains the number of pixels in the image
+with the brightness value 255.
+
+
+Viking Orbiter Image Archive                                   Page - 10
+
+6.3 - Encoding Histogram Object
+
+    The second object in a compressed Viking Orbiter image file is the
+encoding histogram used to generate the first-difference Huffman coding
+table.  The Encoding Histogram Object begins at the record specified by
+the ^ENCODING_HISTOGRAM keyword.  The encoding histogram is contained in
+two variable-length records (^ENCODING_HISTOGRAM - ^ENGINEERING_TABLE).
+These two records, when concatenated together, contain 511 items.  Each
+item is a 32-bit VAX integer [11].  The first element of the encoding
+histogram contains the number of pixels with a first-difference value of
+-255.  The last element contains the number of pixels with a
+first-difference value of 255.  The encoding histogram is required by
+the decompression software to properly decompress the image.
+
+
+6.4 - Engineering Table Object
+
+    The third object in a compressed Viking Orbiter image file is the
+Engineering Table Object.  The table starts at the record specified by
+the ^ENGINEERING_TABLE keyword.  The table is made up of a single
+variable-length record.  The table contains supplemental engineering
+data for the entire image.  This data is usually not needed by most
+users.  Information in this object includes the Flight Data System (FDS)
+counts at start and end of image acquisition, data presence and quality
+indicators, system noise levels, synchronization error counts, command
+codes, and other engineering information.  Note that some of this
+information may be missing for images retrieved from the MDR tapes.  A
+complete description of the Engineering Table Object can be found in
+Appendix D of this document.  The file ENGSUM.FMT in the LABEL directory
+provides an ODL label describing the engineering table.
+
+
+6.5 - Line Header Table Object
+
+    The fourth object in a compressed Viking Orbiter image file is the
+Line Header Table Object.  The table starts at the record specified by
+the ^LINE_HEADER_TABLE keyword.  The table contains 1056 records.  Each
+record has 62 bytes.  The information in the line header table is a
+subset of the engineering data associated with each image line.  Thus,
+there is one line header record for each image line.  Information in
+this object includes the line number, average pixel value, and data
+presence and quality indicators.  Note that some of this information may
+be missing for images retrieved from the MDR tapes.  A complete
+description of the Line Header Table Object can be found in Appendix E
+of this document.  The file LINHDR.FMT in the LABEL directory provides
+an ODL label describing the line header table.
+
+
+6.6 - Image Object
+
+    The fifth object in a compressed Viking Orbiter image file contains
+the image data.  The image starts at the record specified by the ^IMAGE
+keyword.  The image object contains 1056 variable-length records; each
+record represents a single line.  The compressed lines have varying
+lengths because the compression factor for each line is different.  The
+first byte of a compressed line is the original value of the first
+
+
+Viking Orbiter Image Archive                                   Page - 11
+
+sample in the line.  The rest of the record contains the Huffman coded
+bits of the first-difference values.
+
+    Viking Orbiter images in uncompressed form contain 1056 lines and
+1204 samples per line.  Each sample is an 8-bit unsigned integer.  The
+keywords in the label area that describe the image are the
+ENCODING_TYPE, LINES, LINE_SAMPLES, SAMPLE_TYPE, SAMPLE_BITS,
+SAMPLE_BIT_MASK, and CHECKSUM keywords.  For more information on these
+keywords see Appendix C of this document.
+
+
+7 - Data Compression Method
+
+    Viking Orbiter images are stored on this CD-ROM in a compressed
+format using a Huffman encoding scheme.  The advantage of Huffman
+encoding is the significant reduction in space required to store an
+image while maintaining full data precision, i.e., the original image
+can be reconstructed without any loss of data.  The average Viking
+Orbiter image can be compressed by a factor of about 3.5.
+
+
+7.1 - First-Difference Huffman Encoding
+
+    The data compression scheme is combination of first-difference and
+Huffman code procedures.  The combined compression algorithm provides a
+technique that is simple, has minimum overhead, and allows exact
+restoration.  References to Huffman coding can be found in most books
+dealing with data compression, such as reference [12].
+
+    A unique Huffman code tree is created for each image to produce the
+most efficient compression.  In order to create the code tree, a
+first-difference histogram is created for the image.  This is done on a
+line by line basis.  The first pixel of each line is left as its
+original value (neither differenced nor compressed).  Each succeeding
+pixel is subtracted from the original value of the preceding pixel.  The
+first-difference values for each line cluster around zero and eliminate
+the pixel-to-pixel correlation along an image line.
+
+    The Huffman code tree is generated from the first-difference
+histogram.  The Huffman coding technique creates variable length bit
+strings to represent each first-difference value.  The most frequently
+occurring first-difference values will consist of very short bit
+strings, and the less frequently occurring values will consist of longer
+bit strings.  The first-difference values become the nodes of the tree.
+At each step in the generation of the tree the currently active tree
+nodes are ordered by frequency and the two nodes with smallest frequency
+are combined to form a new node.  The new node is added to the active
+list while the combining nodes are dropped.  The frequency for the new
+node is the sum of the frequencies of the combining nodes.  This is
+continued until there is only one active node.  Each branch of the tree
+is assigned a value of 0 or 1.  The Huffman code corresponding to a
+node value is determined by tracing the branches of the tree from the
+root to the node.  A brief example is shown below.
+
+
+
+Viking Orbiter Image Archive                                   Page - 12
+
+                      Example Huffman Coding Tree
+
+ code   freq  value
+ ----   ----  -----
+
+ 00     100    0  ----! 0
+                  195 !----------------------------------! 0
+ 01      95   -1  ----! 1                                !
+                                                     380 !---(root_node)
+ 10      90    1  ---------------------------------! 0   !
+                                               185 !-----! 1
+ 110     40   -2  ---------------------------! 0   !
+                                          95 !-----! 1
+ 1110    30    2   --------------------! 0   !
+                                    55 !-----! 1
+ 11110   10   -3   --------------! 0   !
+                              25 !-----! 1
+ 111110   5    3  ---------! 0   !
+                        15 !-----! 1
+ 1111110  5   -4  ---! 0   !
+                  10 !-----! 1
+ 1111111  5    4  ---! 1
+
+    There are two steps in the decompression of a Huffman coded image.
+First, the first-difference histogram is extracted from the compressed
+image file.  The histogram is used to set up the Huffman coding tree for
+decompression.  Second, the compressed lines are read from the image
+object of the file one line at a time.  In the restoration of a
+compressed line, each bit from the input compressed line is used to
+determine which branch to take in a path from the root to the nodes.
+Once a node is reached, the undifferenced value of the pixel can be
+computed from the node value and the previous pixel.  The search is
+reset for the next input bit to start from the root and the process
+continues for the whole line.
+
+
+7.2 - Decompression Software
+
+    Computer software, available as source code, resides on each CD-ROM
+for decompressing a compressed image.  This software can be found in the
+SOFTWARE directory.  In order to make the software useful to a wide
+community of users, different versions of the decompression software are
+provided in FORTRAN, C, and VAX/VMS assembler language.  Some
+modification of these routines may be required to adapt the software to
+a particular computer and operating system environment.  The SOFTWARE
+directory contains a file named SOFTINFO.TXT that describes the contents
+of the directory and how to use the software in the directory.
+
+    The decompression subroutines are designed to be tools for an
+application program.  Typically, an application program will open a
+compressed image file, read the image data from the file, call the
+decompression routines to restore the image, and then transfer the image
+to the appropriate output media or display device.  Because of
+differences between computer hardware, operating systems, and image
+processing systems, no attempt has been made to provide generalized
+software for accessing an image from the CD-ROM and restoring it to a
+
+
+Viking Orbiter Image Archive                                   Page - 13
+
+hardware display device or an image file format.  Example programs are
+provided in the SOFTWARE directory that test and demonstrate the use of
+the decompression software.
+
+    The decompression software has two top-level subroutines, DECMPINIT
+and DECOMPRESS.  These subroutines provide a common base from which to
+call the processing routines.  DECMPINIT builds the Huffman tree from
+the first-difference histogram in the encoding histogram object.  This
+routine is called only once per image.  DECOMPRESS processes one
+compressed input line per call and returns the line completely restored.
+These routines are fully documented.  Consult the source code files in
+the SOFTWARE directory for a full explanation of their use.
+
+    A cautionary note is in order.  The first-difference histogram
+stored in the image files consist of 32-bit VAX integers [11].  Users of
+other computer hardware environments may need to swap integer byte pairs
+[11].
+
+
+8 - Browse Image File Organization
+
+    A set of image files are included on this CD-ROM to facilitate rapid
+viewing of the image collection.  The image data in these browse images
+have not been compressed, but the images have been reduced in size by
+sub-sampling the original image by a factor of 4 in both lines and
+samples.  Thus, the data volume has been reduced by a factor of 16.  A
+Viking Orbiter browse image contains 264 lines and 300 samples.  The
+reduced data volume and the uncompressed format allow the browse images
+to be quickly retrieved from the CD-ROM.
+
+    A filtering procedure was used in generating the browse images
+because Viking Orbiter images frequently contain noisy data or have
+missing data.  The brightness value of a pixel in a browse image is the
+median brightness value of an array of 4 by 4 pixels from the original
+image.  If the 4 by 4 array of original pixels contained zero values,
+those zero value pixels were not used in determining the median value.
+Of course, if the entire 4 by 4 array contained zero value pixels, the
+corresponding pixel in the browse image was assigned a zero value.
+
+    The structure of a browse image file is different from that of a
+compressed image file.  The record structure of browse images is a
+fixed-length format.  Refer to Appendix A of this document for
+information on fixed-length records.  In addition, browse images do not
+include the Encoding Histogram, Engineering Table, and Line Header Table
+objects of a compressed image file.  The data objects in a browse image
+are the Image Histogram and the Image objects.  These two data objects,
+along with the PDS label of a browse image, are described in the
+remainder of this section.
+
+
+8.1 - Image Label Area
+
+    The label area of a browse image file contains descriptive
+information about the file.  Browse image labels are similar to those in
+compressed image files in that the labels consists of keyword statements
+using the PDS Object Description Language.  Appendix C of this document
+
+
+Viking Orbiter Image Archive                                   Page - 14
+
+provides a detailed description of each keyword found in the label.  The
+primary difference between the browse image label and that of a
+compressed image is that browse image labels are packed into
+fixed-length records.  Each keyword statement is terminated by a
+carriage-return and line feed character sequence.  An example of a
+browse image label is shown below.
+
+         Example of a label for a Viking Orbiter browse image
+
+CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL
+/*          FILE FORMAT AND LENGTH */
+RECORD_TYPE                      = FIXED_LENGTH
+RECORD_BYTES                     = 300
+FILE_RECORDS                     = 275
+LABEL_RECORDS                    = 7
+/*          POINTERS TO START RECORDS OF MAJOR OBJECT IN FILE */
+^IMAGE_HISTOGRAM                 = 8
+^IMAGE                           = 12
+/*          IMAGE DESCRIPTION */
+DATA_SET_ID                      = 'VO1/VO2-M-VIS-2-EDR-BR-V2.0'
+SPACECRAFT_NAME                  = VIKING_ORBITER_1
+MISSION_PHASE_NAME               = SURVEY_MISSION
+TARGET_NAME                      = MARS
+IMAGE_ID                         = '122S01'
+IMAGE_NUMBER                     = 47637242
+IMAGE_TIME                       = 1979-07-22T01:59:08Z
+EARTH_RECEIVED_TIME              = 1979-07-22T10:40:02Z
+ORBIT_NUMBER                     = 1122
+INSTRUMENT_NAME                  = VISUAL_IMAGING_SUBSYSTEM_CAMERA_A
+GAIN_MODE_ID                     = HIGH
+FLOOD_MODE_ID                    = ON
+OFFSET_MODE_ID                   = ON
+FILTER_NAME                      = CLEAR
+EXPOSURE_DURATION                = 0.016970 <SECONDS>
+NOTE                             = "VERY HIGH RESOLUTION GROUND TRACK
+     SEQUENCE WITH IMAGE MOTION COMPENSATION"
+/*          DESCRIPTION OF THE OBJECTS CONTAINED IN FILE */
+OBJECT                           = IMAGE_HISTOGRAM
+ ITEMS                           = 256
+ ITEM_TYPE                       = VAX_INTEGER
+ ITEM_BITS                       = 32
+END_OBJECT
+OBJECT                           = IMAGE
+ LINES                           = 264
+ LINE_SAMPLES                    = 300
+ SAMPLE_TYPE                     = UNSIGNED_INTEGER
+ SAMPLE_BITS                     = 8
+ SAMPLE_BIT_MASK                 = 2#11111110#
+ NOTE                            = "MEDIAN SUBSAMPLED 1056X1204 EDR
+            IMAGE"
+END_OBJECT
+END
+
+
+
+
+Viking Orbiter Image Archive                                   Page - 15
+
+8.2 - Image Histogram Object
+
+    The first object in a browse image file is the image histogram.  It
+begins at the record specified by the ^IMAGE_HISTOGRAM keyword.  The
+histogram consists of 4 fixed-length records.  The structure of the
+image histogram is similar to the structure of a compressed image.  The
+four records, when concatenated together, contain the 256 elements of
+the image histogram with each element occupying 4 bytes.  Thus, the
+image histogram comprises the first 1024 bytes of the 1200 bytes in the
+concatenated records.  The remaining 176 bytes at the end of the object
+are to be ignored.  The first element of the histogram contains the
+number of pixels in the browse image with the brightness value 0.  The
+last element contains the number of pixels in the image with the
+brightness value 255.
+
+
+8.3 - Image Object
+
+    The second object in a browse image file contains the image data.
+The image object starts at the record specified by the ^IMAGE keyword.
+Each image line is stored in a separate fixed-length record.  The browse
+image consists of 264 lines (LINES keyword of the label), and each line
+has 300 samples (LINE_SAMPLES keyword).  Each sample is an 8-bit
+unsigned integer as described by the SAMPLE_BITS and the SAMPLE_TYPE
+keywords in the label.
+
+
+9 - Image Index Files
+
+    Each CD-ROM in the Viking Orbiter image archive contains three index
+tables with catalog information about Viking Orbiter images.  The image
+index files are named IMGINDEX.TAB, CUMINDEX.TAB, and LOSTIMAG.TAB and
+all are located in the INDEX directory.  Each index table has an
+associated PDS label in a separate file with the same name and an
+extension of '.LBL'.  The label files are also located in the INDEX
+directory.  IMGINDEX.TAB contains catalog data for the images on this
+volume, along with directory and file names for both the compressed and
+browse versions of those images.  CUMINDEX.TAB contains the same catalog
+and location information for the cumulative set of Viking Orbiter images
+published thus far on CD-ROM.  In other words, the CUMINDEX.TAB file on
+the most recently published CD-ROM will have entries for images on the
+current disk and all previously published disks.  The most current
+CUMINDEX.TAB will also include any corrections to the catalog or
+location data that may be required.  LOSTIMAG.TAB contains entries for
+Viking Orbiter images that are not included in the archive.  There are
+two primary reasons why images might not be included in the archive.
+The first category is for images that were planned by the VIS team, but
+were not received on Earth.  Such images are noted in this table because
+they may still be listed in some old catalogs or in some documents about
+the mission.  The second category of images listed in the LOSTIMAG.TAB
+includes images where the digital data could not be recovered.  Such
+images are listed in LOSTIMAG.TAB to explain why photographic products
+may exist for the images, but the digital data is not available.
+
+    The catalog information in the index table includes the image
+identifier, the time when the image was acquired, the reason it was
+
+
+Viking Orbiter Image Archive                                   Page - 16
+
+acquired, camera operating mode states, exposure duration, image target,
+optical filter, and other camera parameters.  In addition, the CD-ROM
+volume id and the directory and file names for the compressed and browse
+image files are listed in IMGINDEX.TAB and CUMINDEX.TAB.  LOSTIMAG.TAB
+lists the reason why the image is not included on CD-ROM and omits the
+file name and directory information.  A description of the image index
+record fields and format is found in Appendix F of this document.  The
+image index files consist of fixed-length records in ASCII character
+representation.  Each record contains information for one image.
+
+
+10 - References
+
+1.  Wellman, J. B., F. P. Landauer, D. D. Norris, and T. E. Thorpe, The
+       Viking Orbiter visual imaging subsystem, J. Spacecr. Rockets, 13,
+       660-666, 1976.
+
+2.  Klaasen, K. P., T. E. Thorpe, and L. A. Morabito, Inflight
+       performance of the Viking visual imaging subsystem, Applied
+       Optics, 16, 3158-3170, 1977.
+
+3.  Benesh, M., and T. Thorpe, Viking Orbiter 1975 visual imaging
+       subsystem calibration report, JPL Document 611-125, Jet
+       Propulsion Laboratory, Pasadena, Ca., 1976.
+
+4.  Batson, R. M., Digital Cartography of the planets:  New methods, its
+       status, and future, Photogr. Eng. Remote Sens., 53, 1211-1218,
+       1987.
+
+5.  Planetary Image Cartography System (PICS), Unpublished Manual,
+       Branch of Astrogeology, U. S. Geological Survey, Flagstaff, Az.,
+       1987.  PICS is an integrated computerized system for the
+       systematic reduction, display, mapping, and analysis of planetary
+       image data.
+
+6.  LaVoie, S., C. Avis, H. Mortensen, C. Stanley, and L. Wainio, VICAR
+       - User's Guide, JPL Document D-4186, Jet Propulsion Laboratory,
+       Pasadena, Ca., 1987.
+
+7.  Snyder, C. W., The Missions of the Viking Orbiters, J. Geophys.
+       Res., 82, 3971-3983, 1977.
+
+8.  Snyder, C. W., The Extended Mission of Viking, J. Geophys. Res., 84,
+       7917-7933, 1979.
+
+9.  Martin, M. D., C. L. Stanley, and G. Laughlin, Planetary Image
+       Conversion Task, JPL Publication 85-50, Jet Propulsion
+       Laboratory, Pasadena, Ca., 1985.
+
+10. Martin, T. Z., M. D. Martin, and M. J. Braun, Standards for the
+       Preparation and Interchange of Data Sets, JPL Document D-4683,
+       Jet Propulsion Laboratory, Pasadena, Ca., 1988.
+
+11. VAX integers, as storage units in data files, are configured in
+       "least significant byte first" order.  This is the order for
+       integer values used by VAX and IBM PC computer systems.  Users of
+
+
+Viking Orbiter Image Archive                                   Page - 17
+
+       other computer architectures (IBM Mainframes, Macintosh, SUN, and
+       Apollo) may need to swap the high and low byte positions for
+       16-bit integer data.  For 32-bit integer data, swap byte pairs 1
+       and 4, and 2 and 3.  For example, hexadecimal value AA BB CC DD
+       becomes DD CC BB AA.
+
+12. Held, G., "Data Compression, Techniques and Applications, Hardware
+       and Software Considerations", John Wiley and Sons, 1983.
+
+13. Information processing -- Volume and file structure of CD-ROM for
+       information interchange, ISO/DIS document number 9660,
+       International Organization for Standardization, 1 Rue de Varembe,
+       Case Postale 56, CH-1121 Geneva 20, Switzerland, 1987.
+
+14. Eliason, E. M., and A. S. McEwen, Adaptive box filters for removal
+       of random noise from digital images, Photogrammetric Engineering
+       and Remote Sensing, 56, 453-458, 1990.
+
+
+Viking Orbiter Image Archive                                   Page - 18
+
+            Appendix A - ISO Volume and Directory Standard
+
+
+A.1 - Volume and Directory Structures
+
+    The volume and directory structure of the CD-ROM conforms to the
+standard specified by the International Organization for Standardization
+(ISO) [13].  This standard is known as the ISO-9660 standard.  This
+CD-ROM disk conforms to the first level of interchange, level-1.
+
+
+A.2 - File Structure
+
+    The files on this CD-ROM are of three types:  variable-length record
+files, fixed-length record files, and stream format files.  The
+characteristics of each record type are described in the following
+sections.
+
+A.2.1 - Variable Length Records
+
+    Variable-length record files, permitted in the ISO-9660 standard,
+contain records with any number of bytes, up to a specified maximum.
+These records are prefixed by a count field, indicating the number of
+bytes in the record.  For this disk, the count field is comprised of two
+bytes stored in a VAX integer format [11].  The value stored in the
+count field indicates the number of data bytes in the record.
+
+    On many computer systems (VAX and IBM/PC systems for example),
+variable-length record files can only be accessed sequentially.  This
+means file I/O routines start reading a file with the first record;
+subsequent reads provide the next sequential record in the file.
+
+    In the ISO standard, an odd valued record length can be specified
+but the actual record length must be even.  If an odd length record is
+specified, the value stored in the count field will contain the odd
+length.  However, the record will be padded at the end with a
+zero-filled byte to make the actual record length even.
+
+    For computer systems supporting variable-length records there should
+be high-level I/O routines to access the file.  For systems that do not
+support the level-1 ISO-9660 standard or do not support variable-length
+records, software will need to be developed for handling these files.
+
+    The compressed image files on this CD-ROM have variable-length
+records.
+
+A.2.2 - Fixed Length Records
+
+    Records in a file with fixed-length records are all the same length,
+and there is no embedded information to indicate the beginning or end of
+a record.  Fixed-length records allow any part of a file to be accessed
+directly without the need to pass through the file sequentially.  The
+starting byte of any record can be calculated as follows:
+
+           offset = (record-1)*length
+
+
+
+Viking Orbiter Image Archive                                   Page - 19
+
+    where: offset = offset byte position of record from start of file
+           record = desired record to access
+           length = length of record in bytes
+
+    The browse image files and files with extensions of '.TAB' on this
+CD-ROM have fixed-length records.
+
+A.2.3 - Stream Files
+
+    Stream files typically are used to store ASCII text such as
+documentation and program source code.  A stream file may have records
+of varying lengths.  The end of a record is marked by two bytes
+containing the ASCII carriage return and line feed characters (hex 0D
+and 0A).  Stream files are different from variable-length record files,
+which store the record size in the first two bytes of each record.
+
+    On this CD-ROM, documentations files and detached label files are in
+stream format.  They may be printed or displayed on a terminal.  Their
+file names have the extensions '.TXT', '.LBL', and '.FMT'.  Software
+source code files and the VOLDESC.SFD file in the top-level directory
+are also stream files.
+
+
+A.2.4 - Extended Attribute Record
+
+    An extended attribute record (XAR) contains information about a
+file's record format, record attributes, and record length.  The
+extended attribute record is not considered part of the file and is not
+seen by programs accessing a file with high-level I/O routines.  Not all
+computer operating systems support extended attribute records.  Those
+that do not will simply bypass the XAR when accessing a file.
+
+
+Viking Orbiter Image Archive                                   Page - 20
+
+     Appendix B - Syntactic Rules of Keyword Assignment Statements
+
+
+    A keyword assignment statement, made up of a string of ASCII
+characters, contains the name of an attribute and the value of that
+attribute.  A keyword assignment statement has the general form shown
+below:
+
+         name  = value  [/* comment */]
+
+    The format of each keyword assignment statement is essentially
+free-form; blanks and tabs are typically ignored by a parsing routine.
+An attribute name is separated from its value by the equal symbol (=).
+Each keyword assignment statement may optionally be followed by a
+comment that more completely describes the entry.  The comment begins
+with a slash character followed by an asterisk character (/*), and
+terminates with an asterisk character followed by a slash character
+(*/).  Comments may also exist on a line without a keyword assignment
+statement.  Note that the brackets indicate that the comment and its
+delimiters are optional.
+
+    Values associated with an attribute can be integers, real numbers,
+unitized real numbers, literals, times, or text strings.
+
+
+B.1 - Integer Numbers
+
+    An integer value consists of a string of digits preceded optionally
+by a sign (+ or -).  Non-decimal based integers are expressed according
+to the Ada language convention:  b#nnnnnnn#, where 'b' represents the
+base of the number, and '#' delimits the number 'nnnnnnnn'.  For
+example, the number expressed as 2#111# represents the binary number
+111, which is 7 in base 10.
+
+
+B.2 - Real Numbers
+
+    A real number has the form: [s]f.d[En] where:
+
+         s = optional sign (+ or -)
+         f = one or more digits that specify the integral portion of the
+             number.
+         d = one or more digits that specify the fraction portion of the
+             number.
+         n = an optional exponent expressed as a power of 10.
+
+    A unitized real number is a real number with an associated unit of
+measurement.  The units for a real number value are enclosed in angle
+brackets (< >).  For example, 1.234 <SECONDS> indicates a value of 1.234
+seconds.
+
+
+
+
+Viking Orbiter Image Archive                                   Page - 21
+
+B.3 - Dates and Times
+
+    A special form of a numeric field is a time value.  The following
+format of date/time representations is used:
+
+         yyyy-mm-ddThh:mm:ss.fffZ
+where:   yyyy    = year
+         mm      = month
+         dd      = day of month
+         hh      = hour
+         mm      = minute
+         ss      = seconds
+         fff     = fraction of a second
+         Z       = The Z qualifier indicates the time is expressed
+                   as Universal Time Corrected (UTC).
+
+
+B.4 - Literal Values
+
+    A literal value is an alphanumeric string that is a member of a set
+of finite values.  It can also contain underscore character (_).  A
+literal value must be delimited by single quote (') characters if it
+does not begin with a letter (A-Z).  If the literal begins with a
+letter, it does not have to be enclosed in single quotes.  If a literal
+appears within single quotes, the literal may contain any printable
+ASCII character.  For example, the literal value '1:1' is legal as long
+as the single quoted format is used.  A keyword assignment statement
+using a literal value might look like the examples shown below:
+
+         FILTER_NAME = CLEAR
+         IMAGE_ID = '122S01'
+
+    These statements say that the CLEAR filter was used to acquire an
+image and that the image_id was 122S01.
+
+
+B.5 - Text Character Strings
+
+    Text strings can be any length and can consist of any sequence of
+printable ASCII characters including tabs, blanks, carriage-control, or
+line-feed characters.  Text strings are enclosed in double quote
+characters.  If the text string comprises several lines, it continues
+until a double quote character is encountered and includes the carriage-
+control and line-feed characters.
+
+
+Viking Orbiter Image Archive                                   Page - 22
+
+      Appendix C - Keyword Assignments From Viking Orbiter Images
+
+
+CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL
+    This keyword provides a mechanism for image files on this CD-ROM to
+    conform to the SFDU (Standard Formatted Data Unit) convention.  The
+    first 20 bytes identify the file as a CCSDS SFDU entity.  The next
+    20 bytes identify the file as a registered product of the JPL SFDU
+    control authority.  The components of both SFDU labels are the
+    control authority identifier (characters 1-4), the version
+    identifier (character 5), the class identifier (character 6), a
+    spare field (characters 7-8), a format identifier (characters 9-12),
+    and a length field indicator (characters 13-20).  The version
+    identifier indicates a "Version-3" label, which allows files to be
+    delimited by an end-of-file marker, rather than requiring a byte
+    count to be embedded in the label.  The keyword conforms to standard
+    PDS keyword syntax and the value associated with this keyword will
+    always be SFDU_LABEL.
+
+RECORD_TYPE = FIXED_LENGTH or VARIABLE_LENGTH
+    This keyword defines the record structure of the file.  Compressed
+    image files have VARIABLE_LENGTH records.  Browse image files have
+    FIXED-LENGTH records.
+
+RECORD_BYTES = xxxx
+    Record length in bytes for fixed length records.  For variable
+    length records, the value is the maximum size for a variable-length
+    record within the file.
+
+FILE_RECORDS = xxxx
+    Total number of records contained in the file.
+
+LABEL_RECORDS = xxxx
+    Number of records in the label area of the image file.
+
+^IMAGE_HISTOGRAM = xxxx
+    The (^) character prefixing a keyword indicates that the keyword is
+    a pointer to the starting record of a data object in the file.  In
+    this case, the keyword is the pointer to the Image Histogram Object.
+    The keyword value indicates the starting record in the file for the
+    Image Histogram Object.  The number of records found in an object is
+    determined by differencing the value of the pointer keyword from the
+    value of the next pointer.
+
+^ENCODING_HISTOGRAM = xxxx
+    The keyword value points to the starting record in the file for the
+    Encoding Histogram Object.
+
+^ENGINEERING_TABLE = xxxxx
+    The keyword value points to the starting record in the file for the
+    Engineering Table Object.
+
+^LINE_HEADER_TABLE = xxxxx
+    The keyword value points to the starting record in the file for the
+    Line Header Table Object.
+
+
+
+Viking Orbiter Image Archive                                   Page - 23
+
+^IMAGE = xxxxx
+    The keyword value points to the starting record in the file for the
+    Image Object.
+
+DATA_SET_ID = 'VO1/VO2-M-VIS-2-EDR-V2.0' or
+              'VO1/VO2-M-VIS-2-EDR-BR-V2.0'
+    The PDS defined data set identifier for Viking Orbiter compressed
+    images and browse images stored on CD-ROM.
+
+SPACECRAFT_NAME = VIKING ORBITER_1 or VIKING ORBITER_2
+    The spacecraft name identifies the spacecraft that acquired the
+    image.
+
+MISSION_PHASE_NAME = xxxxxxx
+    The name of the mission phase during which the image was acquired.
+
+TARGET_NAME = xxxxxx
+    Observational target of the image.
+
+IMAGE_ID  = 'nnnxss'
+    The image identifier is a six character string to identify a Viking
+    Orbiter image.  The first three characters represent the orbit
+    number; the fourth character is either an A or S for Viking Orbiter
+    1 or a B for Viking Orbiter 2.  (There are a few cases where the
+    fourth character is different from these values, for example, when
+    there are more than 100 images acquired during an orbit.)  The last
+    two characters represent the sequence number of the image within an
+    orbit.
+
+IMAGE_NUMBER = xxxxxxxx
+    The image number is a value derived from the spacecraft clock start
+    count.  It is also known as the FSC (frame start count) number, and
+    is a commonly used identifier for a Viking Orbiter image.
+
+IMAGE_TIME = yyyy-mm-ddThh:mm:ssZ
+    The time (in UTC) that image was acquired, in the format
+    yyyy-mm-ddThh:mm:ssZ.  'yyyy' = year, 'mm' = month, 'dd' = day of
+    month, 'hh' = hour, 'mm' = minute, 'ss' = second.
+
+EARTH_RECEIVED_TIME = yyyy-mm-ddThh:mm:ssZ
+    The time that image data was first received on Earth, in the format
+    yyyy-mm-ddThh:mm:ssZ.  'yyyy' = year, 'mm' = month, 'dd' = day of
+    month, 'hh' = hour, 'mm' = minute, 'ss' = second.  The time system
+    is UTC.
+
+ORBIT_NUMBER = xxxx
+    The number of orbits that the spacecraft has made since orbit
+    insertion.
+
+INSTRUMENT_NAME = VISUAL_IMAGING_SUBSYSTEM_CAMERA_A or
+                  VISUAL_IMAGING_SUBSYSTEM_CAMERA_B
+    The name of the camera used to acquire the image.
+
+
+
+Viking Orbiter Image Archive                                   Page - 24
+
+GAIN_MODE_ID = LOW or HIGH
+    The gain state used to acquire the image.
+
+FLOOD_MODE_ID = ON or OFF
+    The flood state used to acquire the image.
+
+OFFSET_MODE_ID = ON or OFF
+    The offset state used to acquire the image.
+
+FILTER_NAME = xxxxxx
+    The optical filter used to acquire the image.  Valid values are
+    BLUE, MINUS_BLUE, VIOLET, CLEAR, GREEN, and RED.
+
+EXPOSURE_DURATION  = x.xxxxx <SECONDS>
+    Exposure duration for the image in seconds.
+
+NOTE = "  "
+    The reason for acquiring the image.  Values are derived from records
+    kept by the Visual Imaging Subsystem Team.  Some of the commonly
+    used terms in the NOTE field are:
+        Mapping sequence - contiguous coverage for an area.
+        Ground track sequence - images acquired along the spacecraft
+           ground track near periapsis where ground velocity was high.
+           Images in ground track sequences may not overlap with each
+           other.
+        Monitoring sequence - observations of regions or features for
+           temporal changes.
+        Survey sequence - low resolution images acquired near apoapsis.
+           Images in survey sequences can be mosaicked to show a large
+           portion of the planet.
+        Target of opportunity - regions or features observed with
+           special conditions (e.g., sunrise over the Tharsis
+           volcanoes).
+        Emission phase function - a single area viewed at multiple
+           emission angles for photometric studies.
+        Image motion compensation - a technique used to reduce smear in
+           the image.  As the image was being acquired the scan platform
+           was moved to compensate for the ground speed of the
+           spacecraft.
+    References to image resolution are based on the following
+    approximate divisions of pixel size at the image center:
+         Very high resolution - less than 20 meters per pixel
+         High resolution - 20 to 75 meters per pixel
+         Medium resolution - 75 to 250 meters per pixel
+         Low resolution - greater than 250 meters per pixel
+
+OBJECT = IMAGE_HISTOGRAM
+ ITEMS = 256
+ ITEM_TYPE = VAX_INTEGER
+ ITEM_BITS = 32
+END_OBJECT
+    This keyword sequence identifies the Image Histogram Object.  The
+    object contains 256 elements, stored in VAX integer format [11].
+    Each element has 32 bits.  The records associated with an object are
+    concatenated together to make the object.  Some objects do not
+    completely fill the records that make up the object.
+
+
+Viking Orbiter Image Archive                                   Page - 25
+
+OBJECT = ENCODING_HISTOGRAM
+ ITEMS = 511
+ ITEM_TYPE = VAX_INTEGER
+ ITEM_BITS = 32
+END_OBJECT
+    This keyword sequence identifies the Encoding Histogram Object.  The
+    encoding histogram is used to construct the Huffman coding tree for
+    decompressing an image.  The encoding histogram object contains 511
+    elements, is stored in VAX integer format [11], and has 32 bits for
+    each element.
+
+OBJECT = ENGINEERING_TABLE
+ ROWS = 1
+ ROW_BYTES = 152
+ ^STRUCTURE = 'ENGSUM.FMT'
+END_OBJECT
+    This keyword sequence describes the Engineering Table Object.  The
+    contents of the engineering table are discussed in Appendix D of
+    this document.  The ^STRUCTURE keyword points to a separate file on
+    the CD-ROM that contains keyword descriptors for the engineering
+    table.  The ROWS parameter indicates the number of rows in the
+    engineering table.  The ROW_BYTES parameter indicates the number of
+    bytes in each row.
+
+OBJECT = LINE_HEADER_TABLE
+ ROWS = 1056
+ ROW_BYTES = 62
+ ^STRUCTURE = 'LINHDR.FMT'
+END_OBJECT
+    This keyword sequence describes the Line Header Table Object.  The
+    contents of the line header table are discussed in Appendix E of
+    this document.  The ^STRUCTURE keyword points to a separate file on
+    the CD-ROM that contains keyword descriptors for the line header
+    table.  The ROWS parameter indicates the number of rows or entries
+    in the line header table.  There is one row for each image line.
+    The ROW_BYTES parameter indicates the number of bytes in each row.
+
+OBJECT = IMAGE
+ ENCODING_TYPE = HUFFMAN_FIRST_DIFFERENCE
+ LINES = xxxx
+ LINE_SAMPLES = xxxx
+ SAMPLE_TYPE = UNSIGNED_INTEGER
+ SAMPLE_BITS = 8
+ SAMPLE_BIT_MASK = 2#11111110#
+ CHECKSUM = xxxxxxxx
+ NOTE = "    "
+END_OBJECT
+    This keyword sequence describes the image object.  The meaning of
+    the keywords within this sequence are as follows:
+       ENCODING_TYPE = xxxx
+           Type of image compression encoding scheme, always
+           HUFFMAN_FIRST_DIFFERENCE for full-resolution image.
+       LINES = xxxx
+           Number of image lines in the image object.  The value should
+           always be 1056 for compressed images and 264 for browse
+           images.
+
+
+Viking Orbiter Image Archive                                   Page - 26
+
+       LINE_SAMPLES  = xxxx
+           Number of samples in each image line.  The value should
+           always be 1204 for compressed images and 300 for browse
+           images.
+       SAMPLE_TYPE = UNSIGNED_INTEGER
+           Data type for pixels values, should always be unsigned
+           integers.
+       SAMPLE_BITS = 8
+           Number of bits in a pixels, which are 8-bit values in the
+           range 0 to 255.
+       SAMPLE_BIT_MASK  = 2#11111110#
+           Active bits in an image sample.  The number is expressed as a
+           base 2 value in the Ada language number base convention.  The
+           keyword value consists of a string of 1's and 0's.  The value
+           1 indicates a bit is active and a 0 indicates a bit is not in
+           use.  For example, SAMPLE_BIT_MASK = 2#11111110# indicates
+           all bits active except least significant bit.
+       CHECKSUM = xxxxxxxxxx
+           The sum of all the pixel values within the image.  This
+           parameter can be used to check the results of decompressing
+           the image.
+       NOTE = "    "
+           A brief description of processing used to generate a browse
+           image.
+
+END
+    The keyword entries terminate with a line that contains only the
+    word END.  Bytes in the label area after the END line are ignored.
+
+
+Viking Orbiter Image Archive                                   Page - 27
+
+                 Appendix D - Engineering Table Object
+
+
+    The table shown below describes the information contained in the
+Engineering Table Object.  The format and fields of the Engineering
+Table Object are identical to the data as stored on the original
+Experiment Data Record (EDR) magnetic tape files archived at the Jet
+Propulsion Laboratory.  All integer values are stored in VAX integer
+format [11].
+
+    In the table the first byte in the record is designated byte 1.  The
+bit positions of a byte are numbered as bit 1 for the least significant
+bit and bit 8 as the most significant bit.
+
+Byte
+Position  Item                       Data Description
+--------  --------------------       -----------------------------------
+
+1-2       MTIS Record Id             Mission and Test Imaging System
+                                     record id.
+
+3-4       Physical Sequence Number   Physical sequence number on EDR
+                                     tape.  Not used.
+
+5-6       Logical Sequence Number    Logical sequence number on EDR
+                                     tape.  Not used.
+
+7-12      Earth Received Time        Time of first line record in the
+                                     file containing valid data:
+                                     Bytes  7, 8 - year (7 bits), day of
+                                     year (9 bits);
+                                     Bytes  9,10 - minute (11 bits);
+                                     Bytes 11,12 - milliseconds.
+
+13-18     Earth Received Time        Time of last line record of the
+                                     file containing valid data.  (see
+                                     format above)
+
+19-22     FDS Count                  FDS count of the first line segment
+                                     of the file containing valid data.
+                                     Note that this may not correspond
+                                     to the FDS Count for line record 1,
+                                     segment 1.
+
+23-26     FDS Count                  FDS count of the last line segment
+                                     of the file containing valid data.
+
+27-32     EDR Tape Id                Tape identifier of the original EDR
+                                     tape for this image.
+
+33-34     EDR file Number            File number of image on original
+                                     EDR tape.
+
+35        Fill-in Value              Value used to fill in missing
+                                     samples (always zero).
+
+
+
+Viking Orbiter Image Archive                                   Page - 28
+
+36        Track Presence Mask        Bit mask indicating which tracks
+                                     are present in the image.  The
+                                     nominal value is HEX 3F, indicating
+                                     that all seven tracks are present.
+
+37-38     Average Pixel Value        Average pixel value for entire
+                                     image.
+
+39-42     Unused                     Unused.
+
+43-44     Minimum SNR                The minimum signal to noise (SNR)
+                                     level for the image.  Divide by 32
+                                     to get the actual value.
+
+45-46     Maximum SNR                The maximum signal to noise (SNR)
+                                     level for the image.  Divide by 32
+                                     to get the actual value.
+
+47-48     Unused                     Unused.
+
+49-50     Minimum AGC                The minimum automatic gain control
+                                     (AGC) value for the image.  Divide
+                                     by 16 to get actual value.
+
+51-52     Maximum AGC                The maximum automatic gain control
+                                     (AGC) value for the image.  Divide
+                                     by 16 to get actual value.
+
+53-54     Unused                     Unused.
+
+55-56     Total Segments             Total number of line segments in
+                                     the image that contain some valid
+                                     data.  The maximum value is 7 track
+                                     times 1056 lines or 7392.
+
+57-58     Fully Synched Segments     Total number of line segments in
+                                     the image that were fully
+                                     synchronized.
+
+59-60     Partly Synched Segments    Total number of line segments in
+                                     the image that were partly
+                                     synchronized.
+
+61-62     DQI0 Segments              Total number of line segments in
+                                     the image with a data quality
+                                     indicator of 0.  DQI0 indicates bad
+                                     data.
+
+63-64     DQI1 Segments              Total number of line segments in
+                                     the image with a data quality
+                                     indicator of 1.  DQI1 indicates SNR
+                                     is low and GCF block is bad.
+
+65-66     DQI2 Segments              Total number of line segments in
+                                     the image with a data quality
+
+
+Viking Orbiter Image Archive                                   Page - 29
+
+                                     indicator of 2.  DQI2 indicates
+                                     good SNR, but GCF block is bad.
+
+67-68     DQI3 Segments              Total number of line segments in
+                                     the image with a data quality
+                                     indicator of 3.  DQI3 indicates SNR
+                                     is low, but GCF block is good.
+
+69-70     DQI4 Segments              Total number of line segments in
+                                     the image with a data quality
+                                     indicator of 4.  DQI4 indicates SNR
+                                     and GCF block are good.
+
+71-72     FDS Corrections            Total number of line segments in
+                                     the image with corrected FDS
+                                     counts.
+
+73-74     PN Error Corrections       Total number of line segments in
+                                     the image with corrected
+                                     pseudonoise (PN) codes.
+
+75-76     Adjusted PN Errors         Total number of line segments in
+                                     the image with corrected
+                                     pseudonoise codes adjusted based on
+                                     the number of line segments
+                                     processed versus the total in a
+                                     full image.
+
+77-78     Unreadable Records         Total number of line segments in
+                                     the image that could not be read
+                                     from the Master Data Record tape.
+
+79-80     Logical Sequence Breaks    Total number of breaks in logical
+                                     sequence number in reading the
+                                     System/Master Data Record tape.
+
+81-82     Data Breaks                Total number of breaks in data
+                                     sequence in reading the
+                                     System/Master Data Record tape.
+
+83-84     Unused                     Unused.
+
+85-86     Lines                      Total number of lines in the image
+                                     that contain some valid data
+                                     (nominal is 1056).
+
+87-88     Full Lines                 Number of lines in the image that
+                                     are composed of seven line
+                                     segments.
+
+89-90     Partial Lines              Total number of lines in the image
+                                     that contain some valid data but
+                                     are not composed of seven line
+                                     segments.
+
+
+
+Viking Orbiter Image Archive                                   Page - 30
+
+91-92     First Line Number          First line in the image containing
+                                     valid data.
+
+93-94     Last Line Number           Last line in the image containing
+                                     valid data.
+
+95-96     Unused                     Unused.
+
+97-102    Image Id                   Image identifier for this image.
+                                     The format is OOOSNN, where OOO is
+                                     the orbit number, S is the
+                                     spacecraft identifier, and NN is
+                                     the image sequence number within
+                                     the orbit.
+
+103-104   VRP Run Number             Viking Reconstruction Processing
+                                     (VRP) run number.
+
+105-110   Disk Id                    MTIS disk identifier of the
+                                     original EDR file for this image.
+
+111-112   Unused                     Unused.
+
+113-114   Transmitted Code Word 1    A bit string containing information
+                                     about first transmitted command
+                                     code word.  The bits are
+                                     interpreted as follows:
+                                     Bit 1 = data presence flag (0 if
+                                     data are present;
+                                     Bits 3-5 = data quality indicator
+                                     (0 is bad and 4 is good);
+                                     Bit 7 = offset mode off (0) or on
+                                     (1);
+                                     Bit 8 = gain mode low (0) or high
+                                     (1);
+                                     Bit 9 = light flood mode off (0) or
+                                     on (1);
+                                     Bits 10-11 = filter step;
+                                     Bits 12-16 = exposure duration
+                                     code.
+                                     The remaining bits are not used.
+
+115-116   Transmitted Code Word 2    A bit string containing information
+                                     about second transmitted command
+                                     code word.  The bits are
+                                     interpreted as follows:
+                                     Bit 1 = data presence flag (0 if
+                                     data are present;
+                                     Bits 3-5 = data quality indicator
+                                     (0 is bad and 4 is good);
+                                     Bits 10-12 = filter number;
+                                     Bits 13-16 = camera serial number.
+                                     The remaining bits are not used.
+
+117-118   Received Code Word         A bit string containing information
+                                     about received command code word.
+
+
+Viking Orbiter Image Archive                                   Page - 31
+
+                                     The bits are interpreted in the
+                                     same way as for the first
+                                     transmitted code word.
+
+119-120   Unused                     Unused.
+
+121-122   Plus 50 Volts DC           Plus 50 volts DC.
+
+123-124   Plus 15 Volts DC           Plus 15 volts DC.
+
+125-126   Plus 12 Volts DC           Plus 12 volts DC.
+
+127-128   Plus 5 Volts DC            Plus 5 volts DC.
+
+129-130   Minus 15 Volts DC          Minus 15 volts DC.
+
+131-132   Minus 23 Volts DC          Minus 23 volts DC.
+
+133-134   Average Video              The average video value.
+
+135-136   Power Converter Input      The power converter input current.
+
+137-138   Cathode Current            The cathode current level.
+
+139-140   Cathode Voltage            The cathode voltage.
+
+141-142   Filament Current           The filament current level.
+
+143-144   Frame Sweep Current        The frame sweep current.
+
+145-146   Line Sweep Current         The line sweep current.
+
+147-148   Grid 3 Voltage             Grid 3 voltage.
+
+149-150   Focus Current              Focus current.
+
+151-152   Digital Ladder             Digital ladder.
+
+
+Viking Orbiter Image Archive                                   Page - 32
+
+            Appendix E - Supplemental Line Engineering Data
+
+
+    The table shown below describes the information contained the Line
+Header Table Object within Viking Orbiter compressed images.  The line
+header data were extracted from the final 396 bytes of the original EDR
+image line record.  There are a total of 1056 records in the line header
+table; one record for each image line.  All integer values are stored in
+VAX integer format [11].
+
+In the table the first byte in the record is designated byte 1.  The bit
+positions of a byte are numbered as bit 1 for the least significant bit
+and bit 8 as the most significant bit.  A data type of byte in the table
+below indicates an unsigned integer.
+
+Byte      Data
+Position  Type         Data Description
+--------  ---------    ------------------------------------------------
+  1- 4    Integer      Flight Data System clock count.
+  5- 6    Integer      Line number.
+  7- 7    Byte         Fill in value (always 0).
+  8- 8    Byte         Track presence mask for the line (bits are set to
+                       1 if track is present).
+  9-10    Integer      Average pixel value of the line.
+ 11-12    Integer      Number of segments present in the line (maximum
+                       value is 7).
+ 13-14    Integer      Number of full segments present in the line
+                       (maximum value is 7).
+ 15-16    Integer      Number of partial segments present in the line
+                       (maximum value is 7).
+ 17-18    Integer      Number of segments in the line with a data
+                       quality indicator of 0.
+ 19-20    Integer      Number of segments in the line with a data
+                       quality indicator of 1.
+ 21-22    Integer      Number of segments in the line with a data
+                       quality indicator of 2.
+ 23-24    Integer      Number of segments in the line with a data
+                       quality indicator of 3.
+ 25-26    Integer      Number of segments in the line with a data
+                       quality indicator of 4.
+ 27-54    Bit string   Data for each of the seven line segments.  There
+                       are 4 bytes per segment containing data quality
+                       indicators, telemetry rate codes, orbit number,
+                       track number, and line number.  See the file
+                       LINHDR.FMT for details on interpreting the
+                       individual bits.
+ 55-62    Byte         Embedded low rate science data for the seven
+                       segments.
+
+
+Viking Orbiter Image Archive                                   Page - 33
+
+                 Appendix F - Image Index File Format
+
+
+    The image index files (IMGINDEX.TAB and CUMINDEX.TAB) contain
+information about the image files located on the Viking Orbiter CD-ROM
+volumes.  IMGINDEX.TAB contains data for the images on this volume,
+whereas CUMINDEX.TAB contains data for the cumulative set of Viking
+Orbiter images published thus far on CD-ROM.  Included in the image
+index is information on the camera state, exposure duration, image
+target, optical filter, and other camera parameters.  The image index
+file consists of fixed-length records of length 512 bytes in ASCII
+character representation.  Each record contains the information for a
+single image.
+
+    The table shown below describes the contents of the image index
+files.  These files are located in the INDEX directory.  All fields are
+in ASCII character format.  The image index files are formatted to allow
+automatic data entry programs to access the data for entry into an
+existing data base system.  The non-numeric fields are enclosed by
+double-quote characters.  All fields are delimited by commas.  The last
+two bytes in a record are carriage-control and line-feed characters.
+The table shown below gives the starting and ending byte positions of
+each field in the table.  These byte positions specify the actual fields
+and do not include the double-quote marks and commas that separate the
+fields.
+
+    There are label files, IMGINDEX.LBL and CUMINDEX.LBL, located in the
+INDEX directory, which describe the contents of the index files.  The
+label files consist of keyword statements in the Object Description
+Language (ODL) developed by the PDS project [10].
+
+
+    Byte
+    Positions      Description
+------------------------------------------------------------------
+      2-  9        Image id (example:  122S01)
+     12- 19        Image number (frame start count)
+     22- 37        Spacecraft name
+     41- 72        Mission phase name
+     76- 83        Target name
+     87-106        Image time (Universal Time Corrected)
+    110-129        Earth received time (Universal Time Corrected)
+    132-139        Orbit number
+    142-175        Instrument name (VISUAL_IMAGING_SUBSYSTEM_CAMERA_A or
+                   VISUAL_IMAGING_SUBSYSTEM_CAMERA_B)
+    179-186        Gain mode id (HIGH or LOW)
+    190-197        Flood mode id (ON or OFF)
+    201-208        Offset mode id (ON or OFF)
+    212-221        Filter name (BLUE, MINUS_BLUE, VIOLET, CLEAR, GREEN,
+                   or RED)
+    224-231        Exposure duration (seconds)
+    234-393        Note (reason for acquiring the image)
+    397-404        CD-ROM volume number of compressed image
+    408-435        Directory location and name of compressed image
+    439-446        CD-ROM volume number of browse image
+    450-477        Directory location and name of browse image
+
+
+Viking Orbiter Image Archive                                   Page - 34
+
+    The LOSTIMAG table contains a listing of Viking Orbiter images that
+are not included in the CD-ROM archive.  Such images are not included
+because they were not received on Earth or they were not recoverable
+from any available magnetic tape media.  The data fields in the LOSTIMAG
+table contain the planned values for such images.  The table shown below
+describes the contents of the lost image table.  The table is formatted
+in the same way as the image index tables in that fields are delimited
+by commas and non-numeric fields are enclosed by double-quote
+characters.  Each record consists of 396 bytes, with a carriage return
+and line feed character sequence in bytes 395 and 396.
+
+
+    Byte
+    Positions      Description
+-----------------------------------------------------------------
+      2-  9        Image id
+     12- 19        Image number
+     22- 37        Spacecraft name
+     41- 72        Mission phase name
+     76- 83        Target name
+     87-106        Image time (Universal Time Corrected)
+    110-129        Earth received time (Universal Time Corrected)
+    132-139        Orbit number
+    142-175        Instrument name
+    179-186        Gain mode id
+    190-197        Flood mode id
+    201-208        Offset mode id
+    212-221        Filter name
+    224-231        Exposure duration (seconds)
+    234-393        Note (reason why image is lost)

@@ -1,0 +1,2160 @@
+               Mars Mosaicked Digital Image Model (MDIM)
+                           Multi-look Color
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              Eric Eliason, Alfred McEwen, Annie Allison,
+                  Ray Batson, and Laurence Soderblom
+                        Branch of Astrogeology
+                    United States Geological Survey
+                        2255 North Gemini Drive
+                       Flagstaff, Arizona 86001
+
+                              Mike Martin
+               Jet Propulsion Laboratory - Stop 525-3610
+                  California Institute of Technology
+                         4800 Oak Grove Drive
+                      Pasadena, California 91109
+
+
+
+                          September 30, 1992
+                              Version 1.0
+
+                               CONTENTS
+
+1    -    INTRODUCTION 
+
+2    -    VIKING MISSION 
+
+3    -    VIKING ORBITER VISUAL IMAGING SUBSYSTEM 
+
+4    -    CARTOGRAPHY AND DATA PRODUCTS 
+          
+5    -    PLANETARY DIGITAL IMAGE MODELS 
+ 5.1 -    PROJECTIONS
+ 5.2 -    PIXEL SIZES
+ 5.3 -    DN SCALING AND I/F
+ 5.4 -    COLOR
+ 5.5 -    SYNTHETIC GREEN IMAGES
+ 5.6 -    COMPUSERVE GIF FORMATS
+ 5.7 -    "IDEAL" COLOR STRETCH
+
+6    -    COMPILATION
+ 6.1 -    LEVEL 1: RADIOMETRIC CORRECTION
+ 6.2 -    LEVEL 2: GEOMETRIC CORRECTION
+ 6.3 -    LEVEL 3: PHOTOMETRIC CORRECTION
+ 6.4 -    LEVEL 4: CONTROLLED MOSAICKING
+
+7    -    CONCEPT OF TILING SCHEME
+
+8    -    FILES, DIRECTORIES, AND DISK CONTENTS
+ 8.1 -    IMAGE FILE NAMING CONVENTION
+ 8.2 -    DIRECTORIES
+
+9    -    IMAGE FILE ORGANIZATION
+ 9.1 -    IMAGE LABEL AREA
+ 9.2 -    IMAGE HISTOGRAM OBJECT
+ 9.3 -    IMAGE OBJECT
+
+10   -    SOFTWARE 
+ 10.1-    SOFTWARE DISCLAIMER
+ 10.2-    SOFTWARE TOOLS
+
+11   -    IMAGE INDEX
+
+12   -    GAZETTEER 
+
+13   -    VIKING VIEWING GEOMETRY (SPICE)
+
+14   -    ACKNOWLEDGEMENTS
+
+15   -    REFERENCES
+
+APPENDIX A -  ISO VOLUME AND DIRECTORY STANDARD 
+
+APPENDIX B -  SYNTACTIC RULES OF KEYWORD ASSIGNMENT STATEMENTS 
+
+APPENDIX C -  KEYWORD ASSIGNMENTS FOR IMAGE FILES
+
+APPENDIX D -  GEOMETRIC DEFINITION OF A PIXEL
+
+APPENDIX E -  SINUSODIAL EQUAL-AREA PROJECTION EQUATION
+
+
+
+
+1 -  INTRODUCTION
+
+
+Mosaics from 53 spacecraft revolutions (or "revs" hereafter) have been
+produced, most in both red and violet or red, green, and violet filters
+(see Table 1). The phase angles range from 13 degrees to 85 degrees,
+comparable to the expected phase angles of the Mars Observer mapping 
+mission. More than 1500 Viking Orbiter color frames have been processed,
+including radiometric calibration, cosmetic cleanup, geometric control,
+reprojection, and mosaicking into single-rev mosaics (with nearly
+constant subspacecraft and subsolar positions). All of the mosaics are
+geometrically tied to the previously published 1/256 degree/pixel Mars
+Mosaicked Digital Image Model (MDIM) which will also be used as the base
+map for coregistration of Mars Observer datasets. Global coverage is
+near 100 percent in red-filter mosaics and 98 percent and 60 percent in
+corresponding violet- and green-filter mosaics, respectively.
+
+Perhaps the most interesting portion of this dataset is the comparison
+of overlap regions, which show significant surface and atmospheric
+variations. About half of Mars is covered at least twice by different
+mosaics, and many areas are covered up to five times. 
+
+Following a special stretching procedure (see section 5.7), observations
+in which the atmosphere is relatively free of condensate hazes are
+immediately obvious because the overall scene is markedly redder than is
+the same area viewed during hazier conditions. The bluer images also
+have more discrete atmospheric features and show correlations between
+color and local topography, because the hazes settle into local
+topographic lows or because high mountains rise through the low-lying
+regional haze. These very clear atmospheric observations are crucial to
+the correct identification and mapping of spectral units on the surface.
+
+Surface changes can be categorized as (1) changes that probably occurred 
+during the great dust storms of 1977; (2) changes that occurred soon
+after the  1977 storms due to removal or redistribution of recently
+deposited dust;  (3) changes in the northern lowlands that probably
+occurred during the dusty  southern summer of 1979 (when no great dust
+storm occurred); and (4) changes  associated with strong slope winds in
+the Tharsis and Elysium regions.
+
+Color mosaics show parts of the southern hemisphere just before and
+during the  initial stages of the first and second great dust storms of
+1977. In addition, color observations of almost the entire southern
+hemisphere were acquired soon  after clearing of the atmosphere in the
+southern hemisphere following the 1977  storms. These mosaics have been
+reprojected to a common format for detailed  comparisons of the surface
+and atmosphere before, during the initial stages,  and after the dust
+storm activity. Although Mars appears uniformly bland  during mature
+stages of global storms, the dust clouds have considerable  structure
+during the initial stages. Relations between the dust clouds and 
+surface topography and color and albedo variations of the polar cap are
+evident in the data.
+
+The organization and format of the Multi-look Color MDIM CDROM volume
+set (volumes 8-14) are similar to the previously published volumes of
+the Mars MDIM series. The previously published volumes contain the
+planet wide medium-resolution black-white MDIMs (volumes 1-6) at a
+resolution of 1/256 deg/pixel (223 meters/pixel). Volume 7 contains the
+global low-resolution black-white MDIM and a coregistered Digital
+Terrain Model (DTM). These data are stored at a resolution of 1/64
+degree per pixel (925 meters/pixel). Compilation, data preparation, and
+organization of the previously published volumes is described in the
+VOLINFO.TXT file on these volumes.
+
+The digital Multi-look Color MDIMs are stored on eight CDROM volumes as
+shown in the listing below:
+
+Volume  8.  Vastitas Borealis Region of Mars (VO_2008): Color MDIM
+     image files covering the entire north polar region of Mars
+     southward from the pole to a latitude of 37.5 deg North. Polar
+     Stereographic projection images of the north pole area from 80
+     to 90 degrees are located in the POLAR directory on this disk.
+
+Volume  9.  Xanthe Terra Region of Mars (VO_2009): Color MDIM 
+     image files covering the region of Mars from 37.5 deg North
+     latitude to 52.5 deg South latitude, and 0 deg longitude to 90
+     deg West longitude. 
+
+Volume 10.  Amazonis Planitia Region of Mars (VO_2010): Color MDIM
+     image files covering the region of Mars from 37.5 deg 
+     North latitude to 52.5 deg South latitude, and 90 deg West
+     longitude to 180 deg West longitude. 
+                    
+Volume 11.  Elysium Planitia Region of Mars (VO_2011): Color MDIM
+     image files covering the region of Mars from 37.5 deg North
+     latitude to 52.5 deg South latitude, and 180 deg West
+     longitude to 270 deg West longitude. 
+
+Volume 12.  Arabia Terra Region of Mars (VO_2012): Color MDIM
+     image files covering the region of Mars from 37.5 deg North
+     latitude to 52.5 deg South latitude, and 270 deg West 
+     longitude to 0 deg West longitude. 
+
+Volume 13.  Planum Australe Region of Mars (VO_2013): Color MDIM
+     image files covering the entire South polar region of Mars
+     northward from the pole to a latitude of 52.5 South latitude.
+     Polar Stereographic projection images of the south pole area
+     from 80 to 90 degrees are located in the POLAR directory on
+     this disk.
+ 
+Volume 14. Global Mars Coverage (VO_2014): Color MDIM 
+     image files stored in 8-bit color CompuServe GIF format.
+     Images files from volumes 8-13 stored in a compressed
+     format on this volume. (see section 5.6)
+
+Each of the volumes contains Multi-look Color MDIMs of the areas
+specified at resolutions of 1/64 deg/pixel (925m). Each volume also
+contains black-white MDIM coverage of the entire planet at 1/16
+deg/pixel (3.70 km). The volumes include a digitized airbrush map of the
+entire planet at 1/16 deg/pixel (3.70 km) and at 1/4 deg/pixel. Special
+color data products exist in the SPECIAL directory. These image files
+contain orthographic, point-perspective, and oblique views of the
+planet. A gazetteer of IAU-approved feature names, referenced by
+latitude and longitude coordinates is included as a table file on each
+of the volumes.
+
+
+The tiling layout for the Multi-look Color MDIM collection is the same
+layout as found on volume 7. The image data are projected to a
+Sinusoidal Equal-area Projection. Each tile contains approximately 1000
+lines and samples, and contains 15 degrees of latitude and longitude at
+the central latitudes.
+
+
+
+            TABLE 1. - VIKING ORBITER GLOBAL COLOR DATASETS
+            -----------------------------------------------
+    REV  AEROCENTRIC  FILTER  PHASE  #         DESCRIPTION
+          SOLAR LONG.         ANGLE  FRAMES
+   ----------------------------------------------------------
+   
+   441A      326      RGV     50      42     S. Hem. Seq.
+   447A      329      RGV     47      42     S. Hem. Seq.
+   453A      332      RGV     43      42     S. Hem. Seq.
+   459A      336      RGV     41      42     S. Hem. Seq.
+   463A      338      RGV     36      42     S. Hem. Seq.
+   469A      342      RGV     36      39     S. Hem. Seq.
+   583A       36      RGV     19      36     Equatorial Seq.
+   586A       38      RGV     22      24     Equatorial Seq.
+   590A       40      RV      24      72     Full disk
+   593A       41      RGV     21      30     Equatorial Seq.
+   605A       46      RV      26      64     Full disk
+   609A       48      RGV     27      30     Equatorial Seq.
+   614A       50      RGV     29      36     Equatorial Seq.
+   663A       72      RGV     46      24     Equatorial Seq.
+   666A       73      RGV     47      24     Equatorial Seq.
+   669A       74      RGV     49      24     Equatorial Seq.
+   672A       76      RGV     50      24     Equatorial Seq.
+   681A       80      RGV     53      15     Equatorial Seq.
+   684A       81      RGV     55      24     Equatorial Seq.
+   687A       82      RGV     55      24     Equatorial Seq.
+   690A       84      RGV     56      24     Equatorial Seq.
+   717A       96      RV      13      12     N. Pole
+   735A      104      RGV     62      24     N. Pole
+   747A      109      RV      23       8     N. Pole
+   756A      113      RV      26       6     N. Pole
+   762A      116      R       55       4     N. Pole
+   765A      118      RV      46      16     N. Pole
+   768A      119      RV      48      14     N. Pole
+   771A      120      RV      49      12     N. Pole
+   793A      131      R       70       6     N. Pole
+   797A      132      R       72       8     N. Pole
+   801A      134      R       74       8     N. Pole
+   808A      138      R       77       6     N. Pole
+   811A      139      R       79       6     N. Pole
+   814A      141      R       79       8     N. Pole
+   816A      142      R       80       4     N. Pole
+   818A      143      R       81       6     N. Pole
+   826A      147      R       85       4     N. Pole
+   169B      200      RV      68      36     S. Hem Dust Storm
+   180B      208      RV      53      36     1st great storm
+   356B      314      RGV     73      12     S. Pole, post-storm
+   358B      315      RGV     66      39     S. Pole, post-storm
+   407B      341      RGV     85      24     S. Pole resid. cap
+   323S       65      RV      35     104     Full disk
+   333S       69      RV      50      36     N. Pole, hazy
+   334S       70      RV      35     102     Full disk
+   347S       75      RV      40     100     Full disk
+   353S       78      RV      58      36     N. Pole, hazy
+   378S       89      RV      55     100     Full disk
+   426S      111      RV      58      24     S. Hem. frosts
+   483S      140      RGV     81      36     Hellas 
+   425A      297      RGV     33      36
+   577A       33      RGV     20      36
+   
+
+
+2 - VIKING MISSION
+
+The Viking Mission consisted of four spacecraft: two identical orbiters
+and two identical landers. During cruise from Earth to Mars the landers
+were attached to the orbiters. Thirteen science teams had experiments on
+these spacecraft. The major scientific objective of the mission was to
+search for life on Mars. Several experiments on the landers were
+designed to address this objective. In addition, some of the experiments
+on the orbiters and landers focused on the study of the composition and
+physical properties of the atmosphere, the distribution of water vapor,
+and global and local meteorology. Other experiments investigated the
+composition and physical properties of the surface and the geologic
+history of Mars. Data on the seismicity of Mars and its gravity field
+were also acquired to study the internal structure of Mars [1, 2].
+
+One of the Orbiter experiments was the Visual Imaging Subsystem (VIS),
+which acquired the images that comprise the Mars MDIM series. The
+imaging system is briefly described in the next section. The first
+objective of the VIS experiment was to characterize potential landing
+sites in support of site selection. Additional objectives were to study
+the photometric and colorimetric properties of the surface, to study
+various geological features that were discovered by Mariner 9 in order
+to better understand the geological history of Mars, to study the
+dynamics of the atmosphere, and to monitor the surface for changes.
+
+The Viking Orbiter spacecraft operated in orbit around Mars from 1976
+until 1980. The overall Viking mission was divided into a number of
+mission phases with specific objectives. The "primary mission" extended
+from orbital insertion in June 1974 until November 1976. The main
+objective of the primary mission was to collect data in support of
+landing site selection. The spacecraft orbital characteristics were
+chosen so that the Orbiters could serve as relay stations for
+communications between the Landers and Earth. In addition, the Orbiter
+imaging systems imaged all of the terrains on Mars, collected some color
+and stereo images, and made observations of Phobos and Deimos. The
+"extended mission" took place between November 1976 and May 1978, and
+the "continuation mission" took place from May 1978 through February
+1979. During these periods the Orbiters were not always required as
+relay stations with the Landers, and could be used for data gathering
+that was independent of the Lander missions. Some of the image sequences
+acquired by the VIS experiment include systematic medium and high
+resolution coverage of large portions of the surface, stereo images,
+observations of Phobos and Deimos, color images of the equatorial
+regions, observations of the polar regions, and monitoring dust storm
+activity. The final phase of the Viking Mission was the "survey mission"
+from July 1979 until July 1980. During the Survey Mission only Viking
+Orbiter 1 operated since Viking Orbiter 2 had lost its attitude control
+gas through a series of leaks. The survey mission was designed to obtain
+contiguous high resolution coverage of the Martian cratered terrain. One
+reason for acquiring these data was to help select landing sites on Mars
+for future missions.
+
+
+
+3 - VIKING ORBITER VISUAL IMAGING SUBSYSTEM
+
+
+Each Viking Orbiter was equipped with two identical vidicon cameras,
+called the Visual Imaging Subsystem (VIS) [3, 4, 5]. Each VIS camera
+consisted of a telescope, a slow scan vidicon, a filter wheel, and
+associated electronics. The angular field of view of the camera as
+defined by the reseau pattern was 1.51 by 1.69 degrees. The ground area
+covered by an image varies as a function of spacecraft altitude and
+emission angle. A digital image was generated by scanning the vidicon
+face plate. The signal at each location (pixel) was digitized as a 7-bit
+number (i.e., within the range of 0 to 127). The EDR image data were
+converted to 8-bit numbers by multiplying the original 7-bit numbers by
+2. Thus, the least significant bit of each pixel in an EDR image is
+zero, except for interpolated pixels or pixels with corrupted values. A
+full-resolution, Viking Orbiter image consists of an array of 1056 lines
+with 1204 samples per line. There are only 1182 valid samples in each
+line. The extra 22 samples in each line consist of dark bands on the
+left and right edges of each image, produced by an opaque mask located
+at the front of the vidicon. Each dark band is approximately 11 samples
+wide, although the exact width varies from image to image.
+
+Each VIS camera contained a filter wheel with five color filters (blue,
+minus blue, violet, green, and red) and a clear position, i.e., no
+filter. The filter half power bandwidths are approximately: blue from
+0.35 to 0.53 micrometers; minus-blue from 0.48 to 0.70 micrometers;
+violet from 0.35 to 0.47 micrometers; clear from 0.35 to 0.70
+micrometers; green from 0.50 to 0.60 micrometers; and red from 0.55 to
+0.70 micrometers. Multiple images of the same areas were occasionally
+acquired using violet, green, and red filters to form color images after
+processing on Earth. It is from these images that the Multi-look Color
+MDIM was prepared. Color image reconstruction from Viking imaging
+requires radiometric and geometric corrections, and co-registration of
+the images that make up the color set. 
+
+
+ 
+4 - CARTOGRAPHY AND DATA PRODUCTS
+
+
+The Mars MDIM of Viking Orbiter color images of Mars was compiled
+according to the plan described by Batson [6, 7, 8, 9]. The
+Multi-look Color MDIM is tied to the medium-resolution black-white MDIM
+previously published on volumes 1-6 of the MDIM series. The MDIM has a
+published standard error of about 5 km which represents 20 pixels at the
+1/256 deg/pixel resolution and a 5 pixel error at the 1/64 deg/pixel
+resolution.
+
+Discrepancies between adjacent Multi-look Color MDIM images in the
+mosaic are far less than 5 pixels over most, but not all, of the planet. 
+We attempted to distribute the error so that it was not obtrusive in the
+mosaics, but this was not possible in some areas. The error can be
+attributed to a lack of precise knowledge of the spacecraft location at
+the time each image was taken and to parallax in oblique images of
+rugged terrain. Camera locations can be derived only by tracking the
+spacecraft continuously and precisely during its active lifetime, which
+was not always done for Viking Orbiters 1 and 2. Given assumed camera
+positions, camera orientations were derived by reducing to their minima
+the discrepancies between images in overlapping frames and the control
+net.
+
+ 
+
+5 -  PLANETARY DIGITAL IMAGE MODELS
+
+Digital mosaics have in the past been compiled primarily as elegant
+demonstrations of a costly alternative to manual compilations. They have
+generally been special products designed to serve specialized purposes
+and until recently were not affordable as primary standard products. The
+intent of the digital planetary mapping program is to develop a unified
+system, consisting of a single digital format for all planetary
+cartographic databases. The relations between digital map-storage
+formats and map projection and image resolution are therefore
+fundamental considerations in the design of the system. 
+
+5.1 - PROJECTIONS
+
+The simplest form of a digital model (DM) is one in which each image
+element's value is stored in a "bin" (pixel) labeled in terms of
+latitude and longitude. For computer work, it is only necessary that
+each bin be readily accessible. In compiling and describing DM's,
+however, it is useful to discuss a digital array in terms of map
+projections. The simplest projection is one in which each image line, or
+row of bins, is a parallel of latitude and each column of samples, or
+bins, is a meridian. This presentation was termed a "Simple Cylindrical"
+or "Square" projection by Clark [10]. Its simplicity is appealing, even
+though the higher latitudes are oversampled (e.g., the pole of a planet,
+in reality, is a point, but is represented digitally by an image line
+with as many samples as that for the equator, all with the same value). 
+Several planetary consortia, consisting of geological, geochemical, and
+geophysical databases in this format, have used this format for several
+years for the Moon, Mars, Venus, and the Galilean satellites [11, 12,
+13, 14]. The total storage required for this kind of array is only about
+60% more than if each element represented the same size area on the
+planet, and is therefore not prohibitive. However, this projection does
+present an operational problem, in that a Simple Cylindrical projection
+of a single spacecraft image containing the north or south pole has too
+many pixels in an image line to manage easily during DM compilation. As
+a result, the Sinusoidal Equal-Area projection [14] was selected for
+compiling planetary DM's. The conversions between Simple Cylindrical and
+Sinusoidal Equal-Area geometry are so computationally trivial that the
+two formats are nearly twins.
+
+A Sinusoidal Equal-Area projection is one in which each parallel of
+latitude is an image line, and the length of each line is compressed by
+the cosine of its latitude. The Sinusoidal projection has the simplicity
+of the Simple Cylindrical projection so far as indexing (rows and
+columns are still parallels along meridians), but compilation is much
+more efficient in the Sinusoidal Equal-Area because the projection does
+not have mathematical peculiarities at the poles. However, viewing
+distortion becomes severe with distance from the central meridian in the
+sinusoidal presentation. This is a problem only for visual examination
+of DIM images; it is not relevant to the integrity of the database. By
+simply sliding image lines parallel to one another, the central meridian
+can be rapidly shifted; this allows an undistorted view of a selected
+region without geometrically resampling the image. Segments of a DIM can
+therefore be displayed with a local central meridian, although the poles
+themselves must be transformed to a polar projection. 
+
+The Sinusoidal projection and use of the cartographic keywords in the
+image labels are described in Appendix E.
+
+5.2 - PIXEL SIZES
+
+The resolution of digital images is often given in terms of pixel
+dimensions in meters or kilometers on the surface of a target. However,
+Mars DM's on this CDROM are encoded so that the number of lines (which
+are also parallels of latitude) in a global DM is an integer. It is
+therefore more convenient to specify DM resolution in terms of
+planetocentric degrees than in linear units. The size of pixels in DM's
+is therefore specified as some negative power of two (1/4, 1/8, 1/16 . .
+. 1/256, etc.) degrees per pixel. Resolutions intermediate to these
+values are not used, so that databases can be registered in scale simply
+by successively doubling or halving the pixel sizes by subsampling or
+averaging, but without resampling. Metric equivalents for each Mars
+scale are shown in Table 2.
+
+
+         TABLE 2. - METRIC EQUIVALENTS OF PIXEL SIZES FOR MARS
+         -----------------------------------------------------
+                    DEGREES/PIXEL  KILOMETERS/PIXEL
+                    -------------------------------
+
+                            1/4        14.8
+                            1/8         7.40
+                            1/16        3.70
+                            1/32        1.85
+                            1/64        0.925
+                            1/128       0.463
+                            1/256       0.231
+                            1/512       0.116
+                            1/1024      0.0578
+        
+
+5.3 - DN SCALING AND I/F
+ 
+Images have been radiometrically corrected for the varying response of
+the vidicon across the field-of-view of the camera. During the
+radiometric process, the pixel values are converted to "radiance factor
+values", designated I/F or "I over F", and then scaled to fit into the
+8-bit (0-255 DN) dynamic range. I/F is defined as the ratio of the
+observed radiance to the radiance of a white screen, normal to the
+incident rays of the Sun. An I/F value of 1.0 represents a 100%
+lambertian reflector target with normal sun and viewing geometry at the
+Sun-to-Mars distance of the target. The value of an 8-bit pixel (DN
+value) can be converted to an I/F value by applying the SCALING_FACTOR
+and OFFSET values found in the PDS labels. The equation used is: I/F =
+SCALING_FACTOR*DN + OFFSET. The parameters used to perform the
+radiometric correction are described by Klassen [4].
+              
+
+For most red, green, and synthetic green images the SCALING_FACTOR =
+0.001, and for violet images the SCALING_FACTOR = 0.0005. The OFFSET
+value is 0 for all Color MDIM images. 
+
+
+
+5.4 - COLOR
+
+The Viking Orbiter cameras contained a filter wheel with five color
+filters. Of these filters, only the red, green, and violet filter
+positions were used in the color MDIM. The filter half-power bandwidths
+are approximately: violet 0.35 to 0.47 micrometers; green 0.50 to 0.60
+micrometers; and red 0.55 to 0.70 micrometers.
+
+Viking Orbiter global color datasets were acquired in the revs shown in
+Table 1. To reconstruct color, images of the same areas on the planet
+were acquired using violet, green, and red filters; or violet and red
+filters. Color image reconstruction requires radiometric and geometric
+corrections, and co-registration of the different filter images.
+
+Color images can be displayed using standard Red-Green-Blue triplets
+(RGB) supported but many computer display monitors. The violet filter
+images are displayed as the Blue component of an RGB triplet. For color
+sequences that did not acquire green images, a synthetic green image was
+created for use in the green component of the color triplet.
+
+Each color in the RGB triplet is represented as an 8-bit pixel value in
+the image files. For computer color display monitors with 24-bit color
+systems, it is a straight forward process to display the image data; the
+red, green, and violet images are simply read into the 8-bits of each
+RGB triplet. For 8-bit color monitors the 24-bit color must be
+compressed into the 8-bit scheme. The CompuServe GIF formatted color
+files found on volumes 14 (described in section 5.6) provide color
+images in an 8-bit form.
+
+
+5.5 - SYNTHETIC GREEN IMAGES
+
+In order to facilitate the display of color images, synthetic green
+images have been created for all red-violet image pairs. Synthetic green
+images have the file extension name of "SGR" (acquired green images have
+the file extension name of "GRN"). The synthetic green image can be used
+in the same manner as green images in a RGB color triplet.
+
+Synthetic green images are created for color mosaics even though an
+acquired green image may exist. When visually comparing a red-violet
+pair mosaic with a red-green-violet triplet mosaic, it is best to use
+the synthetic green image for both sets of images. This insures any
+difference in the comparison of the two images is not attributed to a
+lack of real green filter data in the red-violet pair. Otherwise there
+may be a misidentification of color differences in the mosaics.
+
+A synthetic green image is created as follows: 1) the red and violet DN
+values are converted to I/F, 2) the synthetic green I/F value is a
+simple average of the red and violet I/F values, and 3) the synthetic
+green value is converted to a DN value by applying the reciprocal of the
+SCALING_FACTOR.
+
+
+5.6 COMPUSERVE GIF FORMATS
+
+Volume 14 contains all of the color images from Volumes 8 through 13 in 
+CompuServe Graphics Interchange Format (GIF), version GIF87A. The GIF
+87A storage format is described in the document file GIF87A.TXT located
+in the DOCUMENT directory. This format was chosen because it is widely
+supported by image display programs on personal computers and
+workstations. This collection is oriented to users who do not have
+sophisticated image processing systems or full color (24-bit) displays. 
+Each image has a custom palette to best represent the colors in the
+scene. This provides optimal display of each individual image on an
+8-bit color display screen. The drawback of this format is that images
+can only be displayed individually and no selective color contrast
+stretching can be performed. Since each has a different palette, the
+screen colors will change when a new image is displayed on an 8-bit
+monitor. The possibility of developing a standard color palette for all
+mosaic images was investigated, but it was determined that the effort to
+produce such a palette would be prohibitive in time and effort.
+
+The conversion was performed on a Sun workstation using utilities from 
+the public domain Portable Bit Map (PBM) Plus package [15] and the
+commercial program Image Alchemy [16]. Raw images were converted to 
+Portable Gray Map format using the raw2pgm program. The Portable Gray 
+Map images were then combined into Portable Pixel Map format using the 
+rgb3toppm program. Finally, the Image Alchemy program was used to create
+the GIF versions from the 24-bit images.
+
+
+
+5.7 - "IDEAL" COLOR STRETCH
+
+Recommended density "stretch" pairs are provided for RGB color sets to
+create visually pleasing images with enhanced color contrast. The
+recommended stretch has already been applied to the GIF formatted image
+files.
+
+These stretch parameters are specified by the STRETCH_MINIMUM and
+STRETCH_MAXIMUM keywords in the PDS label area. STRETCH_MINIMUM
+indicates how the low-end DN value is to be mapped, STRETCH_MAXIMUM
+indicates how the high-end DN value is to be mapped. For example,
+STRETCH_MINIMUM=(50,0), STRETCH_MAXIMUM=(170,255), the DN value of 50 is
+mapped to 0, and the DN value 170 is mapped to 255. Values between 50
+and 170 are assigned to DN values by simple interpolation of the low and
+high-end specification. The values specified assume an 8-bit (0-225 DN)
+range for each color of a RGB triplet. The stretch pairs are also found
+in the image index table (IMGINDEX.TAB)
+
+The following algorithm, empirically derived to create a visually
+pleasing appearance is used to determine the stretch parameters for an
+RGB triplet:
+
+1) For the Red image of a RGB triplet, determine the DN values
+corresponding to the bottom 1% of the image histogram (DN_RED_LOW), and
+the top 99% of the image histogram (DN_RED_HIGH). Subtract 10 from
+DN_RED_LOW and add 10 to DN_RED_HIGH. The result becomes the density
+stretch for the red image. DN_RED_LOW is mapped to zero, DN_RED_HIGH is
+mapped to 255. 
+
+2) For the Green image of a RGB triplet, apply the equations
+DN_GRN_LOW = DN_RED_LOW*.6375, DN_GRN_HIGH = DN_RED_HIGH *.8250. 
+DN_GRN_LOW is mapped to zero, DN_GRN_HIGH is mapped to 255.
+
+3) For the violet image of a RGB triplet, use the equations:
+DN_VIO_LOW = DN_RED_LOW  * .2750 * (RED_SCALE/VIOLET_SCALE), 
+DN_VIO_HIGH =DN_RED_HIGH * .6500 * (RED_SCALE/VIOLET_SCALE) 
+DN_VIO_LOW is mapped to zero, DN_VIO_HIGH is mapped to 255. RED_SCALE is
+the SCALING_FACTOR of the red image to convert form DN value to I/F,
+VIOLET_SCALE is the SCALING_FACTOR of the Violet image to convert from
+DN value to I/F. RED_SCALE/VIOLET_SCALE = 2.0 for most images in the
+MDIM.
+
+
+
+6 - COMPILATION
+
+The Multi-look Color MDIM image models are compiled in stages or
+"levels", beginning with raw images. Corrections made during these stages
+have some level of uncertainty, so the processing sequence is designed
+to progress from corrections with the highest probability of accuracy to
+the lowest, and intermediate stages are preserved for future analytical
+use. Image processing software exists to perform the various stages of
+image correction and enhancement [17, 18].
+
+
+6.1 - LEVEL 1: RADIOMETRIC CORRECTION 
+
+Level 1 processing includes removal of electronic shading, which is
+inherent in the imaging system, and artifacts such as minute dust specks
+on the vidicon tube, microphonic noise introduced by operation of other
+instruments on the spacecraft during imaging sequences, and data
+drop-outs and spikes [3]. Reseau marks are also located and removed
+during this stage; their precise locations are recorded for use during
+later geometric processing. A digital image label is created,
+containing the reseau-mark locations, geodetic control point and image
+tie-point locations, and a computed camera orientation matric that will
+project the frame to a best-fit shape and position in a mosaic.
+
+Level 1 images have better resolution than those produced at any
+subsequent processing level. This is because they have not been
+resampled for geometric correction and projection; some loss of
+information is inevitable in any resampling, because the density values
+of multiple pixels and/or fractional pixels must be averaged to form new
+pixels in the output array. Photographic copies of Level 1 images, with
+spatial filter enhancement, are therefore the more useful photographic
+materials for visual interpretation of "at resolution" image
+information.
+
+
+6.2 - LEVEL 2: GEOMETRIC CORRECTION 
+
+Level 2 processing includes removal of camera distortions and
+transformation from image to map coordinates in DM format according to
+parameters derived at the end of the Level 1 processing phase. The
+resolution of each frame is preserved to some extent by oversampling in
+the output array; that is, by selecting a resolution step that results
+in an image with more lines and samples than the original image. 
+Distortion corrections are based on preflight calibration of the reseau. 
+Image transformation is based on camera orientation matrices derived by
+photogrammetric triangulation modified as required for a best fit
+with adjacent images. On those images where matrices are not available,
+they are derived by matching corresponding points with images that have
+matrices.
+
+The red, green, and violet filter images were treated slightly
+differently in defining the geometric transformation. For red filter
+image files, control points in the image were matched with the
+medium-resolution MDIM control net. The camera pointing geometry
+parameters were updated and the red image was geometrically
+transformed. The camera pointing parameters of the green and violet
+filter images were updated by matching control points between them and
+the corresponding red image file.
+
+6.3 - LEVEL 3: PHOTOMETRIC CORRECTION
+
+At level 3 processing apparent inconsistencies in surface brightness
+caused by variation in illumination geometry and by atmospheric effects
+are treated. Atmospheric scattering is a significant consideration on
+Mars. Different materials on any planet have different light-reflecting
+properties. Other photometric corrections are effective only to the
+extent that all geometric parameters can be modeled. 
+
+The Multi-look Color MDIM series images have no photometric correction.
+Each MDIM mosaic was acquired in a single spacecraft revolution
+so the illumination geometry and atmospheric effects for the images
+were nearly identical. Nearly seamless mosaics could be produced from
+each rev due to the nearly identical viewing conditions of each image
+frame.
+
+6.4 - LEVEL 4: CONTROLLED MOSAICKING 
+
+Compilation of an accurate digital mosaic (MDIM) of the surface of a
+planet is the final stage in the construction of a DIM. The Multi-look
+Color MDIM is a digital image of the planet, with uniform resolution
+throughout. The resolution of level 2 images used in the compilation is
+compressed or expanded to match that of the MDIM.
+
+A separate mosaic was constructed for each spacecraft rev listed in
+Table 1. Many of these mosaics overlap in area and it is common to have
+several views of the planet surface.
+
+7 - CONCEPT OF THE TILING SCHEME
+
+Most DMs are far too large to be managed conveniently as single files,
+and must be segmented to produce tiles of manageable size for convenient
+access on CDROM disks. The scheme used for the Multi-look Color MDIM is
+the same used for the MDIM/DTM volume 7. This scheme uses 15 X 15 deg
+tiles in the equatorial regions and modified for convergence of
+meridians in the higher and lower latitudes. 
+
+Just as published maps are indexed by the latitude/longitude of their
+center points (truncated to the nearest integer degree to simplify the
+indexing), the file names in the MDIM refer to the latitude/longitude of
+the center of the tile. Thus, the tile named MG15N007.RED is centered
+on a point 15 deg. north of the equator and a longitude of 7 deg. West.
+
+Each tile has its own central meridian in order to minimize the
+geometric distortion (shearing) of the data within the tile and can be
+independently displayed with little geometric distortion. Thus, craters
+remain round rather than oblong. Simple display software can display a
+tile (or sub-area of a tile) with virtually no geometric distortion in
+the area of interest. 
+
+The central meridian of a Sinusoidal Equal-Area projection can be
+changed by sliding image lines parallel to one another (assuming
+nearest-neighbor interpolation). For a computer algorithm to convert a
+DM tile to a new central meridian, the algorithm need only calculate a
+starting offset (where to put the first sample of the input line) and
+move the pixels from an input buffer to an output buffer starting at the
+calculated offset. For example, if a feature of interest existed on a
+boundary between two tiles, it would be relatively simple to develop a
+program that would read the two tiles into memory, create an output
+memory array with a new central meridian equal to the boundary longitude
+between the two tiles, and then copy the input tile lines to the output
+tile lines with a calculated offset value for each line.
+
+8 -  FILES, DIRECTORIES, AND DISK CONTENTS
+
+8.1 - IMAGE FILE NAMING CONVENTION
+
+Each image file has a name constructed according to the type of image
+file, resolution, and central latitude and longitude. Because only eight
+characters are available (MS/DOS systems are limited to eight character
+file names) a highly compressed notation is used. The general form of an
+image file name is 'vwxxyzzz.ccc'. The file is located in directory
+'vwxxyXXX', subdirectory 'ooos'. Table 3 specifies the general form the
+file, directory, and subdirectory specification.
+
+             
+                 TABLE 3. - IMAGE FILE NAME CONVENTION
+                 -------------------------------------
+
+           General form of image file names -   vwxxyzzz.ccc
+           located in directory vwxxyXXX, subdirectory ooos
+           where:
+
+               v   =  Type of image file
+                       M - Mars Digital Image Map
+                       S - Shaded Relief Airbrush Map
+               w   =  Resolution code for image file
+                       C  - 1/4   degree/pixel
+                       D  - 1/8   degree/pixel
+                       E  - 1/16  degree/pixel
+                       G  - 1/64  degree/pixel
+                       H  - 1/128 degree/pixel
+                       I  - 1/256 degree/pixel
+               xx  =  Central latitude value rounded
+                      down to nearest whole latitude
+               y   =  North or South latitude
+                       N - North latitude
+                       S - South latitude
+               XXX =  Used in directory specification
+               zzz =  Central longitude value rounded 
+                      down to nearest whole longitude
+               ccc =  Image filter type
+                      RED - Red filter image
+                      GRN - Green filter image
+                      SGR - Synthetic filter image
+                      VIO - violet filter image
+                      IMG - black-white image
+                      GIF - CompuServe 8-bit color image
+               ooo =  Used in naming subdirectories, provides the
+                      mission orbit number for the image
+               s   =  Spacecraft code
+                      A = Viking 1
+                      S = Viking 1, survey mission
+                      B = Viking 2
+
+              -------------------------------------------
+
+MG00N090.RED, located in directory MG00NXXX and subdirectory 334A, is an
+example file name. It is a red filter MDIM image, has a resolution of
+1/64 degree/pixel, a center latitude at the equator, and a center
+longitude at 90 degrees. The images in the mosaic were acquired in orbit
+334 of the Viking 1 Spacecraft.
+
+Volume 8, containing the north polar region of Mars, contains special
+subdirectories called SCALE for some of the image mosaics. These
+subdirectories contain image tiles that have been scaled differently due
+to saturation problems in the high albedo areas of the polar cap. The
+normal DN scale factors (see section 5.6) used to normalize the data to
+8-bit pixels was not appropriate for the illumination and viewing
+geometry for the polar cap. These areas would saturate. Whenever image
+data from a mosaic would saturate, the SCALE subdirectory was created and a
+scale factor was selected to prevent saturation. For example, the
+MG75N000.RED file located in the directory MG75NXXX and subdirectory717A
+contained saturated data in the polar ice areas. An additional file
+MG75N000.RED located in the directory MG75NXXX,717A,SCALE was created
+with different scaling to prevent the polar ice data from saturating.
+The scaling factors used for each image is recorded in the PDS label
+data. See Appendix C for keywords that describe the scaling
+
+
+8.2 - DIRECTORIES 
+
+The volume and directory structure of this CDROM conforms to the level-1
+standard specified by the International Standards Organization (ISO),
+known as the ISO-9660 standard [22]. The ISO standard was used so that
+the disks can be accessed on a wide variety of computer systems. 
+Information on the ISO-9660 CDROM standard is provided in Appendix A.
+
+The MDIM images, Shaded relief airbrush images, special image products,
+documentation, and software are located in separate directories. Table 4
+shows the contents of the directories common to the volumes.
+
+
+                        TABLE 4. - DIRECTORY CONTENTS
+                        ------------------------------
+
+     Root <dir>     - AAREADME.TXT - Introduction to this CD-ROM volume
+                      VOLDESC.SFD - Volume descriptor label
+                      ERRATA.TXT  - Reports errors with volume
+
+     DOCUMENT <dir> - Documentation for the volume
+
+     GAZETTER <dir> - Gazetteer table, labels, and documentation
+
+     INDEX <dir>    - Image index table, labels, and documentation
+
+     LABEL <dir>    - Ancillary label for the dataset map projection 
+                      object
+
+     POLAR <dir>    - Polar stereographic projections of polar 
+                      segments (volumes 8, 13, and 14 only)
+
+     SOFTWARE <dir> - Subdirectories within this directory contain 
+                      supporting software for various hardware 
+                      platforms
+
+     SCXXXXXX <dir> - Digitized airbrush map at 1/4 deg/pixel
+
+     SEXXXXXX <dir> - Digitized airbrush map files at 1/16 deg/pixel
+
+     MEXXXXXX <dir> - Black-white MDIM map files at 1/16 deg/pixel
+
+     SPECIAL <dir>  - Subdirectories within this directory contain 
+                      special image data products such as orthographic
+                      global views, point perspective views, and oblique 
+                      views. Read the IMGINFO.TXT files in each 
+                      subdirectory for more information.
+
+9 - IMAGE FILE ORGANIZATION
+
+The record structure of image files is fixed-length format (see Appendix
+A for a description of fixed-length record files). There are three areas
+that make up the image file: the image label, the image histogram
+object, and the image object.
+
+
+9.1 - IMAGE LABEL AREA
+
+The label area of a image file contains descriptive information about
+the image. The label consists of keyword statements that conform to
+version 2 of the Object Description Language (ODL) developed by NASA's
+PDS project [19, 20]. There are three types of ODL statements within a
+label: structural statements, keyword assignment statements, and pointer
+statements.
+
+Structural statements provide a shell around keyword assignment
+statements to delineate which data object the assignment statements are
+describing. The structural statements are:
+
+         1) OBJECT = object_name
+         2) END_OBJECT
+         3) END
+
+The OBJECT statement begins the description of a particular data object
+and the END_OBJECT statement signals the end of the object's
+description. All keyword assignment statements between an OBJECT and
+its corresponding END_OBJECT statement describe the particular object
+named in the OBJECT statement. The END statement terminates a label. 
+
+A keyword assignment statement contains the name of an attribute and the
+value of that attribute. Keyword assignment statements are described in
+more detail in Appendix B. These statements have the
+following format:
+
+         name = value
+
+Values of keyword assignment statements can be numeric values, literals,
+and text strings.
+
+Pointer statements are a special class of keyword assignment statements. 
+These pointers are expressed in the ODL using the following notation:
+
+         ^object_name = location
+
+If the object is in the same file as the label, the location of the
+object is given as an integer representing the starting record number of
+the object, measured from the beginning of the file. The first label
+record in a file is record 1. Pointers are useful for describing the
+location of individual components of a data object. Pointer statements
+are also used for pointing to data or label information stored in
+separate files. An example of a detached label (i.e., label information
+stored in a separate file) is shown below: By convention, detached
+labels are found in the LABEL directory.
+
+         ^STRUCTURE = 'logical_file_name'
+
+The value of 'logical_file_name' is the name of the detached label file
+containing the description.
+
+The keyword statements in the label are packed into the fixed-length
+records that make up the keyword label area. Each keyword statement is
+terminated by a carriage-return and line-feed character sequence. An
+example of a MDIM image label is shown in Table 5. Descriptions of the
+keywords used in the MDIM label are found in Appendix C.
+
+
+
+             TABLE 5. - EXAMPLE OF COLOR MDIM IMAGE LABEL
+             --------------------------------------------
+
+   CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL
+   
+   /*          FILE FORMAT AND LENGTH */
+   
+   RECORD_TYPE          = FIXED_LENGTH
+   RECORD_BYTES         = 964
+   FILE_RECORDS         = 965
+   LABEL_RECORDS        = 3
+   
+   /*          POINTERS TO START RECORDS OF OBJECTS IN FILE */
+   
+   ^IMAGE_HISTOGRAM     = 4
+   ^IMAGE               = 6                 
+   
+   /*          IMAGE DESCRIPTION */
+   
+   DATA_SET_ID          = "VO1/VO2-M-VIS-5-DIM-V1.0"
+   SPACECRAFT_NAME      = VIKING_ORBITER_1
+   TARGET_NAME          = MARS
+   IMAGE_TIME           = 1980-02-22T11:00:00
+   ORBIT_NUMBER         = 1334
+   FILTER_NAME          = VIOLET
+   IMAGE_ID             = "MG00N022-VIO-334S"
+   INSTRUMENT_NAME      = {VISUAL_IMAGING_SUBSYSTEM_CAMERA_A,
+                           VISUAL_IMAGING_SUBSYSTEM_CAMERA_B}
+   NOTE                 = "MARS MULTI-SPECTRAL MDIM SERIES"
+   /* SUN RAYS EMISSION, INCIDENCE, AND PHASE ANGLES OF IMAGE CENTER */
+   GEOMETRY_SOURCE_IMAGE_ID = "334S63"
+   EMISSION_ANGLE       = 55.080
+   INCIDENCE_ANGLE      = 45.437
+   PHASE_ANGLE          = 37.414
+   
+   /*          DESCRIPTION OF OBJECTS CONTAINED IN FILE */
+   
+   OBJECT               = IMAGE_HISTOGRAM
+    ITEMS               = 256
+    ITEM_TYPE           = VAX_INTEGER
+    ITEM_BITS           = 32
+   END_OBJECT           = IMAGE_HISTOGRAM
+   
+   OBJECT               = IMAGE
+     LINES              = 960
+     LINE_SAMPLES       = 964
+     SAMPLE_TYPE        = UNSIGNED_INTEGER
+     SAMPLE_BITS        = 8
+     SAMPLE_BIT_MASK    = 2#11111111#
+     CHECKSUM           = 49041160
+   /*  I/F = SCALING_FACTOR*DN + OFFSET, CONVERT TO INTENSITY/FLUX */
+     SCALING_FACTOR     = 0.000500
+     OFFSET             = 0.0
+   /* OPTIMUM COLOR STRETCH FOR DISPLAY OF COLOR IMAGES */
+     STRETCHED_FLAG     = FALSE
+     STRETCH_MINIMUM    = ( 79,  0)
+     STRETCH_MAXIMUM    = (143,255)
+   END_OBJECT           = IMAGE
+   
+   OBJECT               = IMAGE_MAP_PROJECTION_CATALOG
+     ^DATA_SET_MAP_PROJECTION_CATALOG = "DSMAPDIM.LBL"
+     MAP_PROJECTION_TYPE =  SINUSOIDAL
+     MAP_RESOLUTION     = 64 <PIXEL/DEG>
+     MAP_SCALE          = 0.92540634<KM/PIXEL>
+     MAXIMUM_LATITUDE   = 7.50000
+     MINIMUM_LATITUDE   = -7.50000
+     MAXIMUM_LONGITUDE  = 30.00000
+     MINIMUM_LONGITUDE  = 14.93750
+     X_AXIS_PROJECTION_OFFSET = 480.00
+     Y_AXIS_PROJECTION_OFFSET = 480.00
+     A_AXIS_RADIUS      = 3393.40
+     B_AXIS_RADIUS      = 3393.40
+     C_AXIS_RADIUS      = 3375.73
+     FIRST_STANDARD_PARALLEL = "N/A"
+     SECOND_STANDARD_PARALLEL = "N/A"
+     POSITIVE_LONGITUDE_DIRECTION = WEST
+     CENTER_LATITUDE    = 0.00000
+     CENTER_LONGITUDE   = 22.50000
+     REFERENCE_LATITUDE = "N/A"
+     REFERENCE_LONGITUDE = "N/A"
+     X_AXIS_FIRST_PIXEL = 1
+     Y_AXIS_FIRST_PIXEL = 1
+     X_AXIS_LAST_PIXEL  = 960
+     Y_AXIS_LAST_PIXEL  = 964
+     MAP_PROJECTION_ROTATION = "N/A"
+   END_OBJECT           = IMAGE_MAP_PROJECTION_CATALOG
+   END
+
+
+
+9.2 - IMAGE HISTOGRAM OBJECT
+
+The first object after the label in an MDIM image file is the histogram
+of the image. The Image Histogram Object begins at the record specified
+by the ^IMAGE_HISTOGRAM pointer keyword. (Note, the first record in the
+file is defined as record 1.) The number of fixed-length records that
+make up the image histogram object can be determined by subtracting the
+value of the ^IMAGE pointer keyword from the ^IMAGE_HISTOGRAM pointer
+keyword value. These records, when concatenated together, contain the
+256 elements of the image histogram with each element occupying four
+bytes. Each element is a 32-bit VAX integer [21]. The first element of
+the histogram contains the count of pixels in the image with the
+brightness value 0. The last element contains the count of pixels in the
+image with brightness value 255.
+
+9.3 - IMAGE OBJECT
+
+The second object in the MDIM image file contains the image data. The
+image starts at the record specified by the ^IMAGE keyword. The number
+of records that make up the image is specified by the LINES keyword
+value. Each image line is stored in a separate fixed-length record. Each
+sample is an 8-bit unsigned integer as described by the SAMPLE_BITS and
+the SAMPLE_TYPE keywords in the label. The LINE_SAMPLES keyword
+describes the number of elements in each image line.
+
+
+10 -  SOFTWARE 
+
+10.1 - SOFTWARE DISCLAIMER
+
+Although the software contained on the MDIM CDROMs have been used and
+tested, no warranty, expressed or implied, is made by NASA, the Jet
+Propulsion Laboratory (JPL), or the United States Geological Survey
+(USGS) as to the accuracy and functioning of the software and related
+materials, and no responsibility is assumed by NASA, JPL, or the USGS.
+
+10.2 - SOFTWARE TOOLS
+
+Software is provided on the MDIM CDROMs to facilitate access to the
+image files. These files allow simple display capability of the
+individual image tiles. Software is provided for four hardware
+platforms: Apple Macintosh, IBM/PC, and SUN Sparcstation. The software
+is located in subdirectories within the SOFTWARE directory. The
+subdirectories MAC (Macintosh software), PC (IBM/PC software), and SUN
+(SUN Sparcstation). Within each subdirectory is located a file called
+SOFTINFO.TXT which describes how to use the software.
+
+
+11 - IMAGE INDEX
+
+
+Table 6 describes the contents of the image index file located in the
+INDEX directory on volumes 8-14. All fields are in ASCII character
+format. The image index files are formatted to allow automatic data
+entry programs to access the data for entry into an existing data base
+system. The non-numeric fields are enclosed by double-quote characters. 
+All fields are delimited by commas. The last two bytes in a record are
+carriage-control and line-feed characters. Table 6 gives the starting
+and ending byte positions of each field in the image index. These byte
+positions specify the actual fields and do not include the double-quote
+marks and commas that separate the fields.
+
+
+          TABLE 6 - FORMAT OF IMAGE INDEX FILE, VOLUMES 8-14
+          --------------------------------------------------
+
+ Byte Positions                   Description
+ ---------------------------------------------------------------------- 
+
+
+   2 -  43   FILE_NAME: the fully qualified CDROM file name for the 
+               image file. The format of the directory name 
+               specification is the VAX/VMS directory format, with 
+	       brackets indicating the directory hierarchy. Users on 
+               other systems will need to convert the directory names 
+               to the operating system formats.
+     
+  46 -  55   MAXIMUM_LATITUDE: the maximum latitude in the image file. 
+               Latitude ranges from +90.0 degrees for the north pole 
+               to -90.0 degrees for the south pole.
+
+  57 -  66   MINIMUM_LATITUDE: the minimum latitude in the image file.
+
+  68 -  78   MAXIMUM_LONGITUDE: the maximum longitude in the image 
+               file. Longitude ranges from 0 to 360.0 degrees.
+
+  80 -  90   MINIMUM_LONGITUDE: the minimum longitude in the image 
+               file.
+
+  92 - 102   CENTER_LONGITUDE: the center longitude of the Sinusoidal
+               Equal-Area projection.
+
+ 104 - 108   LINES: the number of lines in the image file. This 
+               parameter specifies the number of elements of the 
+               slowest varying dimension of the two dimensional image 
+               array.
+
+ 100 - 104   LINE_SAMPLES: the number of samples in the image file. 
+               This parameter specifies the number of elements of the 
+               fastest varying dimension of the two dimensional image 
+	       array.
+
+ 116 - 119   MAP_RESOLUTION: the map resolution of the image file 
+	       expressed as number of pixels per degree at the equator.
+
+ 122 - 128   VOLUME_ID : CDROM volume ID containing image file
+
+ 131 - 151   X_AXIS_PROJECTION_OFFSET: the line position of line 1.0 
+               and sample 1.0 in the x,y coordinates relative to the
+               origin of the map projection.
+
+ 143 - 153   Y_AXIS_PROJECTION_OFFSET: the sample position of line 1.0, 
+               sample 1.0 in the x,y coordinates relative to the
+               origin of the map projection.
+
+ 156 - 231   NOTE: contains a brief description of the image file. The 
+               field indicates the number of degrees/pixel of the file
+               and specifies the center latitude and longitude
+               coordinate of the image file.
+          
+ 235 - 251   IMAGE_ID: this field contains a 17 character string to 
+               identify the image file. 
+
+ 254 - 264   MAP_SCALE: this field gives the number of kilometers per
+                pixel at the equator.
+   
+ 267 - 282   SPACECRAFT_NAME: Name of spacecraft that acquired the 
+                imaging: VIKING_ORBITER_1 or VIKING_ORBITER_2
+
+ 286 - 304   IMAGE_TIME: Time of image acquisition rounded to nearest
+                hour. The Multi-look Color MDIM represents a mosaic
+                of many images and there is not single event time
+                that can define when the mosaic was acquired.
+
+ 307 - 311   ORBIT_NUMBER: Orbit number when the color mosaic
+                was acquired.
+
+ 314 - 328   FILTER_NAME: Color filter of images in mosaic.
+            
+ 332 - 337   GEOMETRY_SOURCE_IMAGE_ID: Image ID of image used to
+               specify the viewing geometry of the mosaic. The viewing
+               geometry of this image was used to define the emission,
+               phase, and incidence angles of the sun rays.
+
+340 - 347   EMISSION_ANGLE: Value of the angel between the surface 
+              normal vector at the intercept point and a vector from 
+              the intercept point to the spacecraft. The center of the 
+              tile is used as the intercept point.
+               
+349 - 356   INCIDENCE_ANGLE: Value of the angle of the lighting
+              condition at the center of the tile.
+
+358 - 365   PHASE_ANGLE: Angle between the spacecraft viewing position
+              and incident solar light. It is the angle between a
+              vector from the center of the image to the sun and a
+              vector from the center of the image to the spacecraft.
+
+367 - 375   SCALING_FACTOR: Multiplicative factor to convert
+              DN values to I/F. I/F is the ratio of the observed
+              radiance and the radiance of a white screen, normal
+              to the incidence rays of the sun. I/F=1.0, for an
+              ideal 100% lambertion reflector with the sun and camera
+              at naidr.
+
+377 - 385   OFFSET_FACTOR: Additive factor to convert DN value to
+              I/F value.
+
+387 - 397    STRETCH_MINIMUM: A two value parameter used to define
+               the low-end DN stretch to apply to the image for creating
+               "ideal" color. For Example, 27,0 specifies the stretch
+               of 27 "mapped" to zero.
+
+399 - 409    STRETCH_MAXIMUM: A two value parameter used to define the
+               high-end DN stretch to apply the image for creating 
+               "ideal" color. For example, 230,255 specifies the
+               stretch of 230 "mapped" to 255.
+
+
+12 - GAZETTEER
+
+Planetary nomenclature, like terrestrial nomenclature, is used to
+uniquely identify a feature on the surface of a planet or satellite so
+that the feature can be easily located, described, or discussed. The
+gazetteer on the MDIM CDROM volume set contains detailed information
+about all named features on Mars that the International Astronomical
+Union (IAU) has named and approved from its founding in 1919 through its
+triennial meeting in 1991. The gazetteer is located on each CDROM
+volume of the seven volume set. The information pertinent to the
+gazetteer is located in the GAZETTER directory (a letter 'E' has been
+intentionally dropped from the spelling of gazetteer because of the
+eight character limit on file names on IBM/PC systems). In this
+directory, a detailed documentation of the gazetteer can be found in the
+GAZETTER.TXT file. The file GAZETTER.TAB is the gazetteer table. Each
+row in the table contains the description of a single Martian feature.
+Finally, the GAZETTER.LBL file is the PDS detached label that describes
+the file contents and format.
+
+Ancillary files exist in the GAZETTER directory for users of the Word
+Perfect text editor. The diacritical marks located in the gazetteer can
+be converted to the Work Perfect format with the macros included in this
+directory. Files which end in the extension *.WPM contain the
+WordPerfect Macros. The document file WPMACRO.TXT describes the use of
+these macros.
+
+13 -    VIKING VIEWING GEOMETRY (SPICE)
+
+The table files located in the GEOMETRY directory contain information 
+describing the primary viewing geometry elements of the Viking EDR
+frames that make up the Mars Color MDIM image files. They were derived
+as a by-product of the coregistration to the medium-resolution MDIM
+series. These data supercede data originally provided by the Mission
+Test and Imaging System (MTIS) during active flight operations. All
+geometry elements are in the EME1950 coordinate system, the coordinate
+system originally used by the Viking Project. Each row (record) in the
+table corresponds to an EDR image, the columns (fields) in each row give
+the primary geometry elements as four vectors: Camera-Angles
+(declination, right-ascension, twist), Planet-Angles (declination,
+right-ascension, and spin), Spacecraft Vector, and Sun Vector. Each
+record consists of 196 bytes, with a carriage return/line feed sequence
+in bytes 195 and 196. All fields (columns) are separated by commas, and
+character and time fields are enclosed in double quotation marks. This
+format allows the table to be treated as a fixed-length record file on
+hosts that support this file type and as a normal text file on other
+hosts. MDIMGEOM.TAB lists the geometry information of the EDR images
+uses in the color MDIM compilation. The format of the tables are given
+in table 7.
+
+The data in the geometry files can be used to generate geometric and
+viewing information about an image. Using the geometry data along with
+software in the NAIF SPICE TOOLKIT [23], or the similar software in
+PICS SPICELIB and MAPLIB libraries [17], many items useful in processing
+and analysis of an Viking EDR image data can be calculated. The
+following are some examples: sub-spacecraft latitude and longitude;
+sub-solar latitude and longitude; image resolution; latitude and
+longitude of image center; sun phase angle; emission angle; azimuth of
+the sun; azimuth to the spacecraft; latitude and longitude range of an
+image; and the line and sample in an image as a function of latitude and
+longitude, or vice versa.
+
+
+                  TABLE 7. - FORMAT OF GEOMETRY FILES
+                  -----------------------------------
+
+  Byte Positions                   Description
+  ---------------------------------------------------------------------
+   2 -  7  IMAGE_ID: this field is a six-character string to identify a 
+           Viking Orbiter image.  The first three characters represent
+           the orbit number. The fourth character is either an A for 
+           Viking Orbiter 1, a B for Viking Orbiter 2, or an S for the 
+           Viking Orbiter 1 Survey Mission.  The letters C and D is 
+           used for images acquired by Viking Orbiter 1 and 2, 
+           respectively, before orbit insertion.  The letter X is used
+           for Viking Orbiter 1 images when more than 100 images were 
+           taken in one orbit.  The last two characters represent the 
+           sequence number of the image within that orbit.
+
+  10 - 19  IMAGE_NUMBER: The image number is a value derived from the 
+           spacecraft clock start count.  It is also known as the
+           FSC (frame start count), and is a commonly used identifier 
+           for a Viking Orbiter image.
+
+  21 - 32  Camera angle - declination in (degrees) EME1950
+           of the pointing direction of the optical axis of the 
+           camera.
+
+  34 - 44  Camera angle - right ascension in (degrees) EME1950
+           of the pointing direction of the optical axis of the
+           camera.
+
+  46 - 56  Camera angle - twist in (degrees) EME1950 is the
+           picture rotation angle about line of boresight.
+
+  58 - 65  Spacecraft to target X-component vector EME1950
+
+  67 - 74  Spacecraft to target Y-component vector EME1950
+
+  76 - 83  Spacecraft to target Z-component vector EME1950
+
+  85 - 93  Planet angles - declination (degrees) EME1950
+
+  95 -103  Planet angles - right ascension (degrees) EME1950
+
+ 105 -113  Planet angles - spin EME1950
+
+ 115 -126  Sun to target X-component vector (EME1950)
+
+ 128 -139  Sun to target Y-component vector (EME1950)
+
+ 141 -152  Sun to target Z-component vector (EME1950)
+
+ 154 -168  Julian day when the image was acquired.
+
+ 171 -193  The time when the image was acquired, in the format 
+           yyyy-mm-ddThh:mm:ss.ssZ.  'yyyy' = year, 'mm' = month,
+           'dd' = day of month, 'hh' = hour, 'mm' = minute, 
+           'ss.ss' = seconds. The time system is Universal Time (UTC).
+
+
+14 -   ACKNOWLEDGEMENTS
+
+The National Aeronautics and Space Administration is charged with the
+responsibility for coordination of a program of systematic exploration
+of the planets by U.S. spacecraft. To this end, it finances spaceflight
+missions and data analysis and research programs administered and
+performed by numerous institutions. The Geological Survey of the U.S.
+Department of the Interior is the agency that performs most of the
+mapping in support of NASA's program of planetary exploration and
+scientific research.
+
+The digital Mars maps contained in these volumes were compiled by
+the U.S. Geological Survey (USGS) under funding provided by NASA
+through its Geology and Geophysics Program at NASA headquarters,
+Washington, DC, and through the Mars Observer Project administered
+by the Jet Propulsion Laboratory, Pasadena, California. NASA's
+Planetary Data System provided the guidance and standards required
+to manufacture and distribute the optical disks containing this
+MDIM of Mars.
+
+Compilation of the Mars digital color models was performed at USGS under
+the direction of Alfred S. McEwen and Laurence A. Soderblom, Principal
+Investigator and Co-Investigators, respectively. Data processing was
+performed by Tammy Becker, Ella Lee, and Jody Swann. The design, layout,
+and production of the CDROMs were performed by E.M. Eliason and A.
+Allison at the USGS, and M. Martin and J. Hyon at JPL.
+
+
+15 -  REFERENCES
+
+1.  Snyder, C. W., 1977. The Missions of the Viking Orbiters, J.  
+         Geophys. Res., 82, p. 3971-3983.
+
+2.  Snyder, C. W., 1979. The Extended Mission of Viking, J.
+     Geophys. Res., 84, p. 7917-7933.
+
+3.  Benesh, M., and T. Thorpe, 1976. Viking Orbiter 1975 visual  
+     imaging subsystem calibration report, JPL Document 611-125,
+     Jet Propulsion Laboratory, Pasadena, Ca.
+
+4.  Klaasen, K. P., T. E. Thorpe, and L. A. Morabito, 1977.
+     Inflight performance of the Viking visual imaging subsystem,
+     Applied Optics, 16, p. 3158-3170.
+
+5.  Wellman, J. B., F. P. Landauer, D. D. Norris, and T. E. Thorpe,
+     The Viking Orbiter visual imaging subsystem, J. Spacecr. 
+     Rockets, 13, p. 660-666, 1976.
+
+6. Batson, R.M., 1987, Digital cartography of the planets: new   
+     methods, its status, and its future:  Photogrammetric Engineering
+     and Remote Sensing, vol. 53, no. 9, p. 1211-1218.
+
+7. Batson, R.M., 1990, Cartography, in Greeley, Ronald, and 
+     Batson, R.M., eds, Planetary Mapping: New York, Cambridge
+     University Press, p. 60-95.
+
+8. Batson, R.M., 1990, Appendix I: Map formats and projections
+     used in planetary cartography, in Greeley, Ronald, and Batson,
+     R.M., eds, Planetary Mapping: New York, Cambridge University
+     Press, p. 261-276.
+
+9. Batson, R.M., 1990, Appendix III: Digital planetary
+     cartography, in Greeley, Ronald, and Batson, R.M., eds, Planetary
+     Mapping: New York, Cambridge University Press, p. 289-287.
+
+10. Clark, David, 1923. Plane and geodetic surveying for
+     engineers,  vol. 2, higher surveying [5th Ed., 1963, Revised by
+     Clendinning, James]. Constable & Co. Ltd., London, p. 599-600.
+
+11. Johnson, T.V., L.A. Soderblom, J.A. Mosher, G.E. Danielson,
+     A.F. Cook, and P. Kupferman, 1983. Global multispectral mosaics
+     of the icy Galilean satellites.  Journal of Geophysical Research,
+     vol. 88, no. B-7, p. 5789-5805.  15. Kieffer, H.H., P.A. Davis,
+     and L.A. Soderblom, 1981. Mars' global properties: Maps and
+     applications. Proceedings of Lunar and Planetary Science
+     Conference XII, Houston, Texas, March 16-20, 1981, p. 1395-1417.
+
+12. Pettengill, Gordon H., Donald B. Campbell, and Harold
+     Masursky, 1980.  The surface of Venus.  Scientific American, vol.
+     243,  no. 2, p. 54-65.
+
+13. Soderblom, L.A., Kathleen Edwards, E.M. Eliason, E.M.
+     Sanchez, and M.P. Charette, 1978. Global color variations on the
+     Martian surface. Icarus, vol. 34, p. 446-464.
+
+14. Planetary Cartography Working Group, 1984.  Planetary
+     Cartography in the Next Decade (1984-1994).  National Aeronautics
+     and Space Administration Special Publication 475, 71 p.
+
+15. Portable Bit Map (PBM) Plus package was developed by Jef
+     Poskanzer, e-mail: jef@well.sf.ca.us
+
+16. The Image Alchemy program was developed by Handmade Software Inc.      
+     15951 Los Gatos Blvd., Suite 17, Los Gatos, CA 95032; 
+     e-mail: hsi@netcom.com.
+
+17. Planetary Image Cartography System (PICS), Unpublished
+     Manual,  Branch of Astrogeology, U. S. Geological Survey,
+     Flagstaff, Az., 1987.  PICS is an integrated computerized system
+     for the systematic reduction, display, mapping, and analysis of
+     planetary image data.
+
+18. LaVoie, S., C. Avis, H. Mortensen, C. Stanley, and L. Wainio, VICAR
+      - User's Guide, JPL Document D-4186, Jet Propulsion Laboratory,
+      Pasadena, Ca., 1987.
+
+19. Davis, R. L., June 1990. Specification for the Object
+     Description Language, Version 2.0; Available from the PDS, Jet
+     Propulsion Laboratory, Pasadena, Ca.
+
+20. Cribbs, M., and Wagner, D., May, 1991. Planetary Data System
+     Data Preparation Workbook; vols. 1 and 2, JPL Document 7669, Jet
+     Propulsion Laboratory, Pasadena, Ca.
+
+21. VAX integers, as storage units in data files, are configured
+     in  "least significant byte first" order.  This is the order for
+     integer values used by VAX and IBM PC computer systems.  Users 
+     of other computer architectures (IBM Mainframes, Macintosh,  SUN,
+     and Apollo) may need to swap the high and low byte  positions for
+     16-bit integer data.  For 32-bit integer data,  swap byte pairs 1
+     and 4, and 2 and 3. For example, hexadecimal  value AA BB CC DD
+     becomes DD CC BB AA.
+
+22. Information processing -- Volume and file structure of CDROM 
+     for information interchange, ISO/DIS document number 9660, 
+     International Organization for Standardization, 1 Rue de 
+     Varembe, Case Postale 56, CH-1121 Geneva 20, Switzerland,  1987.
+
+23. NAIF SPICE TOOLKIT: A software package for spacecraft navigation,
+     viewing geometry, and planetary ephemerides. Contact: Chuck Acton,
+     Mail Stop 301-125L, Jet Propulsion Laboratory, 4800 Oak Grove Drive,
+     Pasadena, CA 91109; Span: NAIF::CHA, e-mail: cha@naif.jpl.nasa.gov
+
+
+
+            APPENDIX A - ISO VOLUME AND DIRECTORY STANDARD
+
+
+A.1 - VOLUME AND DIRECTORY STRUCTURES
+
+The volume and directory structure of the CDROM conforms to the standard
+specified by the International Organization for Standardization (ISO)
+[22]. This standard is known as the ISO-9660 standard. This CDROM disk
+conforms to the first level of interchange, level-1.
+
+
+A.2 - FILE STRUCTURE
+
+The files on this CDROM are of two types: fixed-length record files, and
+stream format files. The characteristics of each record type are
+described in the following sections.
+
+
+A.2.1 - FIXED LENGTH RECORDS
+
+Records in a file with fixed-length records are all the same length, and
+there is no embedded information to indicate the beginning or end of a
+record. Fixed-length records allow any part of a file to be accessed
+directly without the need to pass through the file sequentially. Image
+files with the file name extension '.IMG' and table files with the file
+name extension '.TAB' are fixed-length record files. The starting byte
+of any record can be calculated as follows:
+
+           offset = (record-1)*length
+
+    where: offset = offset byte position of record from start of file
+           record = desired record to access
+           length = length of record in bytes
+
+
+A.2.3 - STREAM FILES
+
+Stream files typically are used to store ASCII text such as
+documentation and program source code. A stream file may have records of
+varying lengths. The end of a record is marked by two bytes containing
+the ASCII carriage return and line feed characters (hex 0D and 0A).
+Stream files are different from variable-length record files, which
+store the record size in the first two bytes of each record.
+
+On this CDROM, the documentation files, detached label files, and
+software source code files are in stream format. They may be printed or
+displayed on a terminal. Their file names have the extensions
+'.TXT','.LBL', '.C', or '.FOR'. 
+
+A.2.4 - EXTENDED ATTRIBUTE RECORD
+
+An extended attribute record (XAR) contains information about a file's
+record format, record attributes, and record length. The extended
+attribute record is not considered part of the file and is not seen by
+programs accessing a file with high-level I/O routines. Not all computer
+operating systems support extended attribute records. Those that do not
+will simply bypass the XAR when accessing a file.
+
+
+
+    APPENDIX B - SYNTACTIC RULES OF KEYWORD ASSIGNMENT STATEMENTS
+
+
+
+The label area of the image files use the syntactic rules of the Object
+Definition Language (ODL) adopted by the PDS. This appendix provides
+only a very brief description of the syntax of the ODL language. For a
+complete description of the ODL language see Davis [19], and the
+Planetary Data System Data Preparation Workbook - Volume 1 [20].
+
+A keyword assignment statement, made up of a string of ASCII characters,
+contains the name of an attribute and the value of that attribute. A
+keyword assignment statement has the general form shown below:
+
+         name  = value  [/* comment */]
+
+The format of each keyword assignment statement is essentially
+free-form; blanks and tabs are typically ignored by a parsing routine. 
+An attribute name is separated from its value by the equal symbol (=).
+Each keyword assignment statement may optionally be followed by a 
+comment that more completely describes the entry. The comment begins
+with a slash character followed by an asterisk character (/*), and
+terminates with an asterisk character followed by a slash character
+(*/). Comments may also exist on a line without a keyword assignment
+statement. Note that the brackets indicate that the comment and its
+delimiter are optional. The MDIM labels have carriage-return and
+line-feed characters following the "name = value" sequence. The ODL
+language does not require a cr/lf sequence at the end of each keyword
+assignment statement but are optional in order to facilitate printing of
+keywords.
+
+Values associated with an attribute can be integers, real numbers,
+unitized real numbers, literals, times, or text strings.
+
+
+B.1 - INTEGER NUMBERS
+
+An integer value consists of a string of digits preceded optionally by a
+sign (+ or -). Non-decimal based integers are expressed according to the
+Ada language convention: b#nnnnnnn#, where 'b' represents the base of
+the number, and '#' delimits the number 'nnnnnnnn'. For example, the
+number expressed as 2#111# represents the binary number 111, which is 7
+in base 10.
+
+
+B.2 - REAL NUMBERS
+
+A real number has the form: [s]f.d[En] where:
+
+     s = optional sign (+ or -)
+     f = one or more digits specify the integral portion of the number.
+     d = one or more digits specify the fraction portion of the number.
+     n = an optional exponent expressed as a power of 10.
+
+A unitized real number is a real number with an associated unit of
+measurement. The units for a real number value are enclosed in angle
+brackets (< >). For example, 1.234 <SECONDS> indicates a value of 1.234
+seconds.
+
+
+
+
+B.3 - DATES AND TIMES
+
+A special form of a numeric field is a time value. The following format
+of date/time representations is used:
+
+         yyyy-mm-ddThh:mm:ss.fffZ
+where:   yyyy    = year
+         mm      = month
+         dd      = day of month
+         hh      = hour
+         mm      = minute
+         ss      = seconds
+         fff     = fraction of a second
+         Z       = The Z qualifier indicates the time is expressed
+                   as Universal Time Corrected (UTC).
+
+
+B.4 - LITERAL VALUES
+
+A literal value is an alphanumeric string that is a member of a set of
+finite values. It can also contain underscore character (_). A literal
+value must be delimited by double or single quote characters (" or ') if
+it does not begin with a letter (A-Z). If the literal begins with a
+letter, it does not have to be enclosed in single quotes. If a literal
+appears within quotes, the literal may contain any printable ASCII
+character. For example, the literal value "1:1" is legal as long as the
+single or double quoted format is used. A keyword assignment statement
+using a literal value might look like the examples shown below:
+
+         DATA_SET_ID = "VO1/VO2-M-VIS-5-DIM-V1.0"
+         TARGET_NAME = MARS
+
+B.5 - TEXT CHARACTER STRINGS
+
+Text strings can be any length and can consist of any sequence of
+printable ASCII characters including tabs, blanks, carriage-control, or
+line-feed characters. Text strings are enclosed in double quote
+characters. If the text string comprises several lines, it continues
+until a double quote character is encountered and includes the
+carriage-control and line-feed characters.
+
+
+
+
+       APPENDIX C - KEYWORD ASSIGNMENTS FOR IMAGE FILES
+
+
+CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL
+    This keyword provides a mechanism for image files on this CDROM to
+    conform to the SFDU (Standard Formatted Data Unit) convention. The
+    first 20 bytes identify the file as a CCSDS SFDU entity. The next
+    20 bytes identify the file as a registered product of the JPL SFDU
+    control authority. The components of both SFDU labels are the
+    control authority identifier (characters 1-4), the version
+    identifier (character 5), the class identifier (character 6), a
+    spare field (characters 7-8), a format identifier  (characters
+    9-12), and a length field indicator (characters 13-20). The version
+    identifier indicates a "Version-3" label, which allows files to be
+    delimited by an end-of-file marker, rather than requiring a byte
+    count to be embedded in the label. The keyword conforms to standard
+    PDS keyword syntax and the value associated with this keyword will
+    always be SFDU_LABEL.
+
+
+RECORD_TYPE          = FIXED_LENGTH
+    This keyword defines the record structure of the file. The MDIM
+    image files are always fixed-length record files. This keyword 
+    always contains the value FIXED_LENGTH.
+
+
+RECORD_BYTES         = xxxx
+    Record length in bytes for fixed length records.  
+
+
+FILE_RECORDS         = xxxx
+    Total number of records contained in the file.
+
+
+LABEL_RECORDS        = xxxx
+    Number of records in the label area of the image file.
+
+
+^IMAGE_HISTOGRAM     = xx
+    The (^) character prefixing a keyword indicates that the keyword is
+    a pointer to the starting record of a data object in the file.  In
+    this case, the keyword is the pointer to the Image Histogram Object.
+    The keyword value indicates the starting record in the file for the
+    Image Histogram Object.  The number of records found in an object is
+    determined by differencing the value of the pointer keyword from the
+    value of the next pointer. 
+
+
+^IMAGE               =  xx
+    The keyword value points to the starting fixed-length record in
+    the file for the Image Object.
+
+
+DATA_SET_ID          = "VO1/VO2-M-VIS-5-DIM-V1.0"
+    The PDS defined data set identifier for the MDIM image data 
+    products produced from the Viking Orbiter Imaging System.
+
+
+SPACECRAFT_NAME      = {VIKING_ORBITER_1, VIKING_ORBITER_2}
+    The spacecraft name identifies the spacecraft that acquired the
+    image data. For the Multi-look Color MDIM images, this keyword
+    contains the values VIKING_ORBITER_1 or VIKING_ORBITER_2.
+
+
+TARGET_NAME          = MARS
+    Observation target of the image. This value is always MARS for the
+    MDIM digital image products.
+
+IMAGE_TIME           = yyyy-mm-ddThh:00:00
+    Time at which images in mosaic were acquired, rounded to the nearest
+    hour. The Color MDIM is compiled for many images in an orbit so
+    there is no instantaneous time at which the imaging was acquired.
+    Thus times are given to the nearest hour of acquisition.
+
+ORBIT_NUMBER         = xxxx
+     Orbit number of when images in a color mosaic were acquired.
+
+IMAGE_ID             = vwxxyzzz-ccc-ooos
+    This is the unique image identification code for the MDIM image. The
+    IMAGE_ID is the same as the name given to the file.
+
+                v   =  Type of image file
+                        M - Mars Digital Image Map
+                        T - Mars Digital Topographic Model
+                        S - Shaded Relief Airbrush Map
+                w   =  Resolution code for image file
+                        C  - 1/4   degrees/pixel
+                        E  - 1/16  degrees/pixel
+                        G  - 1/64  degrees/pixel
+                        I  - 1/256 degrees/pixel
+                xx  =  Central latitude value rounded
+                       down to nearest whole latitude
+                y   =  North or South latitude
+                        N - North latitude
+                        S - South latitude
+                zzz =  Central longitude value rounded 
+                       down to nearest whole longitude
+                ccc =  color filter of image
+                       RED= red filter, GRN= green filter, 
+                       VIO= violet filter, SGR= synthetic green images
+                ooo =  Orbit of mission phase
+                  s =  Spacecraft
+                       A= Viking 1
+                       S= Viking 1, survey mission phase
+                       B= Viking 2
+
+INSTRUMENT_NAME      = {VISUAL_IMAGING_SUBSYSTEM_CAMERA_A, 
+                        VISUAL_IMAGING_SUBSYSTEM_CAMERA_B}
+    The name of the cameras used to acquire the image. This keyword
+    will always contain the values VISUAL_IMAGING_SUBSYSTEM_CAMERA_A
+    and _B. 
+
+NOTE                 = "description"
+    This field provides the product name, scale, and latitude and 
+    longitude of the center of the image.
+
+GEOMETRY_SOURCE_IMAGE_ID = xxxxxx
+    Image ID of image used to define the geometry of the mosaic.
+    Geometry from this frame used to define the emission, incidence,
+    and phase angle of the solar rays.
+
+EMISSION_ANGLE = xxxxxxxx
+    Angle between the surface normal vector at the center of the
+    tile to the spacecraft.
+
+INCIDENCE_ANGLE = xxxx
+    Angle of the lighting at the center of the tile.
+
+PHASE_ANGLE     = xxxxx
+    Angle between the spacecraft viewing position and incident solar
+    light. It is the angle between a vector from the center of the image
+    to the sun and a vector from the center of the image to the
+    spacecraft.
+
+OBJECT                 = IMAGE_HISTOGRAM
+  ITEMS                = 256
+  ITEM_TYPE            = VAX_INTEGER
+  ITEM_BITS            = 32
+END_OBJECT             = IMAGE_HISTOGRAM
+    This keyword sequence identifies the Image Histogram Object.  The
+    object contains 256 elements, stored in VAX integer format [21].
+    Each element has 32 bits.  The records associated with an object are
+    concatenated together to make the object.  Some objects do not
+    completely fill the records that make up the object.
+
+
+OBJECT                 = IMAGE
+  LINES                = xxxx
+  LINE_SAMPLES         = xxxx
+  SAMPLE_TYPE          = UNSIGNED_INTEGER
+  SAMPLE_BITS          = 8
+  SAMPLE_BIT_MASK      = 2#11111111#
+  CHECKSUM             = xxxxxxxxx
+  SCALING_FACTOR       = xxxx
+  OFFSET               = xxxx
+  STRETCHED_FLAG       = FALSE
+  STRETCH_MINIMUM      = (xxx,xxx)
+  STRETCH_MAXIMUM      = (xxx,xxx)   
+END_OBJECT             = IMAGE
+    This keyword sequence describes the image object. The meaning of
+    the keywords with this sequence area as follows:
+       LINES = xxxx
+           Number of image lines in the image object.  
+       LINE_SAMPLES  = xxxx
+           Number of samples in each image line.  
+       SAMPLE_TYPE = UNSIGNED_INTEGER
+           Data type for pixels values, always unsigned integers. 
+       SAMPLE_BITS = 8
+           Number of bits in a pixel, which are 8-bit values in the
+           range 0 to 255. 
+       SAMPLE_BIT_MASK  = 2#11111111#
+           Active bits in an image sample.  The number is expressed as a
+           base 2 value in the Ada language number base convention.  The
+           keyword value consists of a string of 1's or 0's.  The value
+           1 indicates a bit is active and a 0 indicates a bit is not in
+           use.  For example, SAMPLE_BIT_MASK = 2#11111111# indicates
+           all bits active.
+       CHECKSUM = xxxxxxxxxx
+           The sum of all the pixel values within the image. This
+           parameter can be used to verify the image data.
+       SCALING_FACTOR = xxxx
+       OFFSET         = xxx
+           Scaling used to convert from DN to I/F (see section 5.4)
+           I/F = SCALING_FACTOR*DN + OFFSET
+       STRETCHED_FLAG = FALSE
+       STRETCH_MINIMUM = (aaa,bbb)
+       STRETCH_MAXIMUM = (ccc,ddd)
+           Specifies the ideal stretch to apply to the image in order
+           to create an 'ideal' color display. The low-end DN value
+           'aaa' is mapped to 'bbb', and the high-end DN value 
+           'ccc' is mapped to 'ddd'.
+           
+
+OBJECT                 = IMAGE_MAP_PROJECTION_CATALOG
+  ^DATA_SET_MAP_PROJECTION_CATALOG = "DSMAPDIM.LBL"
+  MAP_PROJECTION_TYPE  = SINUSOIDAL
+  MAP_RESOLUTION       = x<PIXEL/DEG>
+  MAP_SCALE            = x.xxxxx<KM/PIXEL>
+  MAXIMUM_LATITUDE     = x.xxxxx
+  MINIMUM_LATITUDE     = x.xxxxx
+  MAXIMUM_LONGITUDE    = x.xxxxx
+  MINIMUM_LONGITUDE    = x.xxxxx
+  X_AXIS_PROJECTION_OFFSET = x.xxxxx
+  Y_AXIS_PROJECTION_OFFSET = x.xxxxx
+  A_AXIS_RADIUS        = 3393.40
+  B_AXIS_RADIUS        = 3393.40
+  C_AXIS_RADIUS        = 3375.73
+  FIRST_STANDARD_PARALLEL = "N/A"
+  SECOND_STANDARD_PARALLEL = "N/A"
+  POSITIVE_LONGITUDE_DIRECTION = WEST
+  CENTER_LATITUDE      = 0.00000
+  CENTER_LONGITUDE     = x.xxxxx
+  REFERENCE_LATITUDE   = "N/A"
+  REFERENCE_LONGITUDE  = "N/A"
+  X_AXIS_FIRST_PIXEL   = 1
+  Y_AXIS_FIRST_PIXEL   = 1
+  X_AXIS_LAST_PIXEL    = xxxx
+  Y_AXIS_LAST_PIXEL    = xxxx
+  MAP_PROJECTION_ROTATION = "N/A"
+END_OBJECT             = IMAGE_MAP_PROJECTION_CATALOG
+    This keyword sequence describes the cartographic keywords that 
+    define the mapping parameters of the image.
+       ^DATA_SET_MAP_PROJECTION_CATALOG = "DSMAPDIM.LBL"
+           This keyword points to a separate file (DSMAPDIM.LBL) on
+           the CDROM that contains supplemental and nonessential
+           keyword descriptors for map projection parameters. By
+           convention, supplemental labels are found in the LABEL
+           directory.
+       MAP_PROJECTION_TYPE  = SINUSOIDAL
+           This element identifies the type of projection used in the
+            map. This value is always SINUSOIDAL for the MDIM products
+            and signifies a Sinusoidal Equal-Area projection.
+       MAP_RESOLUTION       = x<PIXEL/DEG>
+           This element identifies the scale of the MDIM image file. The
+           resolution is defined in pixels per degree.
+       MAP_SCALE            = x.xxxxx<KM/PIXEL>
+           This element identifies the scale of the MDIM image file
+           and is defined in kilometers per pixel.
+       MAXIMUM_LATITUDE     = x.xxxxx
+           This element specifies the northern most latitude in the MDIM
+           image file.
+       MINIMUM_LATITUDE     = x.xxxxx
+           This element specifies the southern most latitude in the MDIM
+           image file.
+       MAXIMUM_LONGITUDE    = x.xxxxx
+           This element specifies the left-most longitude of the image
+           file.
+       MINIMUM_LONGITUDE    = x.xxxxx
+           This element specifies the right-most longitude of the image
+           file.
+       X_AXIS_PROJECTION_OFFSET = x.xxxxx
+           This element provides the line offset value of the map
+           projection origin position from line and sample 1,1. Note
+           that the positive direction is to the right and down. See
+           Appendix E for the use of this element.
+       Y_AXIS_PROJECTION_OFFSET = x.xxxxx
+           This element provides the sample offset value of the map
+           projection origin position from line and sample 1,1. Note
+           that the positive direction is to the right and down. See
+           Appendix E for the use of this element. 
+       A_AXIS_RADIUS        = 3393.40
+       B_AXIS_RADIUS        = 3393.40
+       C_AXIS_RADIUS        = 3375.73
+           These elements provide the semi-major axis (A), intermediate
+           axis (B), and semi-minor axis of the ellipsoid that defines
+           the shape of the body defined in kilometers. These values
+           are always 3393.40, 3393.40, and 3375.73 respectively.
+       FIRST_STANDARD_PARALLEL = "N/A"
+           This element is a mapping transformation parameter. The
+           Sinusoidal Equal-Area projection does not used this element.
+       SECOND_STANDARD_PARALLEL = "N/A"
+           This element is a mapping transformation parameter. The
+           Sinusoidal Equal-Area projection does not used this element.
+       POSITIVE_LONGITUDE_DIRECTION = WEST
+           This element identifies the direction of longitude
+           (EAST,WEST) for a planet. The IAU definition for direction
+           of positive longitude is adopted. For MARS this direction
+           is WEST.        
+       CENTER_LATITUDE      = 0.00000
+           This element identifies the center latitude of the
+            projection. For Sinusoidal Equal-Area projections, this
+            value is zero.
+       CENTER_LONGITUDE     = x.xxxxx
+           This element identifies the center longitude of the
+           projection. Each MDIM image file has its own center
+           longitude. See Appendix E for the use of this mapping
+           parameter.
+       REFERENCE_LATITUDE   = "N/A"
+           This element is a mapping transformation parameter. The
+           Sinusoidal Equal-Area projection does not used this element.
+       REFERENCE_LONGITUDE  = "N/A"
+           This element is a mapping transformation parameter. The
+           Sinusoidal Equal-Area projection does not used this element.
+       X_AXIS_FIRST_PIXEL   = 1
+           This element provides the x-dimension index to be assigned
+           the first pixel that was physically recorded at the
+           beginning of the image array. This value always 1 for MDIM
+           image files.
+       Y_AXIS_FIRST_PIXEL   = 1
+           This element provides the y-dimension index to be assigned
+           the first pixel that was physically recorded at the
+           beginning of the image array. This value always 1 for MDIM
+           image files.
+       X_AXIS_LAST_PIXEL    = xxxx
+           This element provides the x-dimension index to be assigned
+           the last pixel that was physically recorded at the end of
+           the image array. For MDIM image files, this element equals
+           the number of lines in the image.
+       Y_AXIS_LAST_PIXEL    = xxxx
+           This element provides the y-dimension index to be assigned
+           the last pixel that is physically recorded at the end of
+           the image array. For MDIM image files, this element equals
+           the number of samples in the image.
+       MAP_PROJECTION_ROTATION = "N/A"
+           This element is a mapping transformation parameter. The
+           Sinusoidal Equal-Area projection does not used this element.
+   
+END
+    The keyword entries with a line that contains only the word
+    END. Bytes in the label area after the END statement are ignored. 
+
+
+
+
+             APPENDIX D - GEOMETRIC DEFINITION OF A PIXEL
+
+
+
+
+The purpose here is to describe the spatial or geometric definition of a
+pixel used in the generation and utilization of the MDIM digital image
+products. A broad range of factors enters into this question. For
+example, is a pixel to be conceived of as a point or as an area? The
+point definition would be most convenient, for instance, when dealing
+with coordinate grid overlays. This results in an odd number of pixels
+across a map that has an even number of spatial increments. For changing
+scales (for instance by even powers of 2) this definition becomes a
+problem. In this case it makes more sense to treat a pixel as a finite
+area. Then an even number of pixels covers an even number of spatial
+increments and decreasing/increasing scales by a power of 2 becomes
+trivial. However, grids now fall between pixels, at least in a
+mathematical sense. Their treatment in the generation of hardcopy
+therefore becomes an issue.
+
+It was decided that the area concept of a pixel was the better choice;
+we would have to live with the asymmetries introduced in things like
+cartographic grids. There are various solutions: (1) use two pixels for
+the width of a grid line, (2) stagger grid pixels back-and-forth across
+the mathematical position, (3) use a convention whereby grid lines are
+systematically drawn offset from their mathematical position.
+
+The next issue is the conversion between integer coordinates and real
+coordinates of the pixel mesh. We adopt the convention that pixels are
+numbered (or named if you like) beginning in the upper left corner with
+line 1, sample 1 (pixel 1,1); lines increase downward; samples increase
+to the right. (Even this is not a universal standard; some astronomical
+systems begin, perhaps more logically, in the lower left corner.) There
+are three reasonable possibilities for aligning a real, or floating
+point, coordinate system with the pixel mesh: the coordinate 1.0, 1.0
+could be the upper left, the center, or the lower right of pixel 1,1.
+The convention historically used for geometric calibration files (reseau
+positions) and also used in the Multimission Image Processing Laboratory
+at the Jet Propulsion Laboratory, is that the center of the pixel is
+defined as its location in real coordinates. In other words, the real
+coordinates of the center of pixel 1,1 are 1.0, 1.0. The top left corner
+of the pixel is .5, .5 and the bottom right corner is 1.49999 ...,
+1.499999. The bottom and right edge of a pixel is the mathematically
+open boundary. This is the standard adopted in the MDIM image products.
+
+Cartographic conventions must also be defined. The map projection
+representation of a pixel is mathematically open at the increasing
+(right and lower) boundaries, and mathematically closed at its left and
+upper boundaries. An exception occurs at the physical limits of the
+projection; the lower boundary of the lowest pixel is closed to include
+the limit of the projection (e. g. the south pole). Figure D.1 shows the
+coordinates of Pixel 1,1.
+
+
+              
+
+                 
+                 Figure D.1 - Coordinates of Pixel 1,1
+
+                  longitude  180.0         179.00001
+                              |               |
+                  latitude    |               |   line
+                     90.0  -- ----------------- -- .5
+                              |               |
+                              |               |
+                              |               |
+                              |               |
+                              |       +       |
+                              |   (1.0,1.0)   |
+                              |               |
+                              |               |
+                              |               |
+                  89.00001 -- ----------------- -- 1.49999
+                              |               |
+                              |               |
+                     sample  .5            1.49999
+
+
+Finally, we must select a convention for drawing grid lines for various
+cartographic coordinates on planetary images and maps. The convention
+used for MDIM image products is that a grid line is drawn in the pixels
+that contain its floating point value until the open boundary is reached
+and then an exception is made so that the outer range of latitude and
+longitude will always appear on the image. This means, in the example
+given above, a 10 degree grid would start on pixel 1 and be drawn on
+every tenth pixel (11,21,31,...) until the open boundary is reached.
+Then the line would be drawn on the pixel previous to the open boundary
+(line 180 instead of line 181, or sample 360 instead of 361).
+
+
+To summarize, the MDIM conventions are:
+
+1) Pixels are treated as areas, not as points.
+
+2) The integer coordinates begin with 1,1 (read "line 1, sample 1") for
+the upper-left-most pixel; lines increase downward; samples increase to
+the right.
+
+3) Integer and floating point image coordinates are the same at the
+center of a pixel.
+
+4) Grids will be drawn in the pixels that contain the floating point
+location of the grid lines except for open boundaries, which will be
+drawn to the left or above the open boundary.
+
+
+
+
+
+           APPENDIX E - SINUSOIDAL EQUAL-AREA PROJECTION EQUATION
+
+
+
+
+MDIM's are presented in a Sinusoidal Equal-area map projection. In this
+projection, parallels of latitude are straight lines, with constant
+distances between equal latitude intervals. Lines of constant longitude
+on either side of the projection meridian are curved since longitude
+intervals decrease with the cosine of latitude to account for their
+convergence toward the poles. This projection offers a number of
+advantages for storing and managing global digital data; in particular,
+it is computationally simple, and data are stored in a compact form. 
+ 
+The Sinusoidal Equal-area projection is characterized by a projection
+longitude, which is the center meridian of the projection, and a scale,
+which is given in units of pixels/degree. The center latitude for all
+MDIM's is the equator. Each MDIM file contains its own central meridian.
+
+The transformation from latitude and longitude to line and sample for
+planets with a direction of positive longitude of WEST is given by the
+following equations:
+
+  line = INT(X_AXIS_PROJECTION_OFFSET - lat*MAP_RESOLUTION + 1.0)
+
+  sample = INT(Y_AXIS_PROJECTION_OFFSET - (lon - CENTER_LONGITUDE)*
+       MAP_RESOLUTION*cos(lat) + 1.0)
+                       
+                    
+Note that integral values of line and sample correspond to center of a
+pixel. Lat and lon are the latitude and longitude of a given spot on the
+surface. 
+ 
+INT is the fortran equivalent floating point to integer function. This
+function converts floating point values to integer by truncation of the
+fractional part of the floating point value.
+
+X_AXIS_PROJECTION_OFFSET is the line number minus one on which the map
+projection origin occurs. The map projection origin is the intersection
+of the equator and the projection longitude. The value of
+X_AXIS_PROJECTION_OFFSET is positive for images starting north of the
+equator and is negative for images starting south of the equator. The
+X_AXIS_PROJECTION_OFFSET is found in the labels of each image file.
+Y_AXIS_PROJECTION_OFFSET is the nearest sample number to the left of the
+projection longitude. The value of Y_AXIS_PROJECTION_OFFSET is positive
+for images starting to the west of the projection longitude and is
+negative for images starting to the east of the projection longitude.
+The Y_AXIS_PROJECTION_OFFSET is found in the labels of each image file. 
+
+CENTER_LONGITUDE is the value of the projection longitude, which is the
+longitude that passes through the center of the projection. The
+CENTER_LONGITUDE is found in the labels of each image file.
+            
+MAP_RESOLUTION is the number of pixels per degree on the planet. The
+values for MDIM products will be 256, 64, 16, and 4. The MAP_RESOLUTION
+is found in the labels of each image file.
+
+There are four PDS parameters that specify the latitude and longitude
+boundaries of an image. MAXIMUM_LATITUDE and MINIMUM_LATITUDE specify
+the latitude boundaries of the image, and MAXIMUM_LONGITUDE and
+MINIMUM_LONGITUDE specify the longitudinal boundaries of the map.
+
+A special note is required for the MAXIMUM_LONGITUDE and
+MINIMUM_LONGITUDE parameters that define the boundaries of an image. The
+MAXIMUM_LONGITUDE will be greater than the MINIMUM_LONGITUDE except when
+the image map crosses the zero meridian. When the zero meridian is
+contained in the image area, then the MINIMUM_LONGITUDE will be greater
+than the MAXIMUM_LONGITUDE. When this occurs, it may be convenient for a
+computer algorithm that uses these parameters to subtract 360.0 degrees
+from the MINIMUM_LONGITUDE. For example, if an image had longitude
+boundary limits from 10.0 degrees longitude (MAXIMUM_LONGITUDE) to 350.0
+degrees longitude (MINIMUM_LONGITUDE) then it is implied that the zero
+meridian is in the middle of the image file. One could think of the
+longitude limits of the file going from 10.0 to -10.0 degrees longitude.
+
+For global maps that cover the entire 360 degrees of a planet, the
+MINIMUM_LONGITUDE will equal the MAXIMUM_LONGITUDE indicating that the
+"left" edge of the map has the same longitude as the "right" edge of the
+map.
