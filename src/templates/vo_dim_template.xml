@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1J00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1I00_1210.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1J00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+xmlns:cart="http://pds.nasa.gov/pds4/cart/v1" xmlns:proc="http://pds.nasa.gov/pds4/proc/v1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation=
+"http://pds.nasa.gov/pds4/pds/v1     https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.xsd
+http://pds.nasa.gov/pds4/disp/v1     https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1J00_1510.xsd
+http://pds.nasa.gov/pds4/proc/v1     https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1I00_1210.xsd
+http://pds.nasa.gov/pds4/cart/v1   https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1J00_1970.xsd
+">
+ <Identification_Area>
+  <logical_identifier>urn:nasa:pds:viking_orbiter_imaging:data:{product_id}</logical_identifier>
+  <version_id>1.0</version_id>
+  <title>Viking Orbiter {ftype} Image {product_id}</title>
+  <information_model_version>1.19.0.0</information_model_version>
+  <product_class>Product_Observational</product_class>
+  <Citation_Information>
+   <author_list>TBD</author_list>
+   <editor_list>TBD</editor_list>
+   <publication_year>2023</publication_year>
+   <description>
+    {description}
+   </description>
+  </Citation_Information>
+  <Modification_History>
+   <Modification_Detail>
+    <modification_date>{product_creation_time}</modification_date>
+    <version_id>1.0</version_id>
+    <description>First PDS4 version of this product.</description>
+   </Modification_Detail>
+  </Modification_History>
+ </Identification_Area>
+ <Observation_Area>
+  <Time_Coordinates>
+   {start_time}
+   <stop_date_time xsi:nil="true" nilReason="missing" />
+  </Time_Coordinates>
+  <Primary_Result_Summary>
+   <purpose>Science</purpose>
+   <processing_level>Derived</processing_level>
+   <Science_Facets>
+    <wavelength_range>Visible</wavelength_range>
+    <discipline_name>Imaging</discipline_name>
+   </Science_Facets>
+  </Primary_Result_Summary>
+  <Investigation_Area>
+   <name>VIKING</name>
+   <type>Mission</type>
+   <Internal_Reference>
+    <lidvid_reference>urn:nasa:pds:context:investigation:mission.viking::1.1</lidvid_reference>
+    <reference_type>data_to_investigation</reference_type>
+   </Internal_Reference>
+  </Investigation_Area>
+  <Observing_System>
+   {delete:no_vo1}
+   <Observing_System_Component>
+    <name>VIKING ORBITER 1</name>
+    <type>Host</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vo1::1.1</lidvid_reference>
+     <reference_type>is_instrument_host</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_vo1}
+   {delete:no_vo2}
+   <Observing_System_Component>
+    <name>VIKING ORBITER 2</name>
+    <type>Host</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vo2::1.1</lidvid_reference>
+     <reference_type>is_instrument_host</reference_type>
+    </Internal_Reference>
+    <!--TODO: i'm _pretty_ sure the 4=vo1_a, 6=vo2_a, 7=vo1_b, 8=vo2_b mapping right-->
+   </Observing_System_Component>
+   {stop:no_vo2}
+   {delete:no_vo1}
+   {delete:no_visa}
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA A</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visa.vo1::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_visa}
+   {delete:no_visb}
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA B</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visb.vo1::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_visb}
+   {stop:no_vo1}
+   {delete:no_vo2}
+   {delete:no_visa}
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA A</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visa.vo2::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_visa}
+   {delete:no_visb}
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA B</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visb.vo2::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_visb}
+   {stop:no_vo2}
+  </Observing_System>
+  <Target_Identification>
+   <name>MARS</name>
+   <type>Planet</type>
+   <Internal_Reference>
+    <lidvid_reference>urn:nasa:pds:context:target:planet.mars::1.2</lidvid_reference>
+    <reference_type>data_to_target</reference_type>
+   </Internal_Reference>
+  </Target_Identification>
+  <Discipline_Area>
+   <disp:Display_Settings>
+    <Local_Internal_Reference>
+     <local_identifier_reference>image</local_identifier_reference>
+     <local_reference_type>display_settings_to_array</local_reference_type>
+    </Local_Internal_Reference>
+    <disp:Display_Direction>
+     <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+     <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+     <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+     <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+    </disp:Display_Direction>
+   </disp:Display_Settings>
+   {delete:no_cart}
+   <cart:Cartography>
+    <Local_Internal_Reference>
+     <local_identifier_reference>image</local_identifier_reference>
+     <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+    </Local_Internal_Reference>
+    <cart:Spatial_Domain>
+     <cart:Bounding_Coordinates>
+      <cart:west_bounding_coordinate unit="deg">{west_bound}</cart:west_bounding_coordinate>
+      <cart:east_bounding_coordinate unit="deg">{east_bound}</cart:east_bounding_coordinate>
+      <cart:north_bounding_coordinate unit="deg">{max_lat}</cart:north_bounding_coordinate>
+      <cart:south_bounding_coordinate unit="deg">{min_lat}</cart:south_bounding_coordinate>
+     </cart:Bounding_Coordinates>
+    </cart:Spatial_Domain>
+    <cart:Spatial_Reference_Information>
+     <cart:Horizontal_Coordinate_System_Definition>
+      <cart:Planar>
+       <cart:Map_Projection>
+        <cart:map_projection_name>{projection_no_underscore}</cart:map_projection_name>
+        <cart:{projection}>
+         <cart:longitude_of_central_meridian unit="deg">{cen_lon}</cart:longitude_of_central_meridian>
+         <cart:latitude_of_projection_origin unit="deg">{cen_lat}</cart:latitude_of_projection_origin>
+        </cart:{projection}>
+       </cart:Map_Projection>
+       <cart:Planar_Coordinate_Information>
+        <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+        <cart:Coordinate_Representation>
+         <!-- note that 'scale' and 'resolution' look weird here b/c of inconsistencies b/w PDS3 & 4 -->
+         <cart:pixel_resolution_x unit="m/pixel">{pixel_scale_x}</cart:pixel_resolution_x>
+         <cart:pixel_resolution_y unit="m/pixel">{pixel_scale_y}</cart:pixel_resolution_y>
+         <cart:pixel_scale_x unit="pixel/deg">{pixel_resolution_x}</cart:pixel_scale_x>
+         <cart:pixel_scale_y unit="pixel/deg">{pixel_resolution_y}</cart:pixel_scale_y>
+        </cart:Coordinate_Representation>
+       </cart:Planar_Coordinate_Information>
+       <cart:Geo_Transformation>
+        <cart:upperleft_corner_x unit="m">{upleft_x}</cart:upperleft_corner_x>
+        <cart:upperleft_corner_y unit="m">{upleft_y}</cart:upperleft_corner_y>
+       </cart:Geo_Transformation>
+      </cart:Planar>
+      <cart:Geodetic_Model>
+       <cart:latitude_type>Planetographic</cart:latitude_type>
+       <cart:a_axis_radius unit="m">{a_axis_radius}</cart:a_axis_radius>
+       <cart:b_axis_radius unit="m">{b_axis_radius}</cart:b_axis_radius>
+       <cart:c_axis_radius unit="m">{c_axis_radius}</cart:c_axis_radius>
+       <cart:longitude_direction>{long_dir}</cart:longitude_direction>
+      </cart:Geodetic_Model>
+     </cart:Horizontal_Coordinate_System_Definition>
+    </cart:Spatial_Reference_Information>
+   </cart:Cartography>
+   {stop:no_cart}
+  <proc:Processing_Information>
+    <Local_Internal_Reference>
+     <local_identifier_reference>image</local_identifier_reference>
+     <local_reference_type>processing_information_to_data_object</local_reference_type>
+    </Local_Internal_Reference>
+    <proc:Process>
+     <proc:description>Conversion to PDS4 archive format.</proc:description>
+     <proc:Software>
+      <proc:name>Planetary Data Reader</proc:name>
+     </proc:Software>
+    </proc:Process>
+   </proc:Processing_Information>
+  </Discipline_Area>
+ </Observation_Area>
+ <Reference_List>
+   <Internal_Reference>
+    <lidvid_reference>urn:nasa:pds:viking_orbiter_imaging:browse:{product_id}_browse::1.0</lidvid_reference>
+    <reference_type>data_to_browse</reference_type>
+   </Internal_Reference>
+   {delete:dtm}
+   <External_Reference>
+    <reference_text>
+     Semenov, B.V. et al. Viking Orbiter Spice Files (PDS DATA_SET_ID VO1/VO2-M-SPICE-6-V1.0).
+     NAIF/Jet Propulsion Laboratory. 2008-12-03.
+     https://naif.jpl.nasa.gov/pub/naif/pds/data/vo1_vo2-m-spice-6-v1.0/
+    </reference_text>
+    <description>
+    A 2008 NAIF effort led by Boris Semenov produced a comprehensive set of
+    SPICE kernels that concatenate corrected Viking Orbiter geometry data
+    from a variety of sources. Users interested in illumination geometry and
+    ephemeris information for these tiles may wish to examine them.
+   </description>
+  </External_Reference>
+  {stop:dtm}
+  <!-- variable number of source images, so we populate them as -->
+  <!-- fully-generated Source_Product_Internal elements -->
+  {edr_references}
+  <Source_Product_External>
+   <external_source_product_identifier>{data_set_id}:{image_id}</external_source_product_identifier>
+   <reference_type>data_to_derived_source_product</reference_type>
+   <curating_facility>IMG</curating_facility>
+   <description>PDS3 version of this product.</description>
+  </Source_Product_External>
+ </Reference_List>
+ <File_Area_Observational>
+  <File>
+   <file_name>{product_id}.fits</file_name>
+   <creation_date_time>{product_creation_time}</creation_date_time>
+   <file_size unit="byte">{image_file_size}</file_size>
+   <records>{lines}</records>
+  </File>
+  <Header>
+   <offset unit="byte">0</offset>
+   <!--if we jam a whole bunch of extra stuff in the fits header, we can't-->
+   <!--hardcode this, but I expect we won't.-->
+   <object_length unit="byte">2880</object_length>
+   <parsing_standard_id>FITS 4.0</parsing_standard_id>
+  </Header>
+  <Array_2D_Image>
+   <local_identifier>image</local_identifier>
+   <offset unit="byte">2880</offset>
+   <axes>2</axes>
+   <axis_index_order>Last Index Fastest</axis_index_order>
+   <description>
+    Map-projected tile made from calibrated, fused Viking Orbiter EDR data.
+    FITS version.
+   </description>
+   <Element_Array>
+    <data_type>{dtype}</data_type>
+    <!--TODO, maybe: the units in the DIMs are not explicitly described. I _think_ they are normalized, unitless photometric quantities. -->
+    {delete:not_dtm}
+    <unit>m</unit>
+    <scaling_factor>{scaling_factor}</scaling_factor>
+    <value_offset>{offset}</value_offset>
+    {stop:not_dtm}
+   </Element_Array>
+   <Axis_Array>
+    <axis_name>Line</axis_name>
+    <elements>{lines}</elements>
+    <sequence_number>1</sequence_number>
+   </Axis_Array>
+   <Axis_Array>
+    <axis_name>Sample</axis_name>
+    <elements>{samples}</elements>
+    <sequence_number>2</sequence_number>
+   </Axis_Array>
+   <Special_Constants>
+   <missing_constant>0</missing_constant>
+   </Special_Constants>
+  </Array_2D_Image>
+ </File_Area_Observational>
+</Product_Observational>

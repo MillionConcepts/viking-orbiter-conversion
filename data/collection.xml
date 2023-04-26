@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Collection xmlns="http://pds.nasa.gov/pds4/pds/v1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.xsd">
+ <Identification_Area>
+  <logical_identifier>urn:nasa:pds:viking_orbiter_imaging:data</logical_identifier>
+  <version_id>1.0</version_id>
+  <title>Viking Orbiter Imaging Bundle: Data Collection</title>
+  <information_model_version>1.19.0.0</information_model_version>
+  <product_class>Product_Collection</product_class>
+  <Citation_Information>
+   <author_list>St. Clair, Michael; Brown, Sierra; Million, Chase.</author_list>
+   <publication_year>2023</publication_year>
+   <description>
+    This collection contains observational data products associated with the
+    viking_orbiter_imaging bundle, including both minimally-processed Experiment
+    Data Record  images and map-projected, mosaicked Digital Image Model
+    and Digital Terrain Model images. It is a concatenated, reformatted,
+    PDS4-compliant version of all observational data in the PDS Imaging Node VO
+    holdings. Please see primary_bundle_documentation.md in this bundle's document
+    collection for a complete description of contents.
+   </description>
+  </Citation_Information>
+  <Modification_History>
+   <Modification_Detail>
+    <modification_date>2021-01-09</modification_date>
+    <version_id>1.0</version_id>
+    <description>Initial version.</description>
+   </Modification_Detail>
+  </Modification_History>
+ </Identification_Area>
+ <Context_Area>
+    <Investigation_Area>
+     <name>VIKING</name>
+     <type>Mission</type>
+     <Internal_Reference>
+      <lidvid_reference>urn:nasa:pds:context:investigation:mission.viking::1.1</lidvid_reference>
+      <reference_type>collection_to_investigation</reference_type>
+     </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+     <Observing_System_Component>
+      <name>VIKING ORBITER 1</name>
+      <type>Host</type>
+      <Internal_Reference>
+       <lidvid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vo1::1.1</lidvid_reference>
+       <reference_type>is_instrument_host</reference_type>
+      </Internal_Reference>
+     </Observing_System_Component>
+     <Observing_System_Component>
+      <name>VIKING ORBITER 2</name>
+      <type>Host</type>
+      <Internal_Reference>
+       <lidvid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vo2::1.1</lidvid_reference>
+       <reference_type>is_instrument_host</reference_type>
+      </Internal_Reference>
+     </Observing_System_Component>
+     <Observing_System_Component>
+      <name>VISUAL IMAGING SUBSYSTEM - CAMERA A</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+       <lidvid_reference>urn:nasa:pds:context:instrument:visa.vo1::1.0</lidvid_reference>
+       <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+     </Observing_System_Component>
+     <Observing_System_Component>
+      <name>VISUAL IMAGING SUBSYSTEM - CAMERA B</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+       <lidvid_reference>urn:nasa:pds:context:instrument:visb.vo1::1.0</lidvid_reference>
+       <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+     </Observing_System_Component>
+     <Observing_System_Component>
+      <name>VISUAL IMAGING SUBSYSTEM - CAMERA A</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+       <lidvid_reference>urn:nasa:pds:context:instrument:visa.vo2::1.0</lidvid_reference>
+       <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+     </Observing_System_Component>
+     <Observing_System_Component>
+      <name>VISUAL IMAGING SUBSYSTEM - CAMERA B</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+       <lidvid_reference>urn:nasa:pds:context:instrument:visb.vo2::1.0</lidvid_reference>
+       <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+     </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+     <name>MARS</name>
+     <type>Planet</type>
+     <Internal_Reference>
+      <lidvid_reference>urn:nasa:pds:context:target:planet.mars::1.2</lidvid_reference>
+      <reference_type>collection_to_target</reference_type>
+     </Internal_Reference>
+    </Target_Identification>
+  </Context_Area>
+ <Collection>
+  <collection_type>Document</collection_type>
+ </Collection>
+ <File_Area_Inventory>
+  <File>
+   <file_name>collection_data_inventory.csv</file_name>
+  </File>
+  <Inventory>
+   <offset unit="byte">0</offset>
+   <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+   <records>57930</records>
+   <record_delimiter>Line-Feed</record_delimiter>
+   <field_delimiter>Comma</field_delimiter>
+   <Record_Delimited>
+    <fields>2</fields>
+    <groups>0</groups>
+    <Field_Delimited>
+      <name>Member Status</name>
+      <field_number>1</field_number>
+      <data_type>ASCII_String</data_type>
+      <maximum_field_length unit="byte">1</maximum_field_length>
+      <field_format>%1s</field_format>
+    </Field_Delimited>
+    <Field_Delimited>
+      <name>LIDVID_LID</name>
+      <field_number>2</field_number>
+      <data_type>ASCII_LIDVID_LID</data_type>
+      <maximum_field_length unit="byte">255</maximum_field_length>
+      <field_format>%-255s</field_format>
+    </Field_Delimited>
+   </Record_Delimited>
+   <reference_type>inventory_has_member_product</reference_type>
+  </Inventory>
+ </File_Area_Inventory>
+</Product_Collection>

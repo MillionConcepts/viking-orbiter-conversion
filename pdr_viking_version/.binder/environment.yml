@@ -1,0 +1,19 @@
+name: pdr
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - cytoolz
+  - numpy
+  - pandas
+  - git
+  - pip
+  - python-Levenshtein
+  - multidict
+  - more-itertools
+  - jupyter
+  - pillow
+  - pip:
+      - pds4-tools
+      - git+https://github.com/MillionConcepts/dustgoggles.git

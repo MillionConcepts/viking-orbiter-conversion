@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1I00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1I00_1210.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Browse xmlns="http://pds.nasa.gov/pds4/pds/v1"
+xmlns:proc="http://pds.nasa.gov/pds4/proc/v1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation=
+"http://pds.nasa.gov/pds4/pds/v1     https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1I00.xsd
+http://pds.nasa.gov/pds4/proc/v1     https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1I00_1210.xsd
+">
+ <Identification_Area>
+  <logical_identifier>urn:nasa:pds:viking_orbiter_imaging:browse:{product_id}_browse</logical_identifier>
+  <version_id>1.0</version_id>
+  <title>Viking Orbiter Multispectral MDIM Browse Image {product_id}</title>
+  <information_model_version>1.18.0.0</information_model_version>
+  <product_class>Product_Browse</product_class>
+  <Citation_Information>
+   <author_list>TBD</author_list>
+   <editor_list>TBD</editor_list>
+   <publication_year>2023</publication_year>
+   <description>
+    {delete:2D}
+    Browse version of a map-projected image created from coregistered
+    Viking Orbiter EDRs taken during the same revolution through {bands}
+    separate optical filters, intended by the data providers to be treated
+    as bands of a single multispectral image. This browse image is made from
+    contrast-stretched versions of the {band_names} bands.
+    {stop:2D}
+    {delete:3D}
+    Browse version of a single-band image created from coregistered
+    Viking Orbiter EDRs taken during the Viking Orbiter multispectral
+    observation series but not coregistered with images taken through other
+    filters.
+    {stop:3D}
+   </description>
+  </Citation_Information>
+  <Modification_History>
+   <Modification_Detail>
+    <modification_date>{product_creation_time}</modification_date>
+    <version_id>1.0</version_id>
+    <description>First PDS4 version of this product.</description>
+   </Modification_Detail>
+  </Modification_History>
+ </Identification_Area>
+ <Context_Area>
+  <!--TODO: determine how this relates to the source EDRs-->
+  <comment>Only start time is given in the source product labels.</comment>
+  <Time_Coordinates>
+   <start_date_time>{image_time}Z</start_date_time>
+   <stop_date_time xsi:nil="true" nilReason="missing" />
+  </Time_Coordinates>
+  <Primary_Result_Summary>
+   <purpose>Science</purpose>
+   <processing_level>Derived</processing_level>
+   <Science_Facets>
+    <wavelength_range>Visible</wavelength_range>
+    <discipline_name>Imaging</discipline_name>
+   </Science_Facets>
+  </Primary_Result_Summary>
+  <Investigation_Area>
+   <name>VIKING</name>
+   <type>Mission</type>
+   <Internal_Reference>
+    <lidvid_reference>urn:nasa:pds:context:investigation:mission.viking::1.1</lidvid_reference>
+    <reference_type>data_to_investigation</reference_type>
+   </Internal_Reference>
+  </Investigation_Area>
+  <Observing_System>
+   {delete:no_vo1}
+   <Observing_System_Component>
+    <name>VIKING ORBITER 1</name>
+    <type>Host</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vo1::1.1</lidvid_reference>
+     <reference_type>is_instrument_host</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_vo1}
+   {delete:no_vo2}
+   <Observing_System_Component>
+    <name>VIKING ORBITER 2</name>
+    <type>Host</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vo2::1.1</lidvid_reference>
+     <reference_type>is_instrument_host</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_vo2}
+   {delete:no_vo1}
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA A</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visa.vo1::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA B</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visb.vo1::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_vo1}
+   {delete:no_vo2}
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA A</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visa.vo2::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   <Observing_System_Component>
+    <name>VISUAL IMAGING SUBSYSTEM - CAMERA B</name>
+    <type>Instrument</type>
+    <Internal_Reference>
+     <lidvid_reference>urn:nasa:pds:context:instrument:visb.vo2::1.0</lidvid_reference>
+     <reference_type>is_instrument</reference_type>
+    </Internal_Reference>
+   </Observing_System_Component>
+   {stop:no_vo2}
+  </Observing_System>
+  <Target_Identification>
+   <name>MARS</name>
+   <type>Planet</type>
+   <Internal_Reference>
+    <lidvid_reference>urn:nasa:pds:context:target:planet.mars::1.2</lidvid_reference>
+    <reference_type>data_to_target</reference_type>
+   </Internal_Reference>
+  </Target_Identification>
+  <Discipline_Area>
+   <proc:Processing_Information>
+    <Local_Internal_Reference>
+     <local_identifier_reference>image</local_identifier_reference>
+     <local_reference_type>processing_information_to_data_object</local_reference_type>
+    </Local_Internal_Reference>
+    <proc:Process>
+     <proc:description>Conversion to PDS4 archive format.</proc:description>
+     <proc:Software>
+      <proc:name>Planetary Data Reader</proc:name>
+     </proc:Software>
+    </proc:Process>
+   </proc:Processing_Information>
+  </Discipline_Area>
+ </Context_Area>
+ <Reference_List>
+  <Internal_Reference>
+   <lidvid_reference>urn:nasa:pds:viking_orbiter_imaging:data:{product_id}::1.0</lidvid_reference>
+   <reference_type>browse_to_data</reference_type>
+  </Internal_Reference>
+ </Reference_List>
+ <File_Area_Browse>
+  <File>
+   <file_name>{product_id}_browse.png</file_name>
+   <creation_date_time>{product_creation_time}</creation_date_time>
+   <file_size unit="byte">{image_file_size}</file_size>
+  </File>
+  <Encoded_Image>
+   <local_identifier>image</local_identifier>
+   <offset unit="byte">0</offset>
+   <encoding_standard_id>PNG</encoding_standard_id>
+   <description>
+    Map-projected tile made from calibrated, fused Viking Orbiter EDR data.
+    Contrast-enhanced PNG version.
+   </description>
+  </Encoded_Image>
+ </File_Area_Browse>
+</Product_Browse>
