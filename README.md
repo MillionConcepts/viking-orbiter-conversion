@@ -5,11 +5,11 @@ and modernize imaging data and metadata from the Viking Orbiter 1 and 2
 Visual Imaging Subsystems. The 
 [primary bundle documentation](document/primary_bundle_documentation.md) 
 provides the best introduction to the purpose of the project and the 
-contents of the resulting PDS4 bundle. This bundle is currently under review 
-at the Planetary Data System Imaging Node and should be publicly available
-sometime in Q4 2023. Please note that this repo is _not_ a mirror of that 
-bundle, which is too large to distribute via GitHub. It is intended 
-principally as an extension of the documentation provided in the bundle.
+contents of the resulting PDS4 bundle. 
+
+[The PDS Imaging Node hosts the completed bundle.](https://pdsimage2.wr.usgs.gov/Viking_Orbiter/PDS4)
+This repo is _not_ a complete mirror of that bundle, which is too large to distribute via GitHub. 
+It is intended principally as an extension of the documentation provided in the bundle.
 
 ## repository contents
 
