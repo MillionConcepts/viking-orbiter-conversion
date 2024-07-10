@@ -54,7 +54,7 @@ embedded in the PDS3 versions of the EDRs.
 
 ## code usage
 
-If you wish to execute the code in this respository, you may use the 
+If you wish to execute the code in this repository, you may use the 
 environment.yml file to construct a `conda` environment. Versions are pinned
 in this file to record the specific package versions available at the time 
 of creation. Up-to-date versions will probably work, but we cannot guarantee
